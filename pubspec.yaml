@@ -1,0 +1,43 @@
+name: dlovera_app
+description: D'Lovera App
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.3 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  velocity_x: ^3.5.1
+  rx_shared_preferences: ^3.0.0
+  google_fonts: ^3.0.1
+  adaptive_theme: ^3.1.1
+  singleton: ^0.0.3-nullsafety
+  flutter_slider_drawer: ^2.1.1
+  double_back_to_close_app: ^2.1.0
+  stacked: ^2.3.15
+  syncfusion_flutter_charts: ^20.2.40
+  flutter_svg: ^1.1.2
+  dio: ^4.0.6
+  syncfusion_flutter_datagrid: ^20.2.40
+  skeletons: ^0.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icon/
+    - assets/svgs/
