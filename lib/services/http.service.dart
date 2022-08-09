@@ -42,6 +42,29 @@ class HttpService {
     );
   }
 
+  //for post api calls
+  Future<Response> post(
+      String url,
+      body, {
+        bool includeHeaders = true,
+      }) async {
+    //preparing the api uri/url
+    String uri = "$host$url";
+
+    //preparing the post options if header is required
+    final mOptions = !includeHeaders
+        ? null
+        : Options(
+      headers: await getHeaders(),
+    );
+
+    return dio.post(
+      uri,
+      data: body,
+      options: mOptions,
+    );
+  }
+
   Response formatDioException(DioError ex) {
     Response response = Response(requestOptions: ex.requestOptions);
     response.statusCode = 400;

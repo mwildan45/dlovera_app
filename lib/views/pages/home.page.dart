@@ -32,9 +32,9 @@ class _HomePageState extends State<HomePage> {
               controller: model.pageViewController,
               onPageChanged: model.onPageChanged,
               physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                TodaySummaryPage(),
-                LaporanPenjualanPage()
+              children: [
+                TodaySummaryPage(pageViewController: model.pageViewController),
+                const LaporanPenjualanPage()
               ],
             ),
           ),

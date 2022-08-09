@@ -1,5 +1,6 @@
 
-import 'package:dlovera_app/models/chart_data.dart';
+import 'package:dlovera_app/constants/app_routes.dart';
+import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:dlovera_app/requests/today_summary.request.dart';
 import 'package:dlovera_app/view_models/base.view_model.dart';
@@ -62,6 +63,14 @@ class TodaySummaryViewModel extends MyBaseViewModel {
       ChartData(data.statistic!.toJson().keys.toList()[7].toString(),
           data.statistic!.s2123?.toString() ?? ""),
     ];
+  }
+
+  seeAllTransactionsNav(PageController pageViewController){
+    pageViewController.animateToPage(
+      1,
+      duration: const Duration(microseconds: 5),
+      curve: Curves.bounceInOut,
+    );
   }
 
 }

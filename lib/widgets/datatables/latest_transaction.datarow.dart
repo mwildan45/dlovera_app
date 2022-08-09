@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class LatestTransactionsDataSource extends DataGridSource {
-  LatestTransactionsDataSource({required List<LatestTransaction> totalTransactions}) {
-    dataGridRows = totalTransactions
+  LatestTransactionsDataSource({required List<LatestTransaction> latestTransactions}) {
+    dataGridRows = latestTransactions
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
       DataGridCell<String>(columnName: 'no_faktur', value: dataGridRow.noFaktur),
       DataGridCell<String>(columnName: 'nama_customer', value: dataGridRow.namaCustomer),

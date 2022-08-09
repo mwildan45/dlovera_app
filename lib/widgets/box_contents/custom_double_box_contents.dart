@@ -27,12 +27,12 @@ class CustomDoubleBoxContents extends StatelessWidget {
                 child: VStack(
                   [
                     UiSpacer.verticalSpace(space: Vx.dp3),
-                    firstContent.expand(),
+                    firstContent,
                     UiSpacer.verticalSpace(space: Vx.dp3),
                   ],
                   crossAlignment: CrossAxisAlignment.center,
-                ),
-              ).h(heightBox).expand(),
+                ).p8(),
+              ).expand(),
         UiSpacer.horizontalSpace(space: Vx.dp12),
         busyIndicator
             ? const BusyIndicator().h(heightBox).expand()
@@ -41,13 +41,14 @@ class CustomDoubleBoxContents extends StatelessWidget {
                 child: VStack(
                   [
                     UiSpacer.verticalSpace(space: Vx.dp3),
-                    secondContent.expand(),
+                    secondContent,
                     UiSpacer.verticalSpace(space: Vx.dp3),
                   ],
                   crossAlignment: CrossAxisAlignment.center,
-                ),
-              ).h(heightBox).expand(),
+                ).p8(),
+              ).expand(),
       ],
+      crossAlignment: CrossAxisAlignment.start,
     );
   }
 }

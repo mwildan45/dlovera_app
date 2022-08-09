@@ -10,6 +10,7 @@ class MyBaseViewModel extends BaseViewModel {
   BuildContext? viewContext;
   final currencySymbol = AppStrings.appCurrency;
   GlobalKey pageKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   void initialise() {
 

@@ -10,7 +10,8 @@ import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class TodaySummaryPage extends StatefulWidget {
-  const TodaySummaryPage({Key? key}) : super(key: key);
+  const TodaySummaryPage({Key? key, required this.pageViewController}) : super(key: key);
+  final PageController pageViewController;
 
   @override
   State<TodaySummaryPage> createState() => _TodaySummaryPageState();
@@ -60,6 +61,7 @@ class _TodaySummaryPageState extends State<TodaySummaryPage>
                   ? const BusyIndicator().h(200)
                   : TableLatestTransaction(
                 todaySummaryData: vm.todaySummaryData,
+                onPressed: () => vm.seeAllTransactionsNav(widget.pageViewController),
               ),
               UiSpacer.verticalSpace(space: Vx.dp12),
             ]).px(14),

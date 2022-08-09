@@ -6,7 +6,15 @@ class Api {
     return "https://api.higanic.com/api";
   }
 
+  static const login = "/login";
+
   static const todaySummary = "/todaysummary";
+
+  static const laporanPenjualanChart = "/laporanpenjualan";
+  static const laporanPenjualanPerBulan = "/laporanpenjualanperbulan";
+
+  static const laporanPembelianChart = "/laporanpembelian";
+  static const laporanPembelianPerBulan = "/laporanpembelianperbulan";
 
   // Other pages
   // static String get privacyPolicy {

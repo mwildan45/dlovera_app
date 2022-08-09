@@ -15,6 +15,8 @@ class AppColor {
   static Color green = const Color(0xFF00B74A);
   static Color sizzlingRed = const Color(0xFFF93154);
 
+  static Color fadedGrey = Colors.grey.shade300;
+
   // static Color get openColor => Vx.hexToColor(colorEnv('openColor'));
 
 }

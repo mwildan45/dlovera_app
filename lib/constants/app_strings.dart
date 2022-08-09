@@ -8,5 +8,8 @@ class AppStrings {
   static String get appCurrency => "Rp ";
 
   static String userAuthToken = "auth_token";
+  static String userKey = "user";
+  static String authenticated = "authenticated";
+
 
 }

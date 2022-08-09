@@ -2,6 +2,7 @@ import 'dart:convert';
 
 
 import 'package:dlovera_app/constants/app_strings.dart';
+import 'package:dlovera_app/models/user.dart';
 
 import 'http.service.dart';
 import 'local_storage.service.dart';
@@ -17,13 +18,13 @@ class AuthServices {
   // }
   //
   // //
-  // static bool authenticated() {
-  //   return LocalStorageService.prefs.getBool(AppStrings.authenticated) ?? false;
-  // }
+  static bool authenticated() {
+    return LocalStorageService.prefs?.getBool(AppStrings.authenticated) ?? false;
+  }
   //
-  // static Future<bool> isAuthenticated() {
-  //   return LocalStorageService.prefs.setBool(AppStrings.authenticated, true);
-  // }
+  static Future<bool>? isAuthenticated() {
+    return LocalStorageService.prefs?.setBool(AppStrings.authenticated, true);
+  }
 
   // Token
   static Future<String> getAuthBearerToken() async {
@@ -45,18 +46,17 @@ class AuthServices {
 //
 //   //
 //   //
-//   static User currentUser;
-//   static Future<User> getCurrentUser({bool force = false}) async {
-//     if (currentUser == null || force) {
-//       final userStringObject =
-//           await LocalStorageService.prefs.getString(AppStrings.userKey);
-//       final userObject = json.decode(userStringObject);
-//       currentUser = User.fromJson(userObject);
-//     }
-//     print("CURRENT USER ${currentUser.vendor_id}");
-//
-//     return currentUser;
-//   }
+  static User? currentUser;
+  static Future<User?> getCurrentUser({bool force = false}) async {
+    if (currentUser == null || force) {
+      final userStringObject =
+          await LocalStorageService.prefs?.getString(AppStrings.userKey);
+      final userObject = json.decode(userStringObject!);
+      currentUser = User.fromJson(userObject);
+    }
+
+    return currentUser;
+  }
 //
 // //
 //   static Vendor currentVendor;
@@ -74,28 +74,21 @@ class AuthServices {
 //   ///
 //   ///
 //   ///
-//   static Future<User> saveUser(dynamic jsonObject) async {
-//     final currentUser = User.fromJson(jsonObject);
-//     try {
-//       await LocalStorageService.prefs.setString(
-//         AppStrings.userKey,
-//         json.encode(
-//           currentUser.toJson(),
-//         ),
-//       );
-//       //subscribe to firebase topic
-//       FirebaseService()
-//           .firebaseMessaging
-//           .subscribeToTopic("v_${currentUser.vendor_id}");
-//       FirebaseService()
-//           .firebaseMessaging
-//           .subscribeToTopic("${currentUser.role}");
-//
-//       return currentUser;
-//     } catch (error) {
-//       return null;
-//     }
-//   }
+  static Future<User?> saveUser(dynamic jsonObject) async {
+    final currentUser = User.fromJson(jsonObject);
+    try {
+      await LocalStorageService.prefs?.setString(
+        AppStrings.userKey,
+        json.encode(
+          currentUser.toJson(),
+        ),
+      );
+
+      return currentUser;
+    } catch (error) {
+      return null;
+    }
+  }
 //
 //   //save vendor info
 //   static Future<void> saveVendor(dynamic jsonObject) async {

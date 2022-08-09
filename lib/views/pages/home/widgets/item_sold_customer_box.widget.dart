@@ -5,7 +5,7 @@ import 'package:dlovera_app/constants/text.styles.dart';
 import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/widgets/busy_indicator.dart';
-import 'package:dlovera_app/widgets/custom_double_box_contents.dart';
+import 'package:dlovera_app/widgets/box_contents/custom_double_box_contents.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -35,15 +35,16 @@ class ItemSoldCustomerBox extends StatelessWidget {
               .bold
               .size(Vx.dp32)
               .make()
-              .centered()
-              .expand(),
+              .centered(),
           HStack([
             SvgPicture.asset(AppSvgs.downward).pOnly(right: Vx.dp5),
-            "${itemSold?.percent}% from yesterday"
-                .text
-                .color(AppColor.sizzlingRed)
-                .lg
-                .make()
+            Flexible(
+              child: "${itemSold?.percent}% from yesterday"
+                  .text.overflow(TextOverflow.visible)
+                  .color(AppColor.sizzlingRed)
+                  .sm
+                  .make(),
+            )
           ]),
         ],
         crossAlignment: CrossAxisAlignment.center,
@@ -57,15 +58,16 @@ class ItemSoldCustomerBox extends StatelessWidget {
               .bold
               .size(Vx.dp32)
               .make()
-              .centered()
-              .expand(),
+              .centered(),
           HStack([
             SvgPicture.asset(AppSvgs.upward).pOnly(right: Vx.dp5),
-            "${customer?.percent}% from yesterday"
-                .text
-                .color(AppColor.green)
-                .lg
-                .make()
+            Flexible(
+              child: "${customer?.percent}% from yesterday"
+                  .text.overflow(TextOverflow.visible)
+                  .color(AppColor.green)
+                  .sm
+                  .make(),
+            )
           ]),
         ],
         crossAlignment: CrossAxisAlignment.center,
