@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class LaporanPenjualanPelangganSetiaDataSource extends DataGridSource {
-  LaporanPenjualanPelangganSetiaDataSource({required List<LaporanPenjualanPerBulanPelangganSetia> pelangganSetia}) {
+  LaporanPenjualanPelangganSetiaDataSource(
+      {required List<LaporanPenjualanPerBulanPelangganSetia> pelangganSetia}) {
     dataGridRows = pelangganSetia
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
-      DataGridCell<String>(columnName: 'kode_customer', value: dataGridRow.kodeCustomer),
-      DataGridCell<String>(columnName: 'nama_customer', value: dataGridRow.namaCustomer),
-    ]))
+              DataGridCell<String>(
+                  columnName: dataGridRow.kodeCustomer != null
+                      ? 'kode_customer'
+                      : 'kode_supplier',
+                  value: dataGridRow.kodeCustomer ?? dataGridRow.kodeSupplier),
+              DataGridCell<String>(
+                  columnName: dataGridRow.namaCustomer != null
+                      ? 'nama_customer'
+                      : 'nama_supplier',
+                  value: dataGridRow.namaCustomer ?? dataGridRow.namaSupplier),
+            ]))
         .toList();
   }
 
@@ -21,15 +30,16 @@ class LaporanPenjualanPelangganSetiaDataSource extends DataGridSource {
   DataGridRowAdapter? buildRow(DataGridRow row) {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-          return Container(
-              alignment: (dataGridCell.columnName == 'nama_customer')
-                  ? Alignment.centerLeft
-                  : Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                dataGridCell.value.toString(),
-                overflow: TextOverflow.ellipsis,
-              ));
-        }).toList());
+      return Container(
+          alignment: (dataGridCell.columnName == 'nama_customer' ||
+                  dataGridCell.columnName == 'nama_supplier')
+              ? Alignment.centerLeft
+              : Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            dataGridCell.value.toString(),
+            overflow: TextOverflow.ellipsis,
+          ));
+    }).toList());
   }
 }

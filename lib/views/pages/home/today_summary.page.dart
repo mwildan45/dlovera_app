@@ -53,7 +53,7 @@ class _TodaySummaryPageState extends State<TodaySummaryPage>
               vm.isBusy
                   ? const BusyIndicator().h(200)
                   : ReportStatistic(
-                      dataChart: vm.dataChart!,
+                      dataChart: vm.dataChart,
                       statistic: vm.todaySummaryData?.statistic,
                     ),
               UiSpacer.verticalSpace(space: Vx.dp12),

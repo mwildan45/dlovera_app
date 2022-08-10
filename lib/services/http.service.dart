@@ -35,11 +35,19 @@ class HttpService {
             headers: await getHeaders(),
           );
 
-    return dio.get(
-      uri,
-      options: mOptions,
-      queryParameters: queryParameters,
-    );
+    Response response;
+
+    try {
+      response = await dio.get(
+        uri,
+        options: mOptions,
+        queryParameters: queryParameters,
+      );
+    } on DioError catch(error) {
+      response = formatDioException(error);
+    }
+
+    return response;
   }
 
   //for post api calls
@@ -58,11 +66,21 @@ class HttpService {
       headers: await getHeaders(),
     );
 
-    return dio.post(
-      uri,
-      data: body,
-      options: mOptions,
-    );
+    Response response;
+
+    try {
+      response = await dio.post(
+        uri,
+        data: body,
+        options: mOptions,
+      );
+    } on DioError catch(error) {
+      response = formatDioException(error);
+    }
+
+    return response;
+
+    // return
   }
 
   Response formatDioException(DioError ex) {

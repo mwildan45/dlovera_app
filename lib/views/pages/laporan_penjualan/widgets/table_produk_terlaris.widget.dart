@@ -36,8 +36,6 @@ class _TableLaporanPenjualanProdukTerlarisWidgetState
 
   @override
   Widget build(BuildContext context) {
-    print(
-        'data ${_laporanPenjualanProdukTerlarisDataSource.dataGridRows.isEmpty}');
     return Container(
       decoration: BoxStyles.boxContent(),
       child: VStack(

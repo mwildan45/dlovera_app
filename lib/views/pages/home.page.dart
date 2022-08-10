@@ -1,6 +1,7 @@
 import 'package:dlovera_app/constants/app_images.dart';
 import 'package:dlovera_app/view_models/home.vm.dart';
 import 'package:dlovera_app/views/pages/home/today_summary.page.dart';
+import 'package:dlovera_app/views/pages/laporan_pembelian/laporan_pembelian.page.dart';
 import 'package:dlovera_app/views/pages/laporan_penjualan/laporan_penjualan.page.dart';
 import 'package:dlovera_app/widgets/base.page.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
@@ -34,7 +35,8 @@ class _HomePageState extends State<HomePage> {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 TodaySummaryPage(pageViewController: model.pageViewController),
-                const LaporanPenjualanPage()
+                const LaporanPenjualanPage(),
+                const LaporanPembelianPage(),
               ],
             ),
           ),
