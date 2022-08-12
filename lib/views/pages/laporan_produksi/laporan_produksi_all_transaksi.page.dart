@@ -1,7 +1,5 @@
 import 'package:dlovera_app/constants/app_images.dart';
-import 'package:dlovera_app/utils/ui_spacer.dart';
-import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
-import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
+import 'package:dlovera_app/view_models/laporan_produksi.vm.dart';
 import 'package:dlovera_app/widgets/base.page.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
 import 'package:dlovera_app/widgets/datatables/pagination.widget.dart';
@@ -10,21 +8,21 @@ import 'package:stacked/stacked.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class LaporanPembelianAllTransaksiPage extends StatelessWidget {
-  const LaporanPembelianAllTransaksiPage({Key? key, this.viewModel})
+class LaporanProduksiAllTransaksiPage extends StatelessWidget {
+  const LaporanProduksiAllTransaksiPage({Key? key, this.viewModel})
       : super(key: key);
-  final LaporanPembelianViewModel? viewModel;
+  final LaporanProduksiViewModel? viewModel;
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<LaporanPembelianViewModel>.reactive(
-      viewModelBuilder: () => LaporanPembelianViewModel(context),
+    return ViewModelBuilder<LaporanProduksiViewModel>.reactive(
+      viewModelBuilder: () => LaporanProduksiViewModel(context),
       onModelReady: (model) => model.onPageChangeAllTransaksi(1,
           month: viewModel?.selectedMonth, year: viewModel?.selectedYear),
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Pembelian Transaksi ${vm.laporanPenjualanPerBulanData?.month} ${vm.laporanPenjualanPerBulanData?.year}",
+              "Laporan Produksi Transaksi ${vm.laporanPenjualanPerBulanData?.month} ${vm.laporanPenjualanPerBulanData?.year}",
           body: VStack(
             [
               if (vm.busy(vm.laporanPenjualanTransaksiDataSource))

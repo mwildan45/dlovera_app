@@ -10,7 +10,8 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
-  const LaporanPenjualanAllTransaksiPage({Key? key, this.viewModel}) : super(key: key);
+  const LaporanPenjualanAllTransaksiPage({Key? key, this.viewModel})
+      : super(key: key);
   final LaporanPenjualanViewModel? viewModel;
 
   @override
@@ -21,45 +22,43 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
           month: viewModel?.selectedMonth, year: viewModel?.selectedYear),
       builder: (context, vm, child) {
         return BasePage(
-          title: "Laporan Penjualan Transaksi ${vm.laporanPenjualanPerBulanData?.month} ${vm.laporanPenjualanPerBulanData?.year}",
-          floatingActionWidget: CustomPaginationWidget(
-            currentPage: vm.currentPageTransaksi,
-            onPageChange: vm.onPageChangeAllTransaksi,
-            totalPage: vm.laporanPenjualanPerBulanData?.transaksi?.lastPage,
-          ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          body: SingleChildScrollView(
-            child: VStack(
-              [
-                vm.busy(vm.laporanPenjualanTransaksiDataSource)
-                    ? Image.asset(AppImages.appLoadingGear).centered()
-                    : SfDataGrid(
-                        onQueryRowHeight: (details) {
-                          return details
-                              .getIntrinsicRowHeight(details.rowIndex);
-                        },
-                        source: vm.laporanPenjualanTransaksiDataSource!,
-                        shrinkWrapRows: true,
-                        columnWidthMode: ColumnWidthMode.fill,
-                        verticalScrollPhysics: const BouncingScrollPhysics(),
-                        columns: [
-                          CustomGridColumn()
-                              .gridColumn('noFaktur', 'No. Faktur'),
-                          CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
-                          CustomGridColumn().gridColumn(
-                              'namaCustomer', 'Nama Customer',
-                              alignment: Alignment.centerLeft),
-                          CustomGridColumn().gridColumn(
-                              'namaBarang', 'Nama Barang',
-                              alignment: Alignment.centerLeft),
-                          CustomGridColumn().gridColumn('total', 'Total',
-                              alignment: Alignment.centerLeft),
-                        ],
-                      ),
-                UiSpacer.verticalSpace(),
-              ],
-            ),
-          ),
+          title:
+              "Laporan Penjualan Transaksi ${vm.laporanPenjualanPerBulanData?.month} ${vm.laporanPenjualanPerBulanData?.year}",
+          // floatingActionWidget: ,
+          // floatingActionButtonLocation:
+          //     FloatingActionButtonLocation.centerFloat,
+          body: VStack(
+            [
+              if (vm.busy(vm.laporanPenjualanTransaksiDataSource))
+                Image.asset(AppImages.appLoadingGear).centered()
+              else
+                SfDataGrid(
+                  onQueryRowHeight: (details) {
+                    return details.getIntrinsicRowHeight(details.rowIndex);
+                  },
+                  source: vm.laporanPenjualanTransaksiDataSource!,
+                  shrinkWrapRows: true,
+                  columnWidthMode: ColumnWidthMode.fill,
+                  verticalScrollPhysics: const BouncingScrollPhysics(),
+                  columns: [
+                    CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
+                    CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
+                    CustomGridColumn().gridColumn(
+                        'namaCustomer', 'Nama Customer',
+                        alignment: Alignment.centerLeft),
+                    CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
+                        alignment: Alignment.centerLeft),
+                    CustomGridColumn().gridColumn('total', 'Total',
+                        alignment: Alignment.center),
+                  ],
+                ).expand(),
+              CustomPaginationWidget(
+                currentPage: vm.currentPageTransaksi,
+                onPageChange: vm.onPageChangeAllTransaksi,
+                totalPage: vm.laporanPenjualanPerBulanData?.transaksi?.lastPage,
+              )
+            ],
+          )
         );
       },
     );

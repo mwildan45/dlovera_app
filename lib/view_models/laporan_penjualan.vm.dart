@@ -19,8 +19,8 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
   }
 
   LaporanPenjualanRequest laporanPenjualanRequest = LaporanPenjualanRequest();
-  LaporanPenjualanData? laporanPenjualanData;
-  LaporanPenjualanPerBulanData? laporanPenjualanPerBulanData;
+  LaporanChartData? laporanPenjualanData;
+  LaporanPerBulanData? laporanPenjualanPerBulanData;
   List<ChartData>? dataChart = [];
   int? selectedYear = 2022;
   int currentPageTransaksi = 1;

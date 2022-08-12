@@ -16,6 +16,12 @@ class Api {
   static const laporanPembelianChart = "/laporanpembelian";
   static const laporanPembelianPerBulan = "/laporanpembelianperbulan";
 
+  static const laporanProduksiChart = "/laporanproduksi";
+  static const laporanProduksiPerBulan = "/laporanproduksiperbulan";
+
+  static const laporanStockChart = "/laporanstock";
+  static const laporanStockPerBulan = "/laporanstockperbulan";
+
   // Other pages
   // static String get privacyPolicy {
   //   return "$webUrl/privacy/policy";

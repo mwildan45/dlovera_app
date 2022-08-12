@@ -1,12 +1,12 @@
-class LaporanPenjualanPerBulanHeader {
+class LaporanPerBulanHeader {
   String? message;
-  LaporanPenjualanPerBulanData? data;
+  LaporanPerBulanData? data;
 
-  LaporanPenjualanPerBulanHeader({this.message, this.data});
+  LaporanPerBulanHeader({this.message, this.data});
 
-  LaporanPenjualanPerBulanHeader.fromJson(Map<String, dynamic> json) {
+  LaporanPerBulanHeader.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    data = json['data'] != null ? LaporanPenjualanPerBulanData.fromJson(json['data']) : null;
+    data = json['data'] != null ? LaporanPerBulanData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -19,18 +19,19 @@ class LaporanPenjualanPerBulanHeader {
   }
 }
 
-class LaporanPenjualanPerBulanData {
+class LaporanPerBulanData {
   String? year;
   String? month;
   RataRata? rataRata;
   String? transaksiTertinggi;
   String? transaksiTerendah;
-  List<LaporanPenjualanPerBulanProdukTerlaris>? produkTerlaris;
-  List<LaporanPenjualanPerBulanPelangganSetia>? pelangganSetia;
+  List<LaporanPerBulanProdukTerlaris>? produkTerlaris;
+  List<LaporanPerBulanPelangganSetia>? pelangganSetia;
+  List<LaporanProduksiPerBulanCMTLangganan>? langganan;
   Transaksi? transaksi;
   Retur? retur;
 
-  LaporanPenjualanPerBulanData(
+  LaporanPerBulanData(
       {this.year,
         this.month,
         this.rataRata,
@@ -41,7 +42,7 @@ class LaporanPenjualanPerBulanData {
         this.transaksi,
         this.retur});
 
-  LaporanPenjualanPerBulanData.fromJson(Map<String, dynamic> json) {
+  LaporanPerBulanData.fromJson(Map<String, dynamic> json) {
     year = json['year'];
     month = json['month'];
     rataRata = json['rataRata'] != null
@@ -50,15 +51,21 @@ class LaporanPenjualanPerBulanData {
     transaksiTertinggi = json['transaksiTertinggi'];
     transaksiTerendah = json['transaksiTerendah'];
     if (json['produkTerlaris'] != null) {
-      produkTerlaris = <LaporanPenjualanPerBulanProdukTerlaris>[];
+      produkTerlaris = <LaporanPerBulanProdukTerlaris>[];
       json['produkTerlaris'].forEach((v) {
-        produkTerlaris!.add(LaporanPenjualanPerBulanProdukTerlaris.fromJson(v));
+        produkTerlaris!.add(LaporanPerBulanProdukTerlaris.fromJson(v));
       });
     }
     if (json['pelangganSetia'] != null) {
-      pelangganSetia = <LaporanPenjualanPerBulanPelangganSetia>[];
+      pelangganSetia = <LaporanPerBulanPelangganSetia>[];
       json['pelangganSetia'].forEach((v) {
-        pelangganSetia!.add(LaporanPenjualanPerBulanPelangganSetia.fromJson(v));
+        pelangganSetia!.add(LaporanPerBulanPelangganSetia.fromJson(v));
+      });
+    }
+    if (json['langganan'] != null) {
+      langganan = <LaporanProduksiPerBulanCMTLangganan>[];
+      json['langganan'].forEach((v) {
+        langganan!.add(LaporanProduksiPerBulanCMTLangganan.fromJson(v));
       });
     }
     transaksi = json['transaksi'] != null
@@ -114,14 +121,14 @@ class RataRata {
   }
 }
 
-class LaporanPenjualanPerBulanProdukTerlaris {
+class LaporanPerBulanProdukTerlaris {
   String? kodeBarang;
   String? namaBarang;
   String? sumJumlah;
 
-  LaporanPenjualanPerBulanProdukTerlaris({this.kodeBarang, this.namaBarang, this.sumJumlah});
+  LaporanPerBulanProdukTerlaris({this.kodeBarang, this.namaBarang, this.sumJumlah});
 
-  LaporanPenjualanPerBulanProdukTerlaris.fromJson(Map<String, dynamic> json) {
+  LaporanPerBulanProdukTerlaris.fromJson(Map<String, dynamic> json) {
     kodeBarang = json['Kode_Barang'];
     namaBarang = json['Nama_Barang'];
     sumJumlah = json['sumJumlah'];
@@ -136,16 +143,16 @@ class LaporanPenjualanPerBulanProdukTerlaris {
   }
 }
 
-class LaporanPenjualanPerBulanPelangganSetia {
+class LaporanPerBulanPelangganSetia {
   String? kodeCustomer;
   String? kodeSupplier;
   String? namaCustomer;
   String? namaSupplier;
   int? countCustomer;
 
-  LaporanPenjualanPerBulanPelangganSetia({this.kodeCustomer, this.kodeSupplier, this.namaSupplier, this.namaCustomer, this.countCustomer});
+  LaporanPerBulanPelangganSetia({this.kodeCustomer, this.kodeSupplier, this.namaSupplier, this.namaCustomer, this.countCustomer});
 
-  LaporanPenjualanPerBulanPelangganSetia.fromJson(Map<String, dynamic> json) {
+  LaporanPerBulanPelangganSetia.fromJson(Map<String, dynamic> json) {
     kodeCustomer = json['Kode_Customer'];
     kodeSupplier = json['Kode_Supplier'];
     namaCustomer = json['Nama_Customer'];
@@ -164,9 +171,31 @@ class LaporanPenjualanPerBulanPelangganSetia {
   }
 }
 
+class LaporanProduksiPerBulanCMTLangganan {
+  String? kodeProdusen;
+  String? namaProdusen;
+  int? countCustomer;
+
+  LaporanProduksiPerBulanCMTLangganan({this.kodeProdusen, this.namaProdusen, this.countCustomer});
+
+  LaporanProduksiPerBulanCMTLangganan.fromJson(Map<String, dynamic> json) {
+    kodeProdusen = json['Kode_Produsen'];
+    namaProdusen = json['Nama_Produsen'];
+    countCustomer = json['countProdusen'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Kode_Produsen'] = kodeProdusen;
+    data['Nama_Produsen'] = namaProdusen;
+    data['countCustomer'] = countCustomer;
+    return data;
+  }
+}
+
 class Transaksi {
   int? currentPage;
-  List<LaporanPenjualanPerBulanTransaksiData>? data;
+  List<LaporanPerBulanTransaksiData>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -197,9 +226,9 @@ class Transaksi {
   Transaksi.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data = <LaporanPenjualanPerBulanTransaksiData>[];
+      data = <LaporanPerBulanTransaksiData>[];
       json['data'].forEach((v) {
-        data!.add(LaporanPenjualanPerBulanTransaksiData.fromJson(v));
+        data!.add(LaporanPerBulanTransaksiData.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -245,7 +274,7 @@ class Transaksi {
 
 class Retur {
   int? currentPage;
-  List<LaporanPenjualanPerBulanReturData>? data;
+  List<LaporanPerBulanReturData>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -276,9 +305,9 @@ class Retur {
   Retur.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data = <LaporanPenjualanPerBulanReturData>[];
+      data = <LaporanPerBulanReturData>[];
       json['data'].forEach((v) {
-        data!.add(LaporanPenjualanPerBulanReturData.fromJson(v));
+        data!.add(LaporanPerBulanReturData.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -322,7 +351,7 @@ class Retur {
   }
 }
 
-class LaporanPenjualanPerBulanTransaksiData {
+class LaporanPerBulanTransaksiData {
   String? noFaktur;
   String? tanggal;
   String? namaCustomer;
@@ -330,7 +359,7 @@ class LaporanPenjualanPerBulanTransaksiData {
   String? namaBarang;
   String? total;
 
-  LaporanPenjualanPerBulanTransaksiData(
+  LaporanPerBulanTransaksiData(
       {this.noFaktur,
         this.tanggal,
         this.namaCustomer,
@@ -338,7 +367,7 @@ class LaporanPenjualanPerBulanTransaksiData {
         this.namaBarang,
         this.total});
 
-  LaporanPenjualanPerBulanTransaksiData.fromJson(Map<String, dynamic> json) {
+  LaporanPerBulanTransaksiData.fromJson(Map<String, dynamic> json) {
     noFaktur = json['no_faktur'];
     tanggal = json['tanggal'];
     namaCustomer = json['Nama_Customer'];
@@ -381,7 +410,7 @@ class Links {
   }
 }
 
-class LaporanPenjualanPerBulanReturData {
+class LaporanPerBulanReturData {
   String? noFaktur;
   String? tanggal;
   String? namaCustomer;
@@ -389,7 +418,7 @@ class LaporanPenjualanPerBulanReturData {
   String? namaBarang;
   String? alasan;
 
-  LaporanPenjualanPerBulanReturData(
+  LaporanPerBulanReturData(
       {this.noFaktur,
         this.tanggal,
         this.namaCustomer,
@@ -397,7 +426,7 @@ class LaporanPenjualanPerBulanReturData {
         this.namaBarang,
         this.alasan});
 
-  LaporanPenjualanPerBulanReturData.fromJson(Map<String, dynamic> json) {
+  LaporanPerBulanReturData.fromJson(Map<String, dynamic> json) {
     noFaktur = json['no_faktur'];
     tanggal = json['tanggal'];
     namaCustomer = json['Nama_Customer'];

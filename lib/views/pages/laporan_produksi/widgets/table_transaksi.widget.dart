@@ -1,7 +1,9 @@
 import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/models/laporan_penjualan_per_bulan.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
+import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
 import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
+import 'package:dlovera_app/view_models/laporan_produksi.vm.dart';
 import 'package:dlovera_app/widgets/buttons/custom_button.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_penjualan/transaksi.laporan_penjualan.dart';
@@ -10,24 +12,24 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TableLaporanPenjualanTransaksiWidget extends StatefulWidget {
-  const TableLaporanPenjualanTransaksiWidget(
+class TableLaporanProduksiTransaksiWidget extends StatefulWidget {
+  const TableLaporanProduksiTransaksiWidget(
       {Key? key,
       required this.data,
       required this.vm,
       required this.heightTable})
       : super(key: key);
   final LaporanPerBulanData? data;
-  final LaporanPenjualanViewModel vm;
+  final LaporanProduksiViewModel vm;
   final double heightTable;
 
   @override
-  State<TableLaporanPenjualanTransaksiWidget> createState() =>
-      _TableLaporanPenjualanTransaksiWidgetState();
+  State<TableLaporanProduksiTransaksiWidget> createState() =>
+      _TableLaporanProduksiTransaksiWidgetState();
 }
 
-class _TableLaporanPenjualanTransaksiWidgetState
-    extends State<TableLaporanPenjualanTransaksiWidget> {
+class _TableLaporanProduksiTransaksiWidgetState
+    extends State<TableLaporanProduksiTransaksiWidget> {
   late LaporanPenjualanTransaksiDataSource _laporanPenjualanTransaksiDataSource;
 
   @override
@@ -59,7 +61,7 @@ class _TableLaporanPenjualanTransaksiWidgetState
               columns: [
                 CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
                 CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
-                CustomGridColumn().gridColumn('namaCustomer', 'Nama Customer',
+                CustomGridColumn().gridColumn('namaSupplier', 'Nama Supplier',
                     alignment: Alignment.centerLeft),
                 CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
                     alignment: Alignment.centerLeft),

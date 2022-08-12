@@ -3,25 +3,25 @@ import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/laporan_penjualan.model.dart';
 import 'package:dlovera_app/models/laporan_penjualan_per_bulan.model.dart';
 import 'package:dlovera_app/requests/laporan_pembelian.request.dart';
-import 'package:dlovera_app/requests/laporan_penjualan.request.dart';
+import 'package:dlovera_app/requests/laporan_produksi.request.dart';
 import 'package:dlovera_app/view_models/base.view_model.dart';
 import 'package:dlovera_app/views/pages/laporan_pembelian/laporan_pembelian_all_retur.page.dart';
 import 'package:dlovera_app/views/pages/laporan_pembelian/laporan_pembelian_all_transaksi.page.dart';
-import 'package:dlovera_app/views/pages/laporan_penjualan/laporan_penjualan_all_retur.page.dart';
-import 'package:dlovera_app/views/pages/laporan_penjualan/laporan_penjualan_all_transaksi.page.dart';
+import 'package:dlovera_app/views/pages/laporan_produksi/laporan_produksi_all_retur.page.dart';
+import 'package:dlovera_app/views/pages/laporan_produksi/laporan_produksi_all_transaksi.page.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_penjualan/retur.laporan_penjualan.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../widgets/datatables/laporan_penjualan/transaksi.laporan_penjualan.dart';
 
-class LaporanPembelianViewModel extends MyBaseViewModel {
+class LaporanProduksiViewModel extends MyBaseViewModel {
 
-  LaporanPembelianViewModel(BuildContext context){
+  LaporanProduksiViewModel(BuildContext context){
     viewContext = context;
   }
 
-  LaporanPembelianRequest laporanPembelianRequest = LaporanPembelianRequest();
+  LaporanProduksiRequest laporanProduksiRequest = LaporanProduksiRequest();
   LaporanChartData? laporanPenjualanData;
   LaporanPerBulanData? laporanPenjualanPerBulanData;
   List<ChartData>? dataChart = [];
@@ -35,22 +35,23 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
 
   @override
   void initialise() async {
-    geLaporanPenjualanChart("", isGetPerBulan: true);
+    geLaporanProduksiChart("", isGetPerBulan: true);
   }
 
   //
-  geLaporanPenjualanChart(String? year, {bool isGetPerBulan = false}) async {
+  geLaporanProduksiChart(String? year, {bool isGetPerBulan = false}) async {
     setBusy(true);
     try {
 
-      laporanPenjualanData = await laporanPembelianRequest.getLaporanPenjualanChart({
+      laporanPenjualanData = await laporanProduksiRequest.getLaporanProduksiChart({
         'tahun': year ?? "",
       });
 
+      print('data $laporanPenjualanData');
       setDataChart();
 
       if(isGetPerBulan){
-        getLaporanPenjualanPerBulan("", "");
+        getLaporanProduksiPerBulan("", "");
       }
 
       clearErrors();
@@ -67,11 +68,11 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
   }
 
   //
-  getLaporanPenjualanPerBulan(String? month, String? year) async {
+  getLaporanProduksiPerBulan(String? month, String? year) async {
     setBusyForObject(laporanPenjualanPerBulanData, true);
 
     try{
-      laporanPenjualanPerBulanData = await laporanPembelianRequest.getLaporanPenjualanPerBulan(
+      laporanPenjualanPerBulanData = await laporanProduksiRequest.getLaporanProduksiPerBulan(
           {
             'tahun': year ?? 2022,
             'bulan': month ?? 1,
@@ -99,7 +100,7 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
 
     try{
 
-      laporanPenjualanPerBulanData = await laporanPembelianRequest.getLaporanPenjualanPerBulan(
+      laporanPenjualanPerBulanData = await laporanProduksiRequest.getLaporanProduksiPerBulan(
           {
             'tahun': selectedYear.toString(),
             'bulan': selectedMonth,
@@ -129,7 +130,7 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
 
     try{
 
-      laporanPenjualanPerBulanData = await laporanPembelianRequest.getLaporanPenjualanPerBulan(
+      laporanPenjualanPerBulanData = await laporanProduksiRequest.getLaporanProduksiPerBulan(
           {
             'tahun': selectedYear.toString(),
             'bulan': selectedMonth,
@@ -183,17 +184,17 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
     getDataPaginationRetur(number);
   }
 
-  navigateToAllTransaksi(LaporanPembelianViewModel vm) {
+  navigateToAllTransaksi(LaporanProduksiViewModel vm) {
     viewContext?.navigator?.push(
-        MaterialPageRoute(builder: (context) => LaporanPembelianAllTransaksiPage(
+        MaterialPageRoute(builder: (context) => LaporanProduksiAllTransaksiPage(
           viewModel: vm,
         ))
     );
   }
 
-  navigateToAllRetur(LaporanPembelianViewModel vm) {
+  navigateToAllRetur(LaporanProduksiViewModel vm) {
     viewContext?.navigator?.push(
-        MaterialPageRoute(builder: (context) => LaporanPembelianAllReturPage(
+        MaterialPageRoute(builder: (context) => LaporanProduksiAllReturPage(
           vm: vm,
         ))
     );

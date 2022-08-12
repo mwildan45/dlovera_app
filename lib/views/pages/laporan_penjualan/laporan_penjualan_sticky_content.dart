@@ -17,14 +17,14 @@ import 'package:velocity_x/velocity_x.dart';
 class StickyContentLaporanPenjualan extends StatelessWidget {
   const StickyContentLaporanPenjualan({Key? key, this.data, required this.vm}) : super(key: key);
 
-  final LaporanPenjualanPerBulanData? data;
+  final LaporanPerBulanData? data;
   final LaporanPenjualanViewModel vm;
 
   @override
   Widget build(BuildContext context) {
     final double heightScreen = MediaQuery.of(context).size.height;
     return StickyHeader(
-      header: 'Laporan ${data?.month} ${data?.year}'
+      header: 'Laporan Penjualan ${data?.month} ${data?.year}'
           .text
           .lg
           .bold

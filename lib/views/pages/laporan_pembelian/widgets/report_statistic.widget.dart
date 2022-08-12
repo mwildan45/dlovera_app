@@ -2,27 +2,27 @@ import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/laporan_penjualan.model.dart';
-import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
+import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
 import 'package:dlovera_app/widgets/custom_label_box_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class StatisticPenjualanWidget extends StatefulWidget {
-  const StatisticPenjualanWidget(
+class StatisticPembelianWidget extends StatefulWidget {
+  const StatisticPembelianWidget(
       {Key? key, required this.data, required this.dataChart, required this.vm})
       : super(key: key);
 
   final LaporanChartData? data;
   final List<ChartData> dataChart;
-  final LaporanPenjualanViewModel vm;
+  final LaporanPembelianViewModel vm;
 
   @override
-  State<StatisticPenjualanWidget> createState() => _StatisticPenjualanWidgetState();
+  State<StatisticPembelianWidget> createState() => _StatisticPembelianWidgetState();
 }
 
-class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
+class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
   late TooltipBehavior _tooltip;
 
   @override
@@ -49,7 +49,7 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
                     dataSource: widget.dataChart,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => double.parse(data.y),
-                    name: 'Laporan Penjualan Statistic',
+                    name: 'Laporan Pembelian Statistic',
                     color: AppColor.primaryColorDark,
                     onPointTap: (ChartPointDetails data) {
                       // print('${data.dataPoints?[data.pointIndex!]}');

@@ -3,35 +3,35 @@ import 'package:dlovera_app/constants/text.styles.dart';
 import 'package:dlovera_app/models/laporan_penjualan_per_bulan.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
-import 'package:dlovera_app/widgets/datatables/laporan_penjualan/pelanggan_setia.laporan_penjualan_tbl.dart';
+import 'package:dlovera_app/widgets/datatables/laporan_penjualan/cmt_langganan.laporan..dart';
 import 'package:dlovera_app/widgets/empty_datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TableLaporanPenjualanPelangganSetiaWidget extends StatefulWidget {
-  const TableLaporanPenjualanPelangganSetiaWidget(
+class TableLaporanProduksiCMTLanggananWidget extends StatefulWidget {
+  const TableLaporanProduksiCMTLanggananWidget(
       {Key? key, required this.data, this.onPressed})
       : super(key: key);
   final LaporanPerBulanData? data;
   final Function()? onPressed;
 
   @override
-  State<TableLaporanPenjualanPelangganSetiaWidget> createState() =>
-      _TableLaporanPenjualanPelangganSetiaWidgetState();
+  State<TableLaporanProduksiCMTLanggananWidget> createState() =>
+      _TableLaporanProduksiCMTLanggananWidgetState();
 }
 
-class _TableLaporanPenjualanPelangganSetiaWidgetState
-    extends State<TableLaporanPenjualanPelangganSetiaWidget> {
-  late LaporanPenjualanPelangganSetiaDataSource
-      _laporanPenjualanPelangganSetiaDataSource;
+class _TableLaporanProduksiCMTLanggananWidgetState
+    extends State<TableLaporanProduksiCMTLanggananWidget> {
+  late LaporanPenjualanCMTLanggananDataSource
+      _laporanPenjualanCMTLanggananDataSource;
 
   @override
   void initState() {
     super.initState();
-    _laporanPenjualanPelangganSetiaDataSource =
-        LaporanPenjualanPelangganSetiaDataSource(
-            pelangganSetia: widget.data?.pelangganSetia ?? []);
+    _laporanPenjualanCMTLanggananDataSource =
+        LaporanPenjualanCMTLanggananDataSource(
+            cmtLangganan: widget.data?.langganan ?? []);
   }
 
   @override
@@ -41,21 +41,21 @@ class _TableLaporanPenjualanPelangganSetiaWidgetState
       child: VStack(
         [
           UiSpacer.verticalSpace(space: Vx.dp8),
-          TextStyles.labelBoxText(label: "Pelanggan Setia").centered(),
+          TextStyles.labelBoxText(label: "CMT Langganan").centered(),
           UiSpacer.divider().centered(),
           UiSpacer.verticalSpace(space: Vx.dp5),
-          _laporanPenjualanPelangganSetiaDataSource.dataGridRows.isEmpty
+          _laporanPenjualanCMTLanggananDataSource.dataGridRows.isEmpty
               ? const EmptyDatatable()
               : SfDataGrid(
-                  source: _laporanPenjualanPelangganSetiaDataSource,
+                  source: _laporanPenjualanCMTLanggananDataSource,
                   shrinkWrapRows: true,
                   columnWidthMode: ColumnWidthMode.fill,
                   verticalScrollPhysics: const NeverScrollableScrollPhysics(),
                   columns: [
                     CustomGridColumn()
-                        .gridColumn('kode_customer', 'Kode Customer'),
+                        .gridColumn('Kode_Produsen', 'Kode Produsen'),
                     CustomGridColumn().gridColumn(
-                        'nama_customer', 'Nama Customer',
+                        'Nama_Produsen', 'Nama Produsen',
                         alignment: Alignment.centerLeft),
                   ],
                 ),

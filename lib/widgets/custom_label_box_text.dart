@@ -20,7 +20,7 @@ class CustomLabelBoxText extends StatelessWidget {
             bottomRight: Radius.circular(15),
           ),
         ),
-        child: label.text.bold.white.make(),
+        child: label.text.xl.bold.white.make(),
       ),
     );
   }

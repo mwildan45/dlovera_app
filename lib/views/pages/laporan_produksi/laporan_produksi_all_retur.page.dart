@@ -1,28 +1,24 @@
-import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/app_images.dart';
-import 'package:dlovera_app/utils/ui_spacer.dart';
-import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
+import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
+import 'package:dlovera_app/view_models/laporan_produksi.vm.dart';
 import 'package:dlovera_app/widgets/base.page.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
 import 'package:dlovera_app/widgets/datatables/pagination.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pagination/flutter_pagination.dart';
-import 'package:flutter_pagination/widgets/button_styles.dart';
 import 'package:stacked/stacked.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class LaporanPenjualanAllReturPage extends StatelessWidget {
-  const LaporanPenjualanAllReturPage({Key? key, this.vm}) : super(key: key);
-  final LaporanPenjualanViewModel? vm;
+class LaporanProduksiAllReturPage extends StatelessWidget {
+  const LaporanProduksiAllReturPage({Key? key, this.vm}) : super(key: key);
+  final LaporanProduksiViewModel? vm;
 
   @override
   Widget build(BuildContext context) {
-    print('vm ${vm?.selectedMonth}');
     return BasePage(
-      title: "Laporan Penjualan Semua Transaksi",
-      body: ViewModelBuilder<LaporanPenjualanViewModel>.reactive(
-          viewModelBuilder: () => LaporanPenjualanViewModel(context),
+      title: "Laporan Produksi Semua Transaksi",
+      body: ViewModelBuilder<LaporanProduksiViewModel>.reactive(
+          viewModelBuilder: () => LaporanProduksiViewModel(context),
           onModelReady: (model) => model.onPageChangeAllRetur(1,
               month: vm?.selectedMonth, year: vm?.selectedYear),
           builder: (context, vm, child) {
@@ -43,7 +39,7 @@ class LaporanPenjualanAllReturPage extends StatelessWidget {
                       CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
                       CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
                       CustomGridColumn().gridColumn(
-                          'namaCustomer', 'Nama Customer',
+                          'namaCustomer', 'Nama Supplier',
                           alignment: Alignment.centerLeft),
                       CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
                           alignment: Alignment.centerLeft),

@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class LaporanPenjualanReturDataSource extends DataGridSource {
   LaporanPenjualanReturDataSource(
-      {required List<LaporanPenjualanPerBulanReturData> retur}) {
+      {required List<LaporanPerBulanReturData> retur}) {
     dataGridRows = retur
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(

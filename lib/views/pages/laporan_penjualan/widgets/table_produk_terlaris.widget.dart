@@ -13,7 +13,7 @@ class TableLaporanPenjualanProdukTerlarisWidget extends StatefulWidget {
   const TableLaporanPenjualanProdukTerlarisWidget(
       {Key? key, required this.data, this.onPressed})
       : super(key: key);
-  final LaporanPenjualanPerBulanData? data;
+  final LaporanPerBulanData? data;
   final Function()? onPressed;
 
   @override

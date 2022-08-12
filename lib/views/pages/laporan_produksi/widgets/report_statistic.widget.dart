@@ -2,27 +2,27 @@ import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/laporan_penjualan.model.dart';
-import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
+import 'package:dlovera_app/view_models/laporan_produksi.vm.dart';
 import 'package:dlovera_app/widgets/custom_label_box_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class StatisticPenjualanWidget extends StatefulWidget {
-  const StatisticPenjualanWidget(
+class StatisticProduksiWidget extends StatefulWidget {
+  const StatisticProduksiWidget(
       {Key? key, required this.data, required this.dataChart, required this.vm})
       : super(key: key);
 
   final LaporanChartData? data;
   final List<ChartData> dataChart;
-  final LaporanPenjualanViewModel vm;
+  final LaporanProduksiViewModel vm;
 
   @override
-  State<StatisticPenjualanWidget> createState() => _StatisticPenjualanWidgetState();
+  State<StatisticProduksiWidget> createState() => _StatisticProduksiWidgetState();
 }
 
-class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
+class _StatisticProduksiWidgetState extends State<StatisticProduksiWidget> {
   late TooltipBehavior _tooltip;
 
   @override
@@ -49,11 +49,11 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
                     dataSource: widget.dataChart,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => double.parse(data.y),
-                    name: 'Laporan Penjualan Statistic',
+                    name: 'Laporan Produksi Statistic',
                     color: AppColor.primaryColorDark,
                     onPointTap: (ChartPointDetails data) {
                       // print('${data.dataPoints?[data.pointIndex!]}');
-                      widget.vm.getLaporanPenjualanPerBulan(
+                      widget.vm.getLaporanProduksiPerBulan(
                           (data.pointIndex!+1).toString(),
                           (widget.vm.selectedYear ?? widget.data?.yearNow)
                               .toString());
@@ -72,7 +72,7 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
             value: widget.vm.selectedYear ?? widget.data?.yearNow,
             onChanged: (value) {
               widget.vm.selectedYear = value;
-              widget.vm.geLaporanPenjualanChart(value.toString());
+              widget.vm.geLaporanProduksiChart(value.toString());
               widget.vm.notifyListeners();
             },
             items: widget.data?.yearList?.map(

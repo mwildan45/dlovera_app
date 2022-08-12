@@ -3,35 +3,35 @@ import 'package:dlovera_app/constants/text.styles.dart';
 import 'package:dlovera_app/models/laporan_penjualan_per_bulan.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
-import 'package:dlovera_app/widgets/datatables/laporan_penjualan/pelanggan_setia.laporan_penjualan_tbl.dart';
+import 'package:dlovera_app/widgets/datatables/laporan_penjualan/produk_terlaris.laporan_penjualan_tbl.dart';
 import 'package:dlovera_app/widgets/empty_datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TableLaporanPenjualanPelangganSetiaWidget extends StatefulWidget {
-  const TableLaporanPenjualanPelangganSetiaWidget(
+class TableLaporanProduksiBahanTerbanyakWidget extends StatefulWidget {
+  const TableLaporanProduksiBahanTerbanyakWidget(
       {Key? key, required this.data, this.onPressed})
       : super(key: key);
   final LaporanPerBulanData? data;
   final Function()? onPressed;
 
   @override
-  State<TableLaporanPenjualanPelangganSetiaWidget> createState() =>
-      _TableLaporanPenjualanPelangganSetiaWidgetState();
+  State<TableLaporanProduksiBahanTerbanyakWidget> createState() =>
+      _TableLaporanProduksiBahanTerbanyakWidgetState();
 }
 
-class _TableLaporanPenjualanPelangganSetiaWidgetState
-    extends State<TableLaporanPenjualanPelangganSetiaWidget> {
-  late LaporanPenjualanPelangganSetiaDataSource
-      _laporanPenjualanPelangganSetiaDataSource;
+class _TableLaporanProduksiBahanTerbanyakWidgetState
+    extends State<TableLaporanProduksiBahanTerbanyakWidget> {
+  late LaporanPenjualanProdukTerlarisDataSource
+      _laporanPenjualanProdukTerlarisDataSource;
 
   @override
   void initState() {
     super.initState();
-    _laporanPenjualanPelangganSetiaDataSource =
-        LaporanPenjualanPelangganSetiaDataSource(
-            pelangganSetia: widget.data?.pelangganSetia ?? []);
+    _laporanPenjualanProdukTerlarisDataSource =
+        LaporanPenjualanProdukTerlarisDataSource(
+            produkTerlaris: widget.data?.produkTerlaris ?? []);
   }
 
   @override
@@ -41,21 +41,19 @@ class _TableLaporanPenjualanPelangganSetiaWidgetState
       child: VStack(
         [
           UiSpacer.verticalSpace(space: Vx.dp8),
-          TextStyles.labelBoxText(label: "Pelanggan Setia").centered(),
+          TextStyles.labelBoxText(label: "Bahan Terbanyak").centered(),
           UiSpacer.divider().centered(),
           UiSpacer.verticalSpace(space: Vx.dp5),
-          _laporanPenjualanPelangganSetiaDataSource.dataGridRows.isEmpty
+          _laporanPenjualanProdukTerlarisDataSource.dataGridRows.isEmpty
               ? const EmptyDatatable()
               : SfDataGrid(
-                  source: _laporanPenjualanPelangganSetiaDataSource,
+                  source: _laporanPenjualanProdukTerlarisDataSource,
                   shrinkWrapRows: true,
                   columnWidthMode: ColumnWidthMode.fill,
                   verticalScrollPhysics: const NeverScrollableScrollPhysics(),
                   columns: [
-                    CustomGridColumn()
-                        .gridColumn('kode_customer', 'Kode Customer'),
-                    CustomGridColumn().gridColumn(
-                        'nama_customer', 'Nama Customer',
+                    CustomGridColumn().gridColumn('kode_barang', 'Kode Barang'),
+                    CustomGridColumn().gridColumn('nama_barang', 'Nama Barang',
                         alignment: Alignment.centerLeft),
                   ],
                 ),

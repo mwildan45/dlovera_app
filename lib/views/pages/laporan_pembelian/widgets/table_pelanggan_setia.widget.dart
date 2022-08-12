@@ -9,20 +9,20 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TableLaporanPenjualanPelangganSetiaWidget extends StatefulWidget {
-  const TableLaporanPenjualanPelangganSetiaWidget(
+class TableLaporanPembelianPelangganSetiaWidget extends StatefulWidget {
+  const TableLaporanPembelianPelangganSetiaWidget(
       {Key? key, required this.data, this.onPressed})
       : super(key: key);
   final LaporanPerBulanData? data;
   final Function()? onPressed;
 
   @override
-  State<TableLaporanPenjualanPelangganSetiaWidget> createState() =>
-      _TableLaporanPenjualanPelangganSetiaWidgetState();
+  State<TableLaporanPembelianPelangganSetiaWidget> createState() =>
+      _TableLaporanPembelianPelangganSetiaWidgetState();
 }
 
-class _TableLaporanPenjualanPelangganSetiaWidgetState
-    extends State<TableLaporanPenjualanPelangganSetiaWidget> {
+class _TableLaporanPembelianPelangganSetiaWidgetState
+    extends State<TableLaporanPembelianPelangganSetiaWidget> {
   late LaporanPenjualanPelangganSetiaDataSource
       _laporanPenjualanPelangganSetiaDataSource;
 
@@ -53,9 +53,9 @@ class _TableLaporanPenjualanPelangganSetiaWidgetState
                   verticalScrollPhysics: const NeverScrollableScrollPhysics(),
                   columns: [
                     CustomGridColumn()
-                        .gridColumn('kode_customer', 'Kode Customer'),
+                        .gridColumn('kode_supplier', 'Kode Supplier'),
                     CustomGridColumn().gridColumn(
-                        'nama_customer', 'Nama Customer',
+                        'nama_supplier', 'Nama Supplier',
                         alignment: Alignment.centerLeft),
                   ],
                 ),

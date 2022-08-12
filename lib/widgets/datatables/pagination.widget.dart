@@ -17,24 +17,27 @@ class CustomPaginationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Pagination(
-      width: MediaQuery.of(context).size.width * .6,
-      // this prop is optional
-      paginateButtonStyles:
-          PaginateButtonStyles(backgroundColor: AppColor.primaryColorDark),
-      prevButtonStyles: PaginateSkipButton(
-          buttonBackgroundColor: AppColor.primaryColorDark,
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20), bottomLeft: Radius.circular(20))),
-      nextButtonStyles: PaginateSkipButton(
-          buttonBackgroundColor: AppColor.primaryColorDark,
-          borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(20), bottomRight: Radius.circular(20))),
-      onPageChange: onPageChange,
-      useGroup: true,
-      totalPage: totalPage ?? 5,
-      show: 4,
-      currentPage: currentPage,
+    print('pages $totalPage');
+    return Center(
+      child: Pagination(
+        width: MediaQuery.of(context).size.width * .6,
+        // this prop is optional
+        paginateButtonStyles:
+            PaginateButtonStyles(backgroundColor: AppColor.primaryColorDark),
+        prevButtonStyles: PaginateSkipButton(
+            buttonBackgroundColor: AppColor.primaryColorDark,
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20), bottomLeft: Radius.circular(20))),
+        nextButtonStyles: PaginateSkipButton(
+            buttonBackgroundColor: AppColor.primaryColorDark,
+            borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(20), bottomRight: Radius.circular(20))),
+        onPageChange: onPageChange,
+        useGroup: true,
+        totalPage: totalPage ?? 1,
+        show: (totalPage ?? 0) < 4 ? (totalPage ?? 0) - 1 : 4,
+        currentPage: currentPage,
+      ),
     );
   }
 }

@@ -1,12 +1,12 @@
-class LaporanPenjualanHeader {
+class LaporanChartHeader {
   String? message;
-  LaporanPenjualanData? data;
+  LaporanChartData? data;
 
-  LaporanPenjualanHeader({this.message, this.data});
+  LaporanChartHeader({this.message, this.data});
 
-  LaporanPenjualanHeader.fromJson(Map<String, dynamic> json) {
+  LaporanChartHeader.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    data = json['data'] != null ? LaporanPenjualanData.fromJson(json['data']) : null;
+    data = json['data'] != null ? LaporanChartData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -19,20 +19,20 @@ class LaporanPenjualanHeader {
   }
 }
 
-class LaporanPenjualanData {
+class LaporanChartData {
   String? yearNow;
-  List<LaporanPenjualanYearList>? yearList;
+  List<LaporanChartYearList>? yearList;
   int? max;
   List<Statistic>? statistic;
 
-  LaporanPenjualanData({this.yearNow, this.yearList, this.statistic, this.max});
+  LaporanChartData({this.yearNow, this.yearList, this.statistic, this.max});
 
-  LaporanPenjualanData.fromJson(Map<String, dynamic> json) {
+  LaporanChartData.fromJson(Map<String, dynamic> json) {
     yearNow = json['yearNow'];
     if (json['yearList'] != null) {
-      yearList = <LaporanPenjualanYearList>[];
+      yearList = <LaporanChartYearList>[];
       json['yearList'].forEach((v) {
-        yearList!.add(LaporanPenjualanYearList.fromJson(v));
+        yearList!.add(LaporanChartYearList.fromJson(v));
       });
     }
     max = json['max'];
@@ -58,12 +58,12 @@ class LaporanPenjualanData {
   }
 }
 
-class LaporanPenjualanYearList {
+class LaporanChartYearList {
   int? year;
 
-  LaporanPenjualanYearList({this.year});
+  LaporanChartYearList({this.year});
 
-  LaporanPenjualanYearList.fromJson(Map<String, dynamic> json) {
+  LaporanChartYearList.fromJson(Map<String, dynamic> json) {
     year = json['year'];
   }
 

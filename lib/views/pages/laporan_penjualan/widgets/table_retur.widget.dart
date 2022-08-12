@@ -18,7 +18,7 @@ class TableLaporanPenjualanReturWidget extends StatefulWidget {
       required this.heightTable,
       required this.vm})
       : super(key: key);
-  final LaporanPenjualanPerBulanData? data;
+  final LaporanPerBulanData? data;
   final Function()? onPressed;
   final LaporanPenjualanViewModel vm;
   final double heightTable;
