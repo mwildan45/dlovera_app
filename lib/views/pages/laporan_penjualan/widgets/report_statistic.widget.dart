@@ -1,7 +1,7 @@
 import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/models/chart_data.model.dart';
-import 'package:dlovera_app/models/laporan_penjualan.model.dart';
+import 'package:dlovera_app/models/laporan.model.dart';
 import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
 import 'package:dlovera_app/widgets/custom_label_box_text.dart';
 import 'package:flutter/material.dart';

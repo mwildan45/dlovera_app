@@ -15,46 +15,48 @@ class LaporanProduksiAllReturPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
-      title: "Laporan Produksi Semua Transaksi",
-      body: ViewModelBuilder<LaporanProduksiViewModel>.reactive(
-          viewModelBuilder: () => LaporanProduksiViewModel(context),
-          onModelReady: (model) => model.onPageChangeAllRetur(1,
-              month: vm?.selectedMonth, year: vm?.selectedYear),
-          builder: (context, vm, child) {
-            return VStack(
-              [
-                if (vm.busy(vm.laporanPenjualanReturDataSource))
-                  Image.asset(AppImages.appLoadingGear).centered()
-                else
-                  SfDataGrid(
-                    onQueryRowHeight: (details) {
-                      return details.getIntrinsicRowHeight(details.rowIndex);
-                    },
-                    source: vm.laporanPenjualanReturDataSource!,
-                    shrinkWrapRows: true,
-                    columnWidthMode: ColumnWidthMode.fill,
-                    verticalScrollPhysics: const BouncingScrollPhysics(),
-                    columns: [
-                      CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
-                      CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
-                      CustomGridColumn().gridColumn(
-                          'namaCustomer', 'Nama Supplier',
-                          alignment: Alignment.centerLeft),
-                      CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
-                          alignment: Alignment.centerLeft),
-                      CustomGridColumn().gridColumn('alasan', 'Alasan',
-                          alignment: Alignment.centerLeft),
-                    ],
-                  ).expand(),
-                CustomPaginationWidget(
-                  currentPage: vm.currentPageRetur,
-                  onPageChange: vm.onPageChangeAllRetur,
-                  totalPage: vm.laporanPenjualanPerBulanData?.retur?.lastPage,
-                )
-              ],
-            );
-          }),
+    return ViewModelBuilder<LaporanProduksiViewModel>.reactive(
+      viewModelBuilder: () => LaporanProduksiViewModel(context),
+      onModelReady: (model) => model.onPageChangeAllRetur(1,
+          month: vm?.selectedMonth, year: vm?.selectedYear),
+      builder: (context, vm, child) {
+        return BasePage(
+          title:
+              "Laporan Produksi Retur ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+          body: VStack(
+            [
+              if (vm.busy(vm.laporanPenjualanReturDataSource))
+                Image.asset(AppImages.appLoadingGear).centered()
+              else
+                SfDataGrid(
+                  onQueryRowHeight: (details) {
+                    return details.getIntrinsicRowHeight(details.rowIndex);
+                  },
+                  source: vm.laporanPenjualanReturDataSource!,
+                  shrinkWrapRows: true,
+                  columnWidthMode: ColumnWidthMode.fill,
+                  verticalScrollPhysics: const BouncingScrollPhysics(),
+                  columns: [
+                    CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
+                    CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
+                    CustomGridColumn().gridColumn(
+                        'namaCustomer', 'Nama Supplier',
+                        alignment: Alignment.centerLeft),
+                    CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
+                        alignment: Alignment.centerLeft),
+                    CustomGridColumn().gridColumn('alasan', 'Alasan',
+                        alignment: Alignment.centerLeft),
+                  ],
+                ).expand(),
+              CustomPaginationWidget(
+                currentPage: vm.currentPageRetur,
+                onPageChange: vm.onPageChangeAllRetur,
+                totalPage: vm.laporanPerBulanData?.retur?.lastPage,
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

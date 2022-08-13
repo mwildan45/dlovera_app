@@ -1,27 +1,30 @@
 import 'package:dlovera_app/constants/app_images.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/view_models/laporan_produksi.vm.dart';
+import 'package:dlovera_app/view_models/laporan_stock.vm.dart';
 import 'package:dlovera_app/views/pages/laporan_produksi/laporan_produksi_sticky_content.dart';
 import 'package:dlovera_app/views/pages/laporan_produksi/widgets/report_statistic.widget.dart';
+import 'package:dlovera_app/views/pages/laporan_stock/laporan_stock_sticky_content.dart';
+import 'package:dlovera_app/views/pages/laporan_stock/widgets/report_statistic.widget.dart';
 import 'package:dlovera_app/widgets/busy_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class LaporanProduksiPage extends StatefulWidget {
-  const LaporanProduksiPage({Key? key}) : super(key: key);
+class LaporanStockPage extends StatefulWidget {
+  const LaporanStockPage({Key? key}) : super(key: key);
 
   @override
-  State<LaporanProduksiPage> createState() => _LaporanProduksiPageState();
+  State<LaporanStockPage> createState() => _LaporanStockPageState();
 }
 
-class _LaporanProduksiPageState extends State<LaporanProduksiPage>
-    with AutomaticKeepAliveClientMixin<LaporanProduksiPage> {
+class _LaporanStockPageState extends State<LaporanStockPage>
+    with AutomaticKeepAliveClientMixin<LaporanStockPage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ViewModelBuilder<LaporanProduksiViewModel>.reactive(
-        viewModelBuilder: () => LaporanProduksiViewModel(context),
+    return ViewModelBuilder<LaporanStockViewModel>.reactive(
+        viewModelBuilder: () => LaporanStockViewModel(context),
         onModelReady: (model) => model.initialise(),
         builder: (context, vm, child) {
           return SingleChildScrollView(
@@ -31,13 +34,13 @@ class _LaporanProduksiPageState extends State<LaporanProduksiPage>
                 HStack(
                   [
                     UiSpacer.verticalDivider(),
-                    "Laporan Produksi".text.bold.size(20).make().expand()
+                    "Laporan Stock".text.bold.size(20).make().expand()
                   ],
                 ).px(14),
                 UiSpacer.verticalSpace(),
                 vm.isBusy
                     ? const BusyIndicator().h(350).px(14)
-                    : StatisticProduksiWidget(
+                    : StatisticStockWidget(
                   dataChart: vm.dataChart!,
                   data: vm.laporanChartData,
                   vm: vm,
@@ -45,7 +48,7 @@ class _LaporanProduksiPageState extends State<LaporanProduksiPage>
                 UiSpacer.verticalSpace(space: Vx.dp24),
                 vm.busy(vm.laporanPerBulanData) || vm.laporanChartData == null
                     ? Image.asset(AppImages.appLoadingGear).centered()
-                    : StickyContentLaporanProduksi(data: vm.laporanPerBulanData, vm: vm),
+                    : StickyContentLaporanStock(data: vm.laporanPerBulanData, vm: vm),
               ],
             ),
           );

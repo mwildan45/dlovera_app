@@ -1,40 +1,45 @@
 import 'package:dlovera_app/constants/box.styles.dart';
+import 'package:dlovera_app/constants/text.styles.dart';
 import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
+import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
 import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
+import 'package:dlovera_app/view_models/laporan_produksi.vm.dart';
+import 'package:dlovera_app/view_models/laporan_stock.vm.dart';
 import 'package:dlovera_app/widgets/buttons/custom_button.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
+import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/stock_produk.data_source.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/transaksi.data_source.dart';
 import 'package:dlovera_app/widgets/empty_datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TableLaporanPenjualanTransaksiWidget extends StatefulWidget {
-  const TableLaporanPenjualanTransaksiWidget(
+class TableLaporanStockProdukWidget extends StatefulWidget {
+  const TableLaporanStockProdukWidget(
       {Key? key,
       required this.data,
       required this.vm,
       required this.heightTable})
       : super(key: key);
   final LaporanPerBulanData? data;
-  final LaporanPenjualanViewModel vm;
+  final LaporanStockViewModel vm;
   final double heightTable;
 
   @override
-  State<TableLaporanPenjualanTransaksiWidget> createState() =>
-      _TableLaporanPenjualanTransaksiWidgetState();
+  State<TableLaporanStockProdukWidget> createState() =>
+      _TableLaporanStockProdukWidgetState();
 }
 
-class _TableLaporanPenjualanTransaksiWidgetState
-    extends State<TableLaporanPenjualanTransaksiWidget> {
-  late LaporanPenjualanTransaksiDataSource _laporanPenjualanTransaksiDataSource;
+class _TableLaporanStockProdukWidgetState
+    extends State<TableLaporanStockProdukWidget> {
+  late LaporanStockProdukDataSource _laporanStockProdukDataSource;
 
   @override
   void initState() {
     super.initState();
-    _laporanPenjualanTransaksiDataSource = LaporanPenjualanTransaksiDataSource(
-        transaksi: widget.data?.transaksi?.data ?? []);
+    _laporanStockProdukDataSource = LaporanStockProdukDataSource(
+        stockProduk: widget.data?.produk?.data ?? []);
   }
 
   @override
@@ -43,8 +48,11 @@ class _TableLaporanPenjualanTransaksiWidgetState
       decoration: BoxStyles.boxContent(),
       child: VStack(
         [
+          UiSpacer.verticalSpace(space: Vx.dp8),
+          TextStyles.labelBoxText(label: "Produk").centered(),
+          UiSpacer.divider().centered(),
           UiSpacer.verticalSpace(space: Vx.dp5),
-          if (_laporanPenjualanTransaksiDataSource.dataGridRows.isEmpty)
+          if (_laporanStockProdukDataSource.dataGridRows.isEmpty)
             const EmptyDatatable()
           else
             SfDataGrid(
@@ -52,28 +60,26 @@ class _TableLaporanPenjualanTransaksiWidgetState
               onQueryRowHeight: (details) {
                 return details.getIntrinsicRowHeight(details.rowIndex);
               },
-              source: _laporanPenjualanTransaksiDataSource,
+              source: _laporanStockProdukDataSource,
               shrinkWrapRows: true,
               columnWidthMode: ColumnWidthMode.fill,
               // verticalScrollPhysics: const NeverScrollableScrollPhysics(),
               columns: [
-                CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
-                CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
-                CustomGridColumn().gridColumn('namaCustomer', 'Nama Customer',
+                CustomGridColumn().gridColumn('kodeProduk', 'Kode Produk'),
+                CustomGridColumn().gridColumn('barcode', 'Barcode'),
+                CustomGridColumn().gridColumn('Nama_Barang', 'Nama Barang',
                     alignment: Alignment.centerLeft),
-                CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
-                    alignment: Alignment.centerLeft),
-                CustomGridColumn().gridColumn('total', 'Total',
-                    alignment: Alignment.centerLeft),
+                CustomGridColumn().gridColumn('golongan', 'Golongan'),
+                CustomGridColumn().gridColumn('Stock_Akhir', 'Stock Akhir'),
               ],
-            ).h(widget.heightTable - 100),
+            ).h(widget.heightTable - 120),
           UiSpacer.verticalSpace(space: Vx.dp16),
           CustomButton(
             height: 40,
-            title: "See all transaksi",
-            onPressed: _laporanPenjualanTransaksiDataSource.dataGridRows.isEmpty
+            title: "See all stock produk",
+            onPressed: _laporanStockProdukDataSource.dataGridRows.isEmpty
                 ? null
-                : () => widget.vm.navigateToAllTransaksi(widget.vm),
+                : () => widget.vm.navigateToAllStockProduk(widget.vm),
           ).w(210).centered().pOnly(top: Vx.dp12, bottom: Vx.dp8),
         ],
         alignment: MainAxisAlignment.center,

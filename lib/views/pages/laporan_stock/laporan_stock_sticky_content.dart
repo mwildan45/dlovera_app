@@ -4,27 +4,30 @@ import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/constants/text.styles.dart';
 import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
-import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
-import 'package:dlovera_app/views/pages/laporan_penjualan/widgets/table_pelanggan_setia.widget.dart';
-import 'package:dlovera_app/views/pages/laporan_penjualan/widgets/table_produk_terlaris.widget.dart';
-import 'package:dlovera_app/views/pages/laporan_penjualan/widgets/table_retur.widget.dart';
-import 'package:dlovera_app/views/pages/laporan_penjualan/widgets/table_transaksi.widget.dart';
+import 'package:dlovera_app/view_models/laporan_produksi.vm.dart';
+import 'package:dlovera_app/view_models/laporan_stock.vm.dart';
+import 'package:dlovera_app/views/pages/laporan_produksi/widgets/table_cmt_langganan.widget.dart';
+import 'package:dlovera_app/views/pages/laporan_produksi/widgets/table_produk_terlaris.widget.dart';
+import 'package:dlovera_app/views/pages/laporan_produksi/widgets/table_retur.widget.dart';
+import 'package:dlovera_app/views/pages/laporan_produksi/widgets/table_transaksi.widget.dart';
+import 'package:dlovera_app/views/pages/laporan_stock/widgets/table_stock_produk.widget.dart';
+import 'package:dlovera_app/views/pages/laporan_stock/widgets/table_stock_produk_terlaris.widget.dart';
 import 'package:dlovera_app/widgets/box_contents/custom_double_box_contents.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class StickyContentLaporanPenjualan extends StatelessWidget {
-  const StickyContentLaporanPenjualan({Key? key, this.data, required this.vm}) : super(key: key);
+class StickyContentLaporanStock extends StatelessWidget {
+  const StickyContentLaporanStock({Key? key, this.data, required this.vm}) : super(key: key);
 
   final LaporanPerBulanData? data;
-  final LaporanPenjualanViewModel vm;
+  final LaporanStockViewModel vm;
 
   @override
   Widget build(BuildContext context) {
     final double heightScreen = MediaQuery.of(context).size.height;
     return StickyHeader(
-      header: 'Laporan Penjualan ${data?.month} ${data?.year}'
+      header: 'Laporan Stock ${data?.month} ${data?.year}'
           .text
           .lg
           .bold
@@ -57,21 +60,22 @@ class StickyContentLaporanPenjualan extends StatelessWidget {
                   [
                     VStack(
                       [
-                        TextStyles.labelBoxText(label: "Nilai Transaksi"),
+                        TextStyles.labelBoxText(label: "Produk Terjual"),
                         UiSpacer.divider(),
                         HStack(
                           [
-                            AppStrings.appCurrency.text
+                            (data?.rataRata?.produkTerjual ?? 0).toString()
+                                .text
+                                .bold
+                                .size(25)
+                                .make()
+                                .centered(),
+                            'pcs'
+                                .text
                                 .size(Vx.dp16)
                                 .make()
                                 .centered()
-                                .pOnly(bottom: 18),
-                            Flexible(
-                                child: (data?.rataRata?.nilaiTransaksi ?? "0")
-                                    .text
-                                    .bold
-                                    .size(25)
-                                    .make())
+                                .pOnly(bottom: 18, left: Vx.dp4),
                           ],
                           crossAlignment: CrossAxisAlignment.start,
                         )
@@ -81,11 +85,11 @@ class StickyContentLaporanPenjualan extends StatelessWidget {
                     ).expand(),
                     VStack(
                       [
-                        TextStyles.labelBoxText(label: "Jumlah Produk"),
+                        TextStyles.labelBoxText(label: "Produk Retur"),
                         UiSpacer.divider(),
                         HStack(
                           [
-                            (data?.rataRata?.jumlahProduk.toString() ?? "0")
+                            (data?.rataRata?.produkRetur ?? 0)
                                 .text
                                 .bold
                                 .size(25)
@@ -113,7 +117,7 @@ class StickyContentLaporanPenjualan extends StatelessWidget {
           CustomDoubleBoxContents(
             firstContent: VStack(
               [
-                TextStyles.labelBoxText(label: "Nilai Tertinggi"),
+                TextStyles.labelBoxText(label: "Produk Termahal"),
                 UiSpacer.divider(),
                 HStack(
                   [
@@ -134,7 +138,7 @@ class StickyContentLaporanPenjualan extends StatelessWidget {
             ),
             secondContent: VStack(
               [
-                TextStyles.labelBoxText(label: "Nilai Terendah"),
+                TextStyles.labelBoxText(label: "Produk Termurah"),
                 UiSpacer.divider(),
                 HStack(
                   [
@@ -155,38 +159,39 @@ class StickyContentLaporanPenjualan extends StatelessWidget {
             ),
           ),
           UiSpacer.verticalSpace(),
-          TableLaporanPenjualanProdukTerlarisWidget(data: data),
+          TableLaporanStockProdukTerlarisWidget(data: data),
           UiSpacer.verticalSpace(),
-          TableLaporanPenjualanPelangganSetiaWidget(data: data),
-          UiSpacer.verticalSpace(),
-          DefaultTabController(
-            length: 2,
-            child: VStack(
-              [
-                TabBar(
-                  tabs: [
-                    Tab(child: "Transaksi".text.lg.bold.make()),
-                    Tab(child: "Retur".text.lg.bold.make())
-                  ],
-                  indicatorColor: AppColor.primaryColorDark,
-                ),
-                TabBarView(
-                  children: [
-                    TableLaporanPenjualanTransaksiWidget(
-                      data: data,
-                      heightTable: heightScreen / 1.5,
-                      vm: vm,
-                    ).h(heightScreen / 1.5).p8(),
-                    TableLaporanPenjualanReturWidget(
-                      data: data,
-                      heightTable: heightScreen / 1.5,
-                      vm: vm,
-                    ).h(heightScreen / 2).p8()
-                  ],
-                ).h(heightScreen / 1.5),
-              ],
-            ),
-          )
+          TableLaporanStockProdukWidget(
+            data: data,
+            heightTable: heightScreen / 1.5,
+            vm: vm,
+          ).h(heightScreen / 1.5).p8()
+
+
+//           DefaultTabController(
+//             length: 2,
+//             child: VStack(
+//               [
+//                 TabBar(
+//                   tabs: [
+//                     Tab(child: "Transaksi".text.lg.bold.make()),
+//                     Tab(child: "Retur".text.lg.bold.make())
+//                   ],
+//                   indicatorColor: AppColor.primaryColorDark,
+//                 ),
+//                 TabBarView(
+//                   children: [
+// ,
+//                     TableLaporanProduksiReturWidget(
+//                       data: data,
+//                       heightTable: heightScreen / 1.5,
+//                       vm: vm,
+//                     ).h(heightScreen / 2).p8()
+//                   ],
+//                 ).h(heightScreen / 1.5),
+//               ],
+//             ),
+//           )
         ],
       ).p12(),
     );

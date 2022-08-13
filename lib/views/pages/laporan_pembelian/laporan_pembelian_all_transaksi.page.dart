@@ -1,7 +1,5 @@
 import 'package:dlovera_app/constants/app_images.dart';
-import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
-import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
 import 'package:dlovera_app/widgets/base.page.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
 import 'package:dlovera_app/widgets/datatables/pagination.widget.dart';
@@ -24,7 +22,7 @@ class LaporanPembelianAllTransaksiPage extends StatelessWidget {
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Pembelian Transaksi ${vm.laporanPenjualanPerBulanData?.month} ${vm.laporanPenjualanPerBulanData?.year}",
+              "Laporan Pembelian Transaksi ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           body: VStack(
             [
               if (vm.busy(vm.laporanPenjualanTransaksiDataSource))
@@ -53,7 +51,7 @@ class LaporanPembelianAllTransaksiPage extends StatelessWidget {
               CustomPaginationWidget(
                 currentPage: vm.currentPageTransaksi,
                 onPageChange: vm.onPageChangeAllTransaksi,
-                totalPage: vm.laporanPenjualanPerBulanData?.transaksi?.lastPage,
+                totalPage: vm.laporanPerBulanData?.transaksi?.lastPage,
               )
             ],
           ),

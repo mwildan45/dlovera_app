@@ -2,27 +2,28 @@ import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/laporan.model.dart';
-import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
+import 'package:dlovera_app/view_models/laporan_produksi.vm.dart';
+import 'package:dlovera_app/view_models/laporan_stock.vm.dart';
 import 'package:dlovera_app/widgets/custom_label_box_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class StatisticPembelianWidget extends StatefulWidget {
-  const StatisticPembelianWidget(
+class StatisticStockWidget extends StatefulWidget {
+  const StatisticStockWidget(
       {Key? key, required this.data, required this.dataChart, required this.vm})
       : super(key: key);
 
   final LaporanChartData? data;
   final List<ChartData> dataChart;
-  final LaporanPembelianViewModel vm;
+  final LaporanStockViewModel vm;
 
   @override
-  State<StatisticPembelianWidget> createState() => _StatisticPembelianWidgetState();
+  State<StatisticStockWidget> createState() => _StatisticStockWidgetState();
 }
 
-class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
+class _StatisticStockWidgetState extends State<StatisticStockWidget> {
   late TooltipBehavior _tooltip;
 
   @override
@@ -49,11 +50,11 @@ class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
                     dataSource: widget.dataChart,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => double.parse(data.y),
-                    name: 'Laporan Pembelian Statistic',
+                    name: 'Laporan Stock Statistic',
                     color: AppColor.primaryColorDark,
                     onPointTap: (ChartPointDetails data) {
                       // print('${data.dataPoints?[data.pointIndex!]}');
-                      widget.vm.getLaporanPembelianPerBulan(
+                      widget.vm.getLaporanStockPerBulan(
                           (data.pointIndex!+1).toString(),
                           (widget.vm.selectedYear ?? widget.data?.yearNow)
                               .toString());
@@ -72,7 +73,7 @@ class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
             value: widget.vm.selectedYear ?? widget.data?.yearNow,
             onChanged: (value) {
               widget.vm.selectedYear = value;
-              widget.vm.geLaporanPembelianChart(value.toString());
+              widget.vm.geLaporanStockChart(value.toString());
               widget.vm.notifyListeners();
             },
             items: widget.data?.yearList?.map(

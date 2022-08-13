@@ -39,13 +39,13 @@ class _LaporanPenjualanPageState extends State<LaporanPenjualanPage>
                     ? const BusyIndicator().h(350).px(14)
                     : StatisticPenjualanWidget(
                         dataChart: vm.dataChart!,
-                        data: vm.laporanPenjualanData,
+                        data: vm.laporanChartData,
                         vm: vm,
                       ).px(14),
                 UiSpacer.verticalSpace(space: Vx.dp24),
-                vm.busy(vm.laporanPenjualanPerBulanData) || vm.laporanPenjualanData == null
+                vm.busy(vm.laporanPerBulanData) || vm.laporanChartData == null
                     ? Image.asset(AppImages.appLoadingGear).centered()
-                    : StickyContentLaporanPenjualan(data: vm.laporanPenjualanPerBulanData, vm: vm),
+                    : StickyContentLaporanPenjualan(data: vm.laporanPerBulanData, vm: vm),
               ],
             ),
           );

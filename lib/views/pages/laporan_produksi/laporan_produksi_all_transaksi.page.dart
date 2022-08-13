@@ -22,7 +22,7 @@ class LaporanProduksiAllTransaksiPage extends StatelessWidget {
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Produksi Transaksi ${vm.laporanPenjualanPerBulanData?.month} ${vm.laporanPenjualanPerBulanData?.year}",
+              "Laporan Produksi Transaksi ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           body: VStack(
             [
               if (vm.busy(vm.laporanPenjualanTransaksiDataSource))
@@ -51,7 +51,7 @@ class LaporanProduksiAllTransaksiPage extends StatelessWidget {
               CustomPaginationWidget(
                 currentPage: vm.currentPageTransaksi,
                 onPageChange: vm.onPageChangeAllTransaksi,
-                totalPage: vm.laporanPenjualanPerBulanData?.transaksi?.lastPage,
+                totalPage: vm.laporanPerBulanData?.transaksi?.lastPage,
               )
             ],
           ),

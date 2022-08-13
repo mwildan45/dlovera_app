@@ -36,7 +36,7 @@ class _BasePageState extends State<BasePage> {
         title: widget.title == null ? Image.asset(
           "assets/images/brand_text_white.png",
           fit: BoxFit.contain,
-        ).w(120).h(50) : Text(widget.title ?? ""),
+        ).w(120).h(50) : Text(widget.title ?? "", style: TextStyle(fontSize: 15), overflow: TextOverflow.clip),
       ),
       body: VStack([
         widget.isLoading

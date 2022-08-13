@@ -1,4 +1,4 @@
-import 'package:dlovera_app/models/laporan_penjualan_per_bulan.model.dart';
+import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:dlovera_app/utils/currency.dart';
 import 'package:flutter/material.dart';

@@ -1,9 +1,9 @@
 import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/constants/text.styles.dart';
-import 'package:dlovera_app/models/laporan_penjualan_per_bulan.model.dart';
+import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
-import 'package:dlovera_app/widgets/datatables/laporan_penjualan/pelanggan_setia.laporan_penjualan_tbl.dart';
+import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/pelanggan_setia.data_source.dart';
 import 'package:dlovera_app/widgets/empty_datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';

@@ -23,7 +23,7 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Penjualan Transaksi ${vm.laporanPenjualanPerBulanData?.month} ${vm.laporanPenjualanPerBulanData?.year}",
+              "Laporan Penjualan Transaksi ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           // floatingActionWidget: ,
           // floatingActionButtonLocation:
           //     FloatingActionButtonLocation.centerFloat,
@@ -55,7 +55,7 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
               CustomPaginationWidget(
                 currentPage: vm.currentPageTransaksi,
                 onPageChange: vm.onPageChangeAllTransaksi,
-                totalPage: vm.laporanPenjualanPerBulanData?.transaksi?.lastPage,
+                totalPage: vm.laporanPerBulanData?.transaksi?.lastPage,
               )
             ],
           )

@@ -8,16 +8,7 @@ import 'http.service.dart';
 import 'local_storage.service.dart';
 
 class AuthServices {
-  //
-  // static bool firstTimeOnApp() {
-  //   return LocalStorageService.prefs.getBool(AppStrings.firstTimeOnApp) ?? true;
-  // }
-  //
-  // static firstTimeCompleted() async {
-  //   await LocalStorageService.prefs.setBool(AppStrings.firstTimeOnApp, false);
-  // }
-  //
-  // //
+
   static bool authenticated() {
     return LocalStorageService.prefs?.getBool(AppStrings.authenticated) ?? false;
   }
@@ -35,17 +26,7 @@ class AuthServices {
     return LocalStorageService.prefs?.setString(AppStrings.userAuthToken, token);
   }
 
-//   //Locale
-//   static String getLocale() {
-//     return LocalStorageService.prefs.getString(AppStrings.appLocale) ?? "id";
-//   }
-//
-//   static Future<bool> setLocale(language) async {
-//     return LocalStorageService.prefs.setString(AppStrings.appLocale, language);
-//   }
-//
-//   //
-//   //
+
   static User? currentUser;
   static Future<User?> getCurrentUser({bool force = false}) async {
     if (currentUser == null || force) {
@@ -57,23 +38,8 @@ class AuthServices {
 
     return currentUser;
   }
-//
-// //
-//   static Vendor currentVendor;
-//   static Future<Vendor> getCurrentVendor({bool force = false}) async {
-//     if (currentVendor == null || force) {
-//       final vendorStringObject =
-//           await LocalStorageService.prefs.getString(AppStrings.vendorKey);
-//       final vendorObject = json.decode(vendorStringObject);
-//       currentVendor = Vendor.fromJson(vendorObject);
-//     }
-//     print("CURRENT VENDOR ${currentVendor.address}");
-//     return currentVendor;
-//   }
-//
-//   ///
-//   ///
-//   ///
+
+
   static Future<User?> saveUser(dynamic jsonObject) async {
     final currentUser = User.fromJson(jsonObject);
     try {
@@ -89,34 +55,9 @@ class AuthServices {
       return null;
     }
   }
-//
-//   //save vendor info
-//   static Future<void> saveVendor(dynamic jsonObject) async {
-//     final userVendor = Vendor.fromJson(jsonObject);
-//     try {
-//       await LocalStorageService.prefs.setString(
-//         AppStrings.vendorKey,
-//         json.encode(
-//           userVendor.toJson(),
-//         ),
-//       );
-//     } catch (error) {
-//       print("Error vendor ==> $error");
-//     }
-//   }
-//
-//   ///
-//   ///
-//   //
-//   static void logout() async {
-//     await HttpService().getCacheManager().clearAll();
-//     await LocalStorageService.prefs.clear();
-//     await LocalStorageService.prefs.setBool(AppStrings.firstTimeOnApp, false);
-//     FirebaseService()
-//         .firebaseMessaging
-//         .unsubscribeFromTopic("v_${currentUser.vendor_id}");
-//     FirebaseService()
-//         .firebaseMessaging
-//         .unsubscribeFromTopic("${currentUser.role}");
-//   }
+
+
+  static void logout() async {
+    await LocalStorageService.prefs?.clear();
+  }
 }

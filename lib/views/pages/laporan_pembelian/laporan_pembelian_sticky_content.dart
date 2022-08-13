@@ -2,7 +2,7 @@ import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/app_strings.dart';
 import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/constants/text.styles.dart';
-import 'package:dlovera_app/models/laporan_penjualan_per_bulan.model.dart';
+import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
 import 'package:dlovera_app/views/pages/laporan_pembelian/widgets/table_pelanggan_setia.widget.dart';

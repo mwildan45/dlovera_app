@@ -1,13 +1,9 @@
-import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/app_images.dart';
-import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
 import 'package:dlovera_app/widgets/base.page.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
 import 'package:dlovera_app/widgets/datatables/pagination.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pagination/flutter_pagination.dart';
-import 'package:flutter_pagination/widgets/button_styles.dart';
 import 'package:stacked/stacked.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -19,14 +15,15 @@ class LaporanPenjualanAllReturPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('vm ${vm?.selectedMonth}');
-    return BasePage(
-      title: "Laporan Penjualan Semua Transaksi",
-      body: ViewModelBuilder<LaporanPenjualanViewModel>.reactive(
-          viewModelBuilder: () => LaporanPenjualanViewModel(context),
-          onModelReady: (model) => model.onPageChangeAllRetur(1,
-              month: vm?.selectedMonth, year: vm?.selectedYear),
-          builder: (context, vm, child) {
-            return VStack(
+    return ViewModelBuilder<LaporanPenjualanViewModel>.reactive(
+        viewModelBuilder: () => LaporanPenjualanViewModel(context),
+        onModelReady: (model) => model.onPageChangeAllRetur(1,
+            month: vm?.selectedMonth, year: vm?.selectedYear),
+        builder: (context, vm, child) {
+          return BasePage(
+            title:
+                "Laporan Penjualan Retur ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+            body: VStack(
               [
                 if (vm.busy(vm.laporanPenjualanReturDataSource))
                   Image.asset(AppImages.appLoadingGear).centered()
@@ -54,11 +51,11 @@ class LaporanPenjualanAllReturPage extends StatelessWidget {
                 CustomPaginationWidget(
                   currentPage: vm.currentPageRetur,
                   onPageChange: vm.onPageChangeAllRetur,
-                  totalPage: vm.laporanPenjualanPerBulanData?.retur?.lastPage,
+                  totalPage: vm.laporanPerBulanData?.retur?.lastPage,
                 )
               ],
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 }

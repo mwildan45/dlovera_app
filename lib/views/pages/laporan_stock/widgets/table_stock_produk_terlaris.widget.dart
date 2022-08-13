@@ -3,35 +3,35 @@ import 'package:dlovera_app/constants/text.styles.dart';
 import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
-import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/cmt_langganan.data_source..dart';
+import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/produk_terlaris.data_source.dart';
 import 'package:dlovera_app/widgets/empty_datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TableLaporanProduksiCMTLanggananWidget extends StatefulWidget {
-  const TableLaporanProduksiCMTLanggananWidget(
+class TableLaporanStockProdukTerlarisWidget extends StatefulWidget {
+  const TableLaporanStockProdukTerlarisWidget(
       {Key? key, required this.data, this.onPressed})
       : super(key: key);
   final LaporanPerBulanData? data;
   final Function()? onPressed;
 
   @override
-  State<TableLaporanProduksiCMTLanggananWidget> createState() =>
-      _TableLaporanProduksiCMTLanggananWidgetState();
+  State<TableLaporanStockProdukTerlarisWidget> createState() =>
+      _TableLaporanStockProdukTerlarisWidgetState();
 }
 
-class _TableLaporanProduksiCMTLanggananWidgetState
-    extends State<TableLaporanProduksiCMTLanggananWidget> {
-  late LaporanPenjualanCMTLanggananDataSource
-      _laporanPenjualanCMTLanggananDataSource;
+class _TableLaporanStockProdukTerlarisWidgetState
+    extends State<TableLaporanStockProdukTerlarisWidget> {
+  late LaporanPenjualanProdukTerlarisDataSource
+      _laporanPenjualanProdukTerlarisDataSource;
 
   @override
   void initState() {
     super.initState();
-    _laporanPenjualanCMTLanggananDataSource =
-        LaporanPenjualanCMTLanggananDataSource(
-            cmtLangganan: widget.data?.langganan ?? []);
+    _laporanPenjualanProdukTerlarisDataSource =
+        LaporanPenjualanProdukTerlarisDataSource(
+            produkTerlaris: widget.data?.produkTerlaris ?? []);
   }
 
   @override
@@ -41,21 +41,19 @@ class _TableLaporanProduksiCMTLanggananWidgetState
       child: VStack(
         [
           UiSpacer.verticalSpace(space: Vx.dp8),
-          TextStyles.labelBoxText(label: "CMT Langganan").centered(),
+          TextStyles.labelBoxText(label: "Produk Terlaris").centered(),
           UiSpacer.divider().centered(),
           UiSpacer.verticalSpace(space: Vx.dp5),
-          _laporanPenjualanCMTLanggananDataSource.dataGridRows.isEmpty
+          _laporanPenjualanProdukTerlarisDataSource.dataGridRows.isEmpty
               ? const EmptyDatatable()
               : SfDataGrid(
-                  source: _laporanPenjualanCMTLanggananDataSource,
+                  source: _laporanPenjualanProdukTerlarisDataSource,
                   shrinkWrapRows: true,
                   columnWidthMode: ColumnWidthMode.fill,
                   verticalScrollPhysics: const NeverScrollableScrollPhysics(),
                   columns: [
-                    CustomGridColumn()
-                        .gridColumn('Kode_Produsen', 'Kode Produsen'),
-                    CustomGridColumn().gridColumn(
-                        'Nama_Produsen', 'Nama Produsen',
+                    CustomGridColumn().gridColumn('kode_barang', 'Kode Barang'),
+                    CustomGridColumn().gridColumn('nama_barang', 'Nama Barang',
                         alignment: Alignment.centerLeft),
                   ],
                 ),

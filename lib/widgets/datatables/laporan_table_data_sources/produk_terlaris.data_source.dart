@@ -1,18 +1,14 @@
-import 'package:dlovera_app/models/laporan_penjualan_per_bulan.model.dart';
+import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
+import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class LaporanPenjualanCMTLanggananDataSource extends DataGridSource {
-  LaporanPenjualanCMTLanggananDataSource(
-      {required List<LaporanProduksiPerBulanCMTLangganan> cmtLangganan}) {
-    dataGridRows = cmtLangganan
+class LaporanPenjualanProdukTerlarisDataSource extends DataGridSource {
+  LaporanPenjualanProdukTerlarisDataSource({required List<LaporanPerBulanProdukTerlaris> produkTerlaris}) {
+    dataGridRows = produkTerlaris
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
-      DataGridCell<String>(
-          columnName: 'Kode_Produsen',
-          value: dataGridRow.kodeProdusen),
-      DataGridCell<String>(
-          columnName: 'Nama_Produsen',
-          value: dataGridRow.namaProdusen),
+      DataGridCell<String>(columnName: 'kode_barang', value: dataGridRow.kodeBarang),
+      DataGridCell<String>(columnName: 'nama_barang', value: dataGridRow.namaBarang),
     ]))
         .toList();
   }
@@ -27,7 +23,7 @@ class LaporanPenjualanCMTLanggananDataSource extends DataGridSource {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
           return Container(
-              alignment: (dataGridCell.columnName == 'Nama_Produsen')
+              alignment: (dataGridCell.columnName == 'nama_barang')
                   ? Alignment.centerLeft
                   : Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

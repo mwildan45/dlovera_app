@@ -39,13 +39,13 @@ class _LaporanPembelianPageState extends State<LaporanPembelianPage>
                     ? const BusyIndicator().h(350).px(14)
                     : StatisticPembelianWidget(
                   dataChart: vm.dataChart!,
-                  data: vm.laporanPenjualanData,
+                  data: vm.laporanChartData,
                   vm: vm,
                 ).px(14),
                 UiSpacer.verticalSpace(space: Vx.dp24),
-                vm.busy(vm.laporanPenjualanPerBulanData) || vm.laporanPenjualanData == null
+                vm.busy(vm.laporanPerBulanData) || vm.laporanChartData == null
                     ? Image.asset(AppImages.appLoadingGear).centered()
-                    : StickyContentLaporanPembelian(data: vm.laporanPenjualanPerBulanData, vm: vm),
+                    : StickyContentLaporanPembelian(data: vm.laporanPerBulanData, vm: vm),
               ],
             ),
           );
