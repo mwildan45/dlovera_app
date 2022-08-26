@@ -31,11 +31,16 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
 
   @override
   void initialise() async {
-    geLaporanPembelianChart("", isGetPerBulan: true);
+    getLaporanPembelianChart("", isGetPerBulan: true);
+  }
+
+  onReload() async {
+    getLaporanPembelianChart("");
+    getLaporanPembelianPerBulan(selectedMonth, selectedYear);
   }
 
   //
-  geLaporanPembelianChart(String? year, {bool isGetPerBulan = false}) async {
+  getLaporanPembelianChart(String? year, {bool isGetPerBulan = false}) async {
     setBusy(true);
     try {
 
@@ -63,18 +68,22 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
   }
 
   //
-  getLaporanPembelianPerBulan(String? month, String? year) async {
+  getLaporanPembelianPerBulan(month, year) async {
     setBusyForObject(laporanPerBulanData, true);
+    laporanPerBulanData = await laporanPembelianRequest.getLaporanPenjualanPerBulan(
+        {
+          'tahun': year ?? 2022,
+          'bulan': month ?? 1,
+        }
+    );
 
-    try{
-      laporanPerBulanData = await laporanPembelianRequest.getLaporanPenjualanPerBulan(
-          {
-            'tahun': year ?? 2022,
-            'bulan': month ?? 1,
-          }
-      );
-
+    if(year != "") {
       selectedMonth = month;
+      selectedYear = year;
+      notifyListeners();
+    }
+    try{
+
 
     } catch (error) {
       print("Error ==> $error");

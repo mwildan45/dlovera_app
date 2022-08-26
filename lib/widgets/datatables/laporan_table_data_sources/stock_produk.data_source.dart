@@ -1,25 +1,23 @@
-import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
-import 'package:dlovera_app/models/today_summary.model.dart';
-import 'package:dlovera_app/utils/currency.dart';
+import 'package:dlovera_app/models/stock.model.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class LaporanStockProdukDataSource extends DataGridSource {
-  LaporanStockProdukDataSource(
-      {required List<LaporanPerBulanProdukData> stockProduk}) {
-    dataGridRows = stockProduk
+class LaporanStockProdukBahanBakuDataSource extends DataGridSource {
+  LaporanStockProdukBahanBakuDataSource(
+      {required List<DataProdukBahanBaku> stockProdukBahanBaku}) {
+    dataGridRows = stockProdukBahanBaku
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
       DataGridCell<String>(
           columnName: 'kodeProduk', value: dataGridRow.kodeBarang),
       DataGridCell<String>(
-          columnName: 'barcode', value: dataGridRow.barcode),
+          columnName: 'namaBarang', value: dataGridRow.namaBarang),
       DataGridCell<String>(
-          columnName: 'Nama_Barang',
-          value: dataGridRow.namaBarang),
+          columnName: 'hargaSatuan',
+          value: dataGridRow.hargaSatuan),
       DataGridCell<String>(
           columnName: 'golongan', value: dataGridRow.golongan),
       DataGridCell<String>(
-          columnName: 'Stock_Akhir', value: dataGridRow.stockAkhir.toString()),
+          columnName: 'stockAkhir', value: dataGridRow.stockAkhir.toString()),
     ]))
         .toList();
   }
@@ -34,7 +32,7 @@ class LaporanStockProdukDataSource extends DataGridSource {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
           return Container(
-              alignment: (dataGridCell.columnName == 'Nama_Barang')
+              alignment: (dataGridCell.columnName == 'namaBarang')
                   ? Alignment.centerLeft
                   : Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

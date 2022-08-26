@@ -22,8 +22,8 @@ class LaporanPerBulanHeader {
 }
 
 class LaporanPerBulanData {
-  String? year;
-  String? month;
+  dynamic? year;
+  dynamic? month;
   RataRata? rataRata;
   String? transaksiTertinggi;
   String? transaksiTerendah;

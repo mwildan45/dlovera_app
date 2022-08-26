@@ -32,11 +32,17 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
 
   @override
   void initialise() async {
-    geLaporanProduksiChart("", isGetPerBulan: true);
+    getLaporanProduksiChart("", isGetPerBulan: true);
   }
 
   //
-  geLaporanProduksiChart(String? year, {bool isGetPerBulan = false}) async {
+  onReload() async {
+    getLaporanProduksiChart("");
+    getLaporanProduksiPerBulan(selectedMonth, selectedYear);
+  }
+
+  //
+  getLaporanProduksiChart(String? year, {bool isGetPerBulan = false}) async {
     setBusy(true);
     try {
 
@@ -65,7 +71,7 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
   }
 
   //
-  getLaporanProduksiPerBulan(String? month, String? year) async {
+  getLaporanProduksiPerBulan(month, year) async {
     setBusyForObject(laporanPerBulanData, true);
 
     try{
@@ -76,7 +82,11 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
           }
       );
 
-      selectedMonth = month;
+      if(year != "") {
+        selectedMonth = month;
+        selectedYear = year;
+        notifyListeners();
+      }
 
     } catch (error) {
       print("Error ==> $error");

@@ -70,7 +70,7 @@ class _TableLaporanPembelianTransaksiWidgetState
           UiSpacer.verticalSpace(space: Vx.dp16),
           CustomButton(
             height: 40,
-            title: "See all transaksi",
+            title: "lihat semua transaksi",
             onPressed: _laporanPenjualanTransaksiDataSource.dataGridRows.isEmpty
                 ? null
                 : () => widget.vm.navigateToAllTransaksi(widget.vm),

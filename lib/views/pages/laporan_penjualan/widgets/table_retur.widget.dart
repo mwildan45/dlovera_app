@@ -71,7 +71,7 @@ class _TableLaporanPenjualanReturWidgetState
           UiSpacer.verticalSpace(space: Vx.dp16),
           CustomButton(
             height: 40,
-            title: "See all retur",
+            title: "lihat semua retur",
             onPressed: _laporanPenjualanReturDataSource.dataGridRows.isEmpty
                 ? null
                 : () => widget.vm.navigateToAllRetur(widget.vm),

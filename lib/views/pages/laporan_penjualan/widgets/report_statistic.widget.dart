@@ -52,11 +52,11 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
                     name: 'Laporan Penjualan Statistic',
                     color: AppColor.primaryColorDark,
                     onPointTap: (ChartPointDetails data) {
-                      // print('${data.dataPoints?[data.pointIndex!]}');
+                      final id = widget.vm.laporanChartData?.statistic?[data.pointIndex!].num;
+                      print('${widget.vm.laporanChartData?.statistic?[data.pointIndex!].num}');
                       widget.vm.getLaporanPenjualanPerBulan(
-                          (data.pointIndex!+1).toString(),
-                          (widget.vm.selectedYear ?? widget.data?.yearNow)
-                              .toString());
+                          id.toString(),
+                          (widget.vm.selectedYear ?? widget.data?.yearNow));
                     })
               ]).pOnly(top: Vx.dp48),
         ).w(double.maxFinite).h(350),
@@ -72,7 +72,7 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
             value: widget.vm.selectedYear ?? widget.data?.yearNow,
             onChanged: (value) {
               widget.vm.selectedYear = value;
-              widget.vm.geLaporanPenjualanChart(value.toString());
+              widget.vm.getLaporanPenjualanChart(value.toString());
               widget.vm.notifyListeners();
             },
             items: widget.data?.yearList?.map(

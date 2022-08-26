@@ -4,7 +4,6 @@ import 'package:dlovera_app/constants/text.styles.dart';
 import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
-import 'package:dlovera_app/widgets/busy_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -39,7 +38,7 @@ class _ReportStatisticState extends State<ReportStatistic> {
       child: VStack(
         [
           UiSpacer.verticalSpace(space: Vx.dp5),
-          TextStyles.labelBoxText(label: "Report Statistic").centered(),
+          TextStyles.labelBoxText(label: "Statistik").centered(),
           UiSpacer.divider().centered(),
           SfCartesianChart(
               primaryXAxis: CategoryAxis(),
@@ -51,7 +50,7 @@ class _ReportStatisticState extends State<ReportStatistic> {
                     dataSource: widget.dataChart ?? [],
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => double.parse(data.y),
-                    name: 'Report Statistic',
+                    name: 'Statistik',
                     color: AppColor.primaryColorDark)
               ])
         ],

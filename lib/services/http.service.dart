@@ -68,6 +68,8 @@ class HttpService {
 
     Response response;
 
+    print("params: $body");
+
     try {
       response = await dio.post(
         uri,

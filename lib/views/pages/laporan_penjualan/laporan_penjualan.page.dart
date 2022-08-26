@@ -4,6 +4,7 @@ import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
 import 'package:dlovera_app/views/pages/laporan_penjualan/laporan_penjualan_sticky_content.dart';
 import 'package:dlovera_app/views/pages/laporan_penjualan/widgets/report_statistic.widget.dart';
 import 'package:dlovera_app/widgets/busy_indicator.dart';
+import 'package:dlovera_app/widgets/buttons/custom_floating_refresh_button.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -21,10 +22,12 @@ class _LaporanPenjualanPageState extends State<LaporanPenjualanPage>
   Widget build(BuildContext context) {
     super.build(context);
     return ViewModelBuilder<LaporanPenjualanViewModel>.reactive(
-        viewModelBuilder: () => LaporanPenjualanViewModel(context),
-        onModelReady: (model) => model.initialise(),
-        builder: (context, vm, child) {
-          return SingleChildScrollView(
+      viewModelBuilder: () => LaporanPenjualanViewModel(context),
+      onModelReady: (model) => model.initialise(),
+      builder: (context, vm, child) {
+        return CustomFloatingRefreshButton(
+          onTap: () => vm.onReload(),
+          child: SingleChildScrollView(
             child: VStack(
               [
                 UiSpacer.verticalSpace(),
@@ -45,11 +48,14 @@ class _LaporanPenjualanPageState extends State<LaporanPenjualanPage>
                 UiSpacer.verticalSpace(space: Vx.dp24),
                 vm.busy(vm.laporanPerBulanData) || vm.laporanChartData == null
                     ? Image.asset(AppImages.appLoadingGear).centered()
-                    : StickyContentLaporanPenjualan(data: vm.laporanPerBulanData, vm: vm),
+                    : StickyContentLaporanPenjualan(
+                        data: vm.laporanPerBulanData, vm: vm),
               ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   @override

@@ -77,8 +77,8 @@ class TodaySummaryData {
 }
 
 class TotalRevenue {
-  String? total;
-  String? yesterdayData;
+  int? total;
+  int? yesterdayData;
   double? percent;
 
   TotalRevenue({this.total, this.yesterdayData, this.percent});
@@ -144,13 +144,13 @@ class Customer {
 
 class Statistic {
   int? max;
-  int? i0003;
-  int? i0306;
+  String? i0003;
+  String? i0306;
   String? s0609;
   String? s0912;
   String? s1215;
-  int? i1518;
-  int? i1821;
+  String? i1518;
+  String? i1821;
   String? s2123;
 
   Statistic(

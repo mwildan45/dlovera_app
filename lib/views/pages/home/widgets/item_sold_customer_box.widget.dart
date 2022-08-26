@@ -1,10 +1,8 @@
 import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/app_images.dart';
-import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/constants/text.styles.dart';
 import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
-import 'package:dlovera_app/widgets/busy_indicator.dart';
 import 'package:dlovera_app/widgets/box_contents/custom_double_box_contents.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,7 +26,7 @@ class ItemSoldCustomerBox extends StatelessWidget {
       busyIndicator: busyIndicator,
       firstContent: VStack(
         [
-          TextStyles.labelBoxText(label: "Total Item Sold"),
+          TextStyles.labelBoxText(label: "Total Produk"),
           UiSpacer.divider(),
           "${itemSold?.total}"
               .text
@@ -37,11 +35,11 @@ class ItemSoldCustomerBox extends StatelessWidget {
               .make()
               .centered(),
           HStack([
-            SvgPicture.asset(AppSvgs.downward).pOnly(right: Vx.dp5),
+            SvgPicture.asset((itemSold?.total ?? 0) < (itemSold?.yesterdayData ?? 0) ? AppSvgs.downward : AppSvgs.upward).pOnly(right: Vx.dp5),
             Flexible(
-              child: "${itemSold?.percent}% from yesterday"
+              child: "${itemSold?.percent}% from previous"
                   .text.overflow(TextOverflow.visible)
-                  .color(AppColor.sizzlingRed)
+                  .color((itemSold?.total ?? 0) < (itemSold?.yesterdayData ?? 0) ? AppColor.sizzlingRed : AppColor.green)
                   .sm
                   .make(),
             )
@@ -51,7 +49,7 @@ class ItemSoldCustomerBox extends StatelessWidget {
       ),
       secondContent: VStack(
         [
-          TextStyles.labelBoxText(label: "Total Customer"),
+          TextStyles.labelBoxText(label: "Total Konsumen"),
           UiSpacer.divider(),
           "${customer?.total}"
               .text
@@ -60,11 +58,11 @@ class ItemSoldCustomerBox extends StatelessWidget {
               .make()
               .centered(),
           HStack([
-            SvgPicture.asset(AppSvgs.upward).pOnly(right: Vx.dp5),
+            SvgPicture.asset((customer?.total ?? 0) < (customer?.yesterdayData ?? 0) ? AppSvgs.downward : AppSvgs.upward).pOnly(right: Vx.dp5),
             Flexible(
-              child: "${customer?.percent}% from yesterday"
+              child: "${customer?.percent}% from previous"
                   .text.overflow(TextOverflow.visible)
-                  .color(AppColor.green)
+                  .color((customer?.total ?? 0) < (customer?.yesterdayData ?? 0) ? AppColor.sizzlingRed : AppColor.green)
                   .sm
                   .make(),
             )

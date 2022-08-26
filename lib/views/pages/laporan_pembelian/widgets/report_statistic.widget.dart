@@ -52,11 +52,11 @@ class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
                     name: 'Laporan Pembelian Statistic',
                     color: AppColor.primaryColorDark,
                     onPointTap: (ChartPointDetails data) {
+                      final id = widget.vm.laporanChartData?.statistic?[data.pointIndex!].num;
                       // print('${data.dataPoints?[data.pointIndex!]}');
                       widget.vm.getLaporanPembelianPerBulan(
-                          (data.pointIndex!+1).toString(),
-                          (widget.vm.selectedYear ?? widget.data?.yearNow)
-                              .toString());
+                          id.toString(),
+                          (widget.vm.selectedYear ?? widget.data?.yearNow));
                     })
               ]).pOnly(top: Vx.dp48),
         ).w(double.maxFinite).h(350),
@@ -72,7 +72,7 @@ class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
             value: widget.vm.selectedYear ?? widget.data?.yearNow,
             onChanged: (value) {
               widget.vm.selectedYear = value;
-              widget.vm.geLaporanPembelianChart(value.toString());
+              widget.vm.getLaporanPembelianChart(value.toString());
               widget.vm.notifyListeners();
             },
             items: widget.data?.yearList?.map(

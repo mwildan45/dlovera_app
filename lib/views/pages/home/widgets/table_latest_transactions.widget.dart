@@ -36,7 +36,7 @@ class _TableLatestTransactionState extends State<TableLatestTransaction> {
       child: VStack(
         [
           UiSpacer.verticalSpace(space: Vx.dp5),
-          TextStyles.labelBoxText(label: "Latest Transactions").centered(),
+          TextStyles.labelBoxText(label: "Transaksi Terbaru").centered(),
           UiSpacer.divider().centered(),
           UiSpacer.verticalSpace(space: Vx.dp5),
           SfDataGrid(
@@ -53,7 +53,7 @@ class _TableLatestTransactionState extends State<TableLatestTransaction> {
           // UiSpacer.verticalSpace(space: Vx.dp5),
           CustomButton(
             height: 40,
-            title: "See all transactions",
+            title: "lihat semua transaksi",
             onPressed: widget.onPressed,
           ).w(210).centered().pOnly(top: Vx.dp12, bottom: Vx.dp16),
           // UiSpacer.verticalSpace(space: Vx.dp8),

@@ -8,45 +8,45 @@ import 'package:stacked/stacked.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class LaporanStockProdukPage extends StatelessWidget {
-  const LaporanStockProdukPage({Key? key, this.vm}) : super(key: key);
+class LaporanStockPersediaanProdukPage extends StatelessWidget {
+  const LaporanStockPersediaanProdukPage({Key? key, this.vm}) : super(key: key);
   final LaporanStockViewModel? vm;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LaporanStockViewModel>.reactive(
           viewModelBuilder: () => LaporanStockViewModel(context),
-          onModelReady: (model) => model.onPageChangeAllStockProduk(1,
+          onModelReady: (model) => model.onPageChangePersediaanProduk(1,
               month: vm?.selectedMonth, year: vm?.selectedYear),
           builder: (context, vm, child) {
             return BasePage(
-              title: "Laporan Stock Produk ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+              title: "Laporan Stock Persediaan Produk",
               body: VStack(
                 [
-                  if (vm.busy(vm.laporanStockProdukDataSource))
+                  if (vm.busy(vm.laporanStockProdukBahanBakuDataSource))
                     Image.asset(AppImages.appLoadingGear).centered()
                   else
                     SfDataGrid(
                       onQueryRowHeight: (details) {
                         return details.getIntrinsicRowHeight(details.rowIndex);
                       },
-                      source: vm.laporanStockProdukDataSource!,
+                      source: vm.laporanStockProdukBahanBakuDataSource!,
                       shrinkWrapRows: true,
                       columnWidthMode: ColumnWidthMode.fill,
                       verticalScrollPhysics: const BouncingScrollPhysics(),
                       columns: [
                         CustomGridColumn().gridColumn('kodeProduk', 'Kode Produk'),
-                        CustomGridColumn().gridColumn('barcode', 'Barcode'),
-                        CustomGridColumn().gridColumn('Nama_Barang', 'Nama Barang',
+                        CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
                             alignment: Alignment.centerLeft),
+                        CustomGridColumn().gridColumn('jumlahSatuan', 'Jumlah Satuan'),
                         CustomGridColumn().gridColumn('golongan', 'Golongan'),
-                        CustomGridColumn().gridColumn('Stock_Akhir', 'Stock Akhir'),
+                        CustomGridColumn().gridColumn('stockAkhir', 'Stock Akhir'),
                       ],
                     ).expand(),
                   CustomPaginationWidget(
-                    currentPage: vm.currentPageRetur,
-                    onPageChange: vm.onPageChangeAllStockProduk,
-                    totalPage: vm.laporanPerBulanData?.retur?.lastPage,
+                    currentPage: vm.currentPageProduk,
+                    onPageChange: vm.onPageChangePersediaanProduk,
+                    totalPage: vm.stockData?.data?.persediaanProduk?.lastPage,
                   )
                 ],
               ),

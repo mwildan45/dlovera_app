@@ -1,5 +1,4 @@
 
-import 'package:dlovera_app/constants/app_routes.dart';
 import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:dlovera_app/requests/today_summary.request.dart';

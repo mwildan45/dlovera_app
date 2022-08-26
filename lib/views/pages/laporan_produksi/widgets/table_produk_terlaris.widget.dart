@@ -41,7 +41,7 @@ class _TableLaporanProduksiBahanTerbanyakWidgetState
       child: VStack(
         [
           UiSpacer.verticalSpace(space: Vx.dp8),
-          TextStyles.labelBoxText(label: "Bahan Terbanyak").centered(),
+          TextStyles.labelBoxText(label: "Bahan Baku Terbanyak").centered(),
           UiSpacer.divider().centered(),
           UiSpacer.verticalSpace(space: Vx.dp5),
           _laporanPenjualanProdukTerlarisDataSource.dataGridRows.isEmpty

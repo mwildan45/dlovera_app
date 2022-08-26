@@ -41,7 +41,7 @@ class _TableLaporanPembelianProdukTerlarisWidgetState
       child: VStack(
         [
           UiSpacer.verticalSpace(space: Vx.dp8),
-          TextStyles.labelBoxText(label: "Produk Terlaris").centered(),
+          TextStyles.labelBoxText(label: "Bahan Baku Favorit").centered(),
           UiSpacer.divider().centered(),
           UiSpacer.verticalSpace(space: Vx.dp5),
           _laporanPenjualanProdukTerlarisDataSource.dataGridRows.isEmpty

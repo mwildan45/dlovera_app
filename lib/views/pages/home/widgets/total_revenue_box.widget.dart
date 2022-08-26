@@ -2,6 +2,7 @@ import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/app_images.dart';
 import 'package:dlovera_app/constants/app_strings.dart';
 import 'package:dlovera_app/constants/box.styles.dart';
+import 'package:dlovera_app/utils/currency.dart';
 import 'package:dlovera_app/widgets/busy_indicator.dart';
 import 'package:dlovera_app/widgets/custom_label_box_text.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,10 @@ class TotalRevenueBox extends StatelessWidget {
       required this.percentage,
       this.busyIndicator = false})
       : super(key: key);
-  final String totalRevenue, yesterdayTotalRevenue;
+  // final String ;
   final double percentage;
   final bool busyIndicator;
+  final int totalRevenue, yesterdayTotalRevenue;
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +37,21 @@ class TotalRevenueBox extends StatelessWidget {
                         .make()
                         .centered()
                         .pOnly(bottom: 18, right: Vx.dp4),
-                    totalRevenue.text.bold.size(Vx.dp32).make().centered()
+                    totalRevenue.currencyValueFormat().text.bold.size(Vx.dp32).make().centered()
                   ],
                   crossAlignment: CrossAxisAlignment.stretch,
                   alignment: MainAxisAlignment.center,
                 ),
               ).w(double.maxFinite).h(140),
-              const CustomLabelBoxText(label: "Total Revenue"),
+              const CustomLabelBoxText(label: "Total Pendapatan"),
               Positioned(
                 bottom: 5,
                 right: 8,
                 child: HStack([
-                  SvgPicture.asset(AppSvgs.upward).pOnly(right: Vx.dp5),
+                  SvgPicture.asset(totalRevenue < yesterdayTotalRevenue ? AppSvgs.downward : AppSvgs.upward).pOnly(right: Vx.dp5),
                   "$percentage% from yesterday"
                       .text
-                      .color(AppColor.green)
+                      .color(totalRevenue < yesterdayTotalRevenue ? AppColor.sizzlingRed : AppColor.green)
                       .lg
                       .make()
                 ]),
