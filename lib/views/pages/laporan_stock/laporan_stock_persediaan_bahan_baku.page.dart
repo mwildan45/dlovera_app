@@ -38,9 +38,9 @@ class LaporanStockPersediaanBahanBakuPage extends StatelessWidget {
                       CustomGridColumn().gridColumn('kodeProduk', 'Kode Produk'),
                       CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
                           alignment: Alignment.centerLeft),
-                      CustomGridColumn().gridColumn('jumlahSatuan', 'Jumlah Satuan'),
-                      CustomGridColumn().gridColumn('golongan', 'Golongan'),
-                      CustomGridColumn().gridColumn('stockAkhir', 'Stock Akhir'),
+                      CustomGridColumn().gridColumn('jumlahSatuan', 'Harga'),
+                      CustomGridColumn().gridColumn('golongan', 'Kategori'),
+                      CustomGridColumn().gridColumn('stockAkhir', 'Stock'),
                     ],
                   ).expand(),
                 CustomPaginationWidget(

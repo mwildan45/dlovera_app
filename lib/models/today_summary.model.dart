@@ -79,7 +79,7 @@ class TodaySummaryData {
 class TotalRevenue {
   int? total;
   int? yesterdayData;
-  double? percent;
+  dynamic? percent;
 
   TotalRevenue({this.total, this.yesterdayData, this.percent});
 
@@ -101,7 +101,7 @@ class TotalRevenue {
 class ItemSold {
   int? total;
   int? yesterdayData;
-  double? percent;
+  dynamic? percent;
 
   ItemSold({this.total, this.yesterdayData, this.percent});
 
@@ -123,7 +123,7 @@ class ItemSold {
 class Customer {
   int? total;
   int? yesterdayData;
-  double? percent;
+  dynamic? percent;
 
   Customer({this.total, this.yesterdayData, this.percent});
 
@@ -202,7 +202,7 @@ class LatestTransaction {
 
   LatestTransaction.fromJson(Map<String, dynamic> json) {
     noFaktur = json['no_faktur'];
-    namaCustomer = json['Nama_Customer'];
+    namaCustomer = json['nama_customer'];
     grandTotal = json['grand_total'];
     tanggal = json['tanggal'];
   }
@@ -210,7 +210,7 @@ class LatestTransaction {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['no_faktur'] = noFaktur;
-    data['Nama_Customer'] = namaCustomer;
+    data['nama_customer'] = namaCustomer;
     data['grand_total'] = grandTotal;
     data['tanggal'] = tanggal;
     return data;

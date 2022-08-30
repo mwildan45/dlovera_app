@@ -37,7 +37,7 @@ class ItemSoldCustomerBox extends StatelessWidget {
           HStack([
             SvgPicture.asset((itemSold?.total ?? 0) < (itemSold?.yesterdayData ?? 0) ? AppSvgs.downward : AppSvgs.upward).pOnly(right: Vx.dp5),
             Flexible(
-              child: "${itemSold?.percent}% from previous"
+              child: "${itemSold?.percent.abs()}% from previous"
                   .text.overflow(TextOverflow.visible)
                   .color((itemSold?.total ?? 0) < (itemSold?.yesterdayData ?? 0) ? AppColor.sizzlingRed : AppColor.green)
                   .sm
@@ -60,7 +60,7 @@ class ItemSoldCustomerBox extends StatelessWidget {
           HStack([
             SvgPicture.asset((customer?.total ?? 0) < (customer?.yesterdayData ?? 0) ? AppSvgs.downward : AppSvgs.upward).pOnly(right: Vx.dp5),
             Flexible(
-              child: "${customer?.percent}% from previous"
+              child: "${customer?.percent.abs()}% from previous"
                   .text.overflow(TextOverflow.visible)
                   .color((customer?.total ?? 0) < (customer?.yesterdayData ?? 0) ? AppColor.sizzlingRed : AppColor.green)
                   .sm

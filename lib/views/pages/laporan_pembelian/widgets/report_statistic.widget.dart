@@ -46,6 +46,8 @@ class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
               tooltipBehavior: _tooltip,
               series: <ChartSeries<ChartData, String>>[
                 ColumnSeries<ChartData, String>(
+                    dataLabelSettings: const DataLabelSettings(
+                        isVisible: true, labelAlignment: ChartDataLabelAlignment.top, textStyle: TextStyle(color: Colors.white)),
                     dataSource: widget.dataChart,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => double.parse(data.y),

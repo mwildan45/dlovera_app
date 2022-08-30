@@ -25,8 +25,8 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
   int currentPageTransaksi = 1;
   int currentPageRetur = 1;
   String? selectedMonth = '';
-  LaporanPenjualanTransaksiDataSource? laporanPenjualanTransaksiDataSource;
-  LaporanPenjualanReturDataSource? laporanPenjualanReturDataSource;
+  LaporanTransaksiDataSource? laporanPenjualanTransaksiDataSource;
+  LaporanReturDataSource? laporanPenjualanReturDataSource;
 
 
   @override
@@ -114,7 +114,7 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
       );
 
       laporanPenjualanTransaksiDataSource?.dispose();
-      laporanPenjualanTransaksiDataSource = LaporanPenjualanTransaksiDataSource(
+      laporanPenjualanTransaksiDataSource = LaporanTransaksiDataSource(
           transaksi: laporanPerBulanData?.transaksi?.data ?? []);
 
     } catch (error) {
@@ -144,7 +144,7 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
       );
 
       laporanPenjualanReturDataSource?.dispose();
-      laporanPenjualanReturDataSource = LaporanPenjualanReturDataSource(
+      laporanPenjualanReturDataSource = LaporanReturDataSource(
           retur: laporanPerBulanData?.retur?.data ?? []);
 
     } catch (error) {

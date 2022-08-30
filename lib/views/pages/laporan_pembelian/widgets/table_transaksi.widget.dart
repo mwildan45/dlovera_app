@@ -28,12 +28,12 @@ class TableLaporanPembelianTransaksiWidget extends StatefulWidget {
 
 class _TableLaporanPembelianTransaksiWidgetState
     extends State<TableLaporanPembelianTransaksiWidget> {
-  late LaporanPenjualanTransaksiDataSource _laporanPenjualanTransaksiDataSource;
+  late LaporanTransaksiDataSource _laporanPenjualanTransaksiDataSource;
 
   @override
   void initState() {
     super.initState();
-    _laporanPenjualanTransaksiDataSource = LaporanPenjualanTransaksiDataSource(
+    _laporanPenjualanTransaksiDataSource = LaporanTransaksiDataSource(
         transaksi: widget.data?.transaksi?.data ?? []);
   }
 
@@ -61,9 +61,9 @@ class _TableLaporanPembelianTransaksiWidgetState
                 CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
                 CustomGridColumn().gridColumn('namaSupplier', 'Nama Supplier',
                     alignment: Alignment.centerLeft),
-                CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
+                CustomGridColumn().gridColumn('namaBarang', 'Bahan Baku',
                     alignment: Alignment.centerLeft),
-                CustomGridColumn().gridColumn('total', 'Total',
+                CustomGridColumn().gridColumn('total', 'Nilai',
                     alignment: Alignment.centerLeft),
               ],
             ).h(widget.heightTable - 100),

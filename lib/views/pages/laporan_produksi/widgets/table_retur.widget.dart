@@ -30,13 +30,13 @@ class TableLaporanProduksiReturWidget extends StatefulWidget {
 
 class _TableLaporanProduksiReturWidgetState
     extends State<TableLaporanProduksiReturWidget> {
-  late LaporanPenjualanReturDataSource _laporanPenjualanReturDataSource;
+  late LaporanReturDataSource _laporanPenjualanReturDataSource;
 
   @override
   void initState() {
     super.initState();
     _laporanPenjualanReturDataSource =
-        LaporanPenjualanReturDataSource(retur: widget.data?.retur?.data ?? []);
+        LaporanReturDataSource(retur: widget.data?.retur?.data ?? []);
   }
 
   @override
@@ -60,9 +60,9 @@ class _TableLaporanProduksiReturWidgetState
               columns: [
                 CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
                 CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
-                CustomGridColumn().gridColumn('namaSupplier', 'Nama Supplier',
+                CustomGridColumn().gridColumn('namaProdusen', 'Nama CMT',
                     alignment: Alignment.centerLeft),
-                CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
+                CustomGridColumn().gridColumn('namaBarang', 'Bahan',
                     alignment: Alignment.centerLeft),
                 CustomGridColumn().gridColumn('alasan', 'Alasan',
                     alignment: Alignment.centerLeft),

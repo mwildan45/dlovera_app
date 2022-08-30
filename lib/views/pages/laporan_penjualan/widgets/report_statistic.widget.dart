@@ -46,6 +46,8 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
               tooltipBehavior: _tooltip,
               series: <ChartSeries<ChartData, String>>[
                 ColumnSeries<ChartData, String>(
+                    dataLabelSettings: const DataLabelSettings(
+                        isVisible: true, labelAlignment: ChartDataLabelAlignment.top, textStyle: TextStyle(color: Colors.white)),
                     dataSource: widget.dataChart,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => double.parse(data.y),
@@ -69,7 +71,7 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
             isDense: true,
             decoration:
                 const InputDecoration.collapsed(hintText: "Pilih Tahun"),
-            value: widget.vm.selectedYear ?? widget.data?.yearNow,
+            value: (widget.vm.selectedYear ?? widget.data?.yearNow).toString(),
             onChanged: (value) {
               widget.vm.selectedYear = value;
               widget.vm.getLaporanPenjualanChart(value.toString());
@@ -78,7 +80,7 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
             items: widget.data?.yearList?.map(
               (e) {
                 return DropdownMenuItem(
-                    value: e.year, child: Text("${e.year}"));
+                    value: e.year.toString(), child: Text("${e.year}"));
               },
             ).toList(),
           )

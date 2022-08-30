@@ -141,15 +141,15 @@ class LaporanPerBulanProdukTerlaris {
       {this.kodeBarang, this.namaBarang, this.sumJumlah});
 
   LaporanPerBulanProdukTerlaris.fromJson(Map<String, dynamic> json) {
-    kodeBarang = json['Kode_Barang'];
-    namaBarang = json['Nama_Barang'];
+    kodeBarang = json['kode_barang'];
+    namaBarang = json['nama_barang'];
     sumJumlah = json['sumJumlah'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Kode_Barang'] = kodeBarang;
-    data['Nama_Barang'] = namaBarang;
+    data['kode_barang'] = kodeBarang;
+    data['nama_barang'] = namaBarang;
     data['sumJumlah'] = sumJumlah;
     return data;
   }
@@ -170,19 +170,19 @@ class LaporanPerBulanPelangganSetia {
       this.countCustomer});
 
   LaporanPerBulanPelangganSetia.fromJson(Map<String, dynamic> json) {
-    kodeCustomer = json['Kode_Customer'];
-    kodeSupplier = json['Kode_Supplier'];
-    namaCustomer = json['Nama_Customer'];
-    namaSupplier = json['Nama_Supplier'];
+    kodeCustomer = json['kode_customer'];
+    kodeSupplier = json['kode_supplier'];
+    namaCustomer = json['nama_customer'];
+    namaSupplier = json['nama_supplier'];
     countCustomer = json['countCustomer'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['Kode_Customer'] = kodeCustomer;
-    data['Kode_Supplier'] = kodeSupplier;
-    data['Nama_Customer'] = namaCustomer;
-    data['Nama_Supplier'] = namaSupplier;
+    data['kode_supplier'] = kodeSupplier;
+    data['nama_customer'] = namaCustomer;
+    data['nama_supplier'] = namaSupplier;
     data['countCustomer'] = countCustomer;
     return data;
   }
@@ -191,21 +191,21 @@ class LaporanPerBulanPelangganSetia {
 class LaporanProduksiPerBulanCMTLangganan {
   String? kodeProdusen;
   String? namaProdusen;
-  int? countCustomer;
+  dynamic? countCustomer;
 
   LaporanProduksiPerBulanCMTLangganan(
       {this.kodeProdusen, this.namaProdusen, this.countCustomer});
 
   LaporanProduksiPerBulanCMTLangganan.fromJson(Map<String, dynamic> json) {
-    kodeProdusen = json['Kode_Produsen'];
-    namaProdusen = json['Nama_Produsen'];
+    kodeProdusen = json['kode_produsen'];
+    namaProdusen = json['nama_produsen'];
     countCustomer = json['countProdusen'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Kode_Produsen'] = kodeProdusen;
-    data['Nama_Produsen'] = namaProdusen;
+    data['kode_produsen'] = kodeProdusen;
+    data['nama_produsen'] = namaProdusen;
     data['countCustomer'] = countCustomer;
     return data;
   }
@@ -453,6 +453,7 @@ class LaporanPerBulanTransaksiData {
   String? tanggal;
   String? namaCustomer;
   String? namaSupplier;
+  String? namaProdusen;
   String? namaBarang;
   String? total;
 
@@ -461,15 +462,17 @@ class LaporanPerBulanTransaksiData {
       this.tanggal,
       this.namaCustomer,
       this.namaSupplier,
+      this.namaProdusen,
       this.namaBarang,
       this.total});
 
   LaporanPerBulanTransaksiData.fromJson(Map<String, dynamic> json) {
     noFaktur = json['no_faktur'];
     tanggal = json['tanggal'];
-    namaCustomer = json['Nama_Customer'];
-    namaSupplier = json['Nama_Supplier'];
-    namaBarang = json['Nama_Barang'];
+    namaCustomer = json['nama_customer'];
+    namaSupplier = json['nama_supplier'];
+    namaProdusen = json['nama_produsen'];
+    namaBarang = json['nama_barang'];
     total = json['total'];
   }
 
@@ -477,9 +480,10 @@ class LaporanPerBulanTransaksiData {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['no_faktur'] = noFaktur;
     data['tanggal'] = tanggal;
-    data['Nama_Customer'] = namaCustomer;
-    data['Nama_Supplier'] = namaSupplier;
-    data['Nama_Barang'] = namaBarang;
+    data['nama_customer'] = namaCustomer;
+    data['nama_supplier'] = namaSupplier;
+    data['nama_produsen'] = namaProdusen;
+    data['nama_barang'] = namaBarang;
     data['total'] = total;
     return data;
   }
@@ -512,6 +516,7 @@ class LaporanPerBulanReturData {
   String? tanggal;
   String? namaCustomer;
   String? namaSupplier;
+  String? namaProdusen;
   String? namaBarang;
   String? alasan;
 
@@ -521,14 +526,16 @@ class LaporanPerBulanReturData {
       this.namaCustomer,
       this.namaSupplier,
       this.namaBarang,
+      this.namaProdusen,
       this.alasan});
 
   LaporanPerBulanReturData.fromJson(Map<String, dynamic> json) {
     noFaktur = json['no_faktur'];
     tanggal = json['tanggal'];
-    namaCustomer = json['Nama_Customer'];
-    namaSupplier = json['Nama_Supplier'];
-    namaBarang = json['Nama_Barang'];
+    namaCustomer = json['nama_customer'];
+    namaSupplier = json['nama_supplier'];
+    namaProdusen = json['nama_produsen'];
+    namaBarang = json['nama_barang'];
     alasan = json['alasan'];
   }
 
@@ -536,9 +543,10 @@ class LaporanPerBulanReturData {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['no_faktur'] = noFaktur;
     data['tanggal'] = tanggal;
-    data['Nama_Customer'] = namaCustomer;
-    data['Nama_Supplier'] = namaSupplier;
-    data['Nama_Barang'] = namaBarang;
+    data['nama_customer'] = namaCustomer;
+    data['nama_supplier'] = namaSupplier;
+    data['nama_produsen'] = namaProdusen;
+    data['nama_barang'] = namaBarang;
     data['alasan'] = alasan;
     return data;
   }
@@ -559,20 +567,20 @@ class LaporanPerBulanProdukData {
       this.stockAkhir});
 
   LaporanPerBulanProdukData.fromJson(Map<String, dynamic> json) {
-    kodeBarang = json['Kode_Barang'];
+    kodeBarang = json['kode_barang'];
     barcode = json['barcode'];
-    namaBarang = json['Nama_Barang'];
+    namaBarang = json['nama_barang'];
     golongan = json['golongan'];
-    stockAkhir = json['Stock_Akhir'];
+    stockAkhir = json['stock_akhir'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Kode_Barang'] = this.kodeBarang;
+    data['kode_barang'] = this.kodeBarang;
     data['barcode'] = this.barcode;
-    data['Nama_Barang'] = this.namaBarang;
+    data['nama_barang'] = this.namaBarang;
     data['golongan'] = this.golongan;
-    data['Stock_Akhir'] = this.stockAkhir;
+    data['stock_akhir'] = this.stockAkhir;
     return data;
   }
 }

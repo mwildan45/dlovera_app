@@ -23,14 +23,14 @@ class TableLaporanProduksiCMTLanggananWidget extends StatefulWidget {
 
 class _TableLaporanProduksiCMTLanggananWidgetState
     extends State<TableLaporanProduksiCMTLanggananWidget> {
-  late LaporanPenjualanCMTLanggananDataSource
+  late LaporanCMTLanggananDataSource
       _laporanPenjualanCMTLanggananDataSource;
 
   @override
   void initState() {
     super.initState();
     _laporanPenjualanCMTLanggananDataSource =
-        LaporanPenjualanCMTLanggananDataSource(
+        LaporanCMTLanggananDataSource(
             cmtLangganan: widget.data?.langganan ?? []);
   }
 
@@ -41,7 +41,7 @@ class _TableLaporanProduksiCMTLanggananWidgetState
       child: VStack(
         [
           UiSpacer.verticalSpace(space: Vx.dp8),
-          TextStyles.labelBoxText(label: "CMT Langganan").centered(),
+          TextStyles.labelBoxText(label: "CMT Terbanyak").centered(),
           UiSpacer.divider().centered(),
           UiSpacer.verticalSpace(space: Vx.dp5),
           _laporanPenjualanCMTLanggananDataSource.dataGridRows.isEmpty

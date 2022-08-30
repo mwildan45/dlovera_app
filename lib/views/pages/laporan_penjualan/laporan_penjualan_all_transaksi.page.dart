@@ -22,7 +22,7 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Penjualan Transaksi ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+              "Laporan Transaksi Penjualan ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           // floatingActionWidget: ,
           // floatingActionButtonLocation:
           //     FloatingActionButtonLocation.centerFloat,
@@ -43,11 +43,11 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
                     CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
                     CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
                     CustomGridColumn().gridColumn(
-                        'namaCustomer', 'Nama Customer',
+                        'namaCustomer', 'Nama Konsumen',
                         alignment: Alignment.centerLeft),
-                    CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
+                    CustomGridColumn().gridColumn('namaBarang', 'Produk',
                         alignment: Alignment.centerLeft),
-                    CustomGridColumn().gridColumn('total', 'Total',
+                    CustomGridColumn().gridColumn('total', 'Nilai',
                         alignment: Alignment.center),
                   ],
                 ).expand(),

@@ -1,9 +1,15 @@
 // import 'package:velocity_x/velocity_x.dart';
 
 
+//DEVELOPED BY Mochamad Wildan A.S.
+//Contact: wildan3000x@gmail.com
+
+
+
 class Api {
   static String get baseUrl {
-    return "https://api.higanic.com/api";
+    // return "https://api.higanic.com/api";
+    return "https://api.dlovera.com/api";
   }
 
   static const login = "/login";

@@ -18,7 +18,7 @@ class TotalRevenueBox extends StatelessWidget {
       this.busyIndicator = false})
       : super(key: key);
   // final String ;
-  final double percentage;
+  final dynamic percentage;
   final bool busyIndicator;
   final int totalRevenue, yesterdayTotalRevenue;
 
@@ -49,7 +49,7 @@ class TotalRevenueBox extends StatelessWidget {
                 right: 8,
                 child: HStack([
                   SvgPicture.asset(totalRevenue < yesterdayTotalRevenue ? AppSvgs.downward : AppSvgs.upward).pOnly(right: Vx.dp5),
-                  "$percentage% from yesterday"
+                  "${percentage.abs()}% from yesterday"
                       .text
                       .color(totalRevenue < yesterdayTotalRevenue ? AppColor.sizzlingRed : AppColor.green)
                       .lg

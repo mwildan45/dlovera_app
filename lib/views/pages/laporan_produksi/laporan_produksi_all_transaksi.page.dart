@@ -22,7 +22,7 @@ class LaporanProduksiAllTransaksiPage extends StatelessWidget {
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Produksi Transaksi ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+              "Laporan Transaksi Produksi ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           body: VStack(
             [
               if (vm.busy(vm.laporanPenjualanTransaksiDataSource))
@@ -40,11 +40,11 @@ class LaporanProduksiAllTransaksiPage extends StatelessWidget {
                     CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
                     CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
                     CustomGridColumn().gridColumn(
-                        'namaCustomer', 'Nama Supplier',
+                        'namaProdusen', 'Nama CMT',
                         alignment: Alignment.centerLeft),
-                    CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
+                    CustomGridColumn().gridColumn('namaBarang', 'Bahan',
                         alignment: Alignment.centerLeft),
-                    CustomGridColumn().gridColumn('total', 'Total',
+                    CustomGridColumn().gridColumn('total', 'Jasa',
                         alignment: Alignment.centerLeft),
                   ],
                 ).expand(),

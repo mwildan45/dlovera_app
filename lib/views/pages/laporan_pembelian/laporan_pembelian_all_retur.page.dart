@@ -21,7 +21,7 @@ class LaporanPembelianAllReturPage extends StatelessWidget {
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Pembelian Retur ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+              "Laporan Retur Pembelian ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           body: VStack(
             [
               if (vm.busy(vm.laporanPenjualanReturDataSource))
@@ -39,11 +39,11 @@ class LaporanPembelianAllReturPage extends StatelessWidget {
                     CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
                     CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
                     CustomGridColumn().gridColumn(
-                        'namaCustomer', 'Nama Supplier',
+                        'namaSupplier', 'Nama Supplier',
                         alignment: Alignment.centerLeft),
-                    CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
+                    CustomGridColumn().gridColumn('namaBarang', 'Bahan Baku',
                         alignment: Alignment.centerLeft),
-                    CustomGridColumn().gridColumn('alasan', 'Alasan',
+                    CustomGridColumn().gridColumn('alasan', 'Nilai',
                         alignment: Alignment.centerLeft),
                   ],
                 ).expand(),

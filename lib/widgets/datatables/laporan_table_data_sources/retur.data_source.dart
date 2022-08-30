@@ -1,22 +1,25 @@
 import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
-import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class LaporanPenjualanReturDataSource extends DataGridSource {
-  LaporanPenjualanReturDataSource(
-      {required List<LaporanPerBulanReturData> retur}) {
+class LaporanReturDataSource extends DataGridSource {
+  LaporanReturDataSource({required List<LaporanPerBulanReturData> retur}) {
     dataGridRows = retur
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(
                   columnName: 'noFaktur', value: dataGridRow.noFaktur),
               DataGridCell<String>(
                   columnName: 'tanggal', value: dataGridRow.tanggal),
-              DataGridCell<String>(
-                  columnName: dataGridRow.namaCustomer == null
-                      ? 'namaSupplier'
-                      : 'namaCustomer',
-                  value: dataGridRow.namaCustomer ?? dataGridRow.namaSupplier),
+              if (dataGridRow.namaSupplier != null)
+                DataGridCell<String>(
+                    columnName: 'namaSupplier', value: dataGridRow.namaSupplier)
+              else if (dataGridRow.namaCustomer != null)
+                DataGridCell<String>(
+                    columnName: 'namaCustomer', value: dataGridRow.namaCustomer)
+              else if (dataGridRow.namaProdusen != null)
+                DataGridCell<String>(
+                    columnName: 'namaProdusen',
+                    value: dataGridRow.namaProdusen),
               DataGridCell<String>(
                   columnName: 'namaBarang', value: dataGridRow.namaBarang),
               DataGridCell<String>(
@@ -37,7 +40,8 @@ class LaporanPenjualanReturDataSource extends DataGridSource {
       return Container(
           alignment: (dataGridCell.columnName == 'namaCustomer' ||
                   dataGridCell.columnName == 'namaSupplier' ||
-                  dataGridCell.columnName == 'namaBarang')
+              dataGridCell.columnName == 'namaProdusen' ||
+              dataGridCell.columnName == 'namaBarang')
               ? Alignment.centerLeft
               : Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),

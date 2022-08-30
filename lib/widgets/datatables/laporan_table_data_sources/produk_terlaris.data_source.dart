@@ -3,8 +3,8 @@ import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class LaporanPenjualanProdukTerlarisDataSource extends DataGridSource {
-  LaporanPenjualanProdukTerlarisDataSource({required List<LaporanPerBulanProdukTerlaris> produkTerlaris}) {
+class LaporanProdukTerlarisDataSource extends DataGridSource {
+  LaporanProdukTerlarisDataSource({required List<LaporanPerBulanProdukTerlaris> produkTerlaris}) {
     dataGridRows = produkTerlaris
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
       DataGridCell<String>(columnName: 'kode_barang', value: dataGridRow.kodeBarang),

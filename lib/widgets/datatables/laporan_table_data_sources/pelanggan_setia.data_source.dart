@@ -2,8 +2,8 @@ import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class LaporanPenjualanPelangganSetiaDataSource extends DataGridSource {
-  LaporanPenjualanPelangganSetiaDataSource(
+class LaporanPelangganSetiaDataSource extends DataGridSource {
+  LaporanPelangganSetiaDataSource(
       {required List<LaporanPerBulanPelangganSetia> pelangganSetia}) {
     dataGridRows = pelangganSetia
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [

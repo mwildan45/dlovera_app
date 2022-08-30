@@ -22,6 +22,8 @@ class ApiResponse {
 
   factory ApiResponse.fromResponse(dynamic response, {bool hasDataObject = true}) {
 
+    print('RESPONSE: ${response.data}');
+
     int code = response.statusCode;
     dynamic body = response.data ?? null; // Would mostly be a Map
     List errors = [];

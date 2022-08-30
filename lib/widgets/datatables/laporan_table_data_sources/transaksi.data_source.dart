@@ -4,25 +4,37 @@ import 'package:dlovera_app/utils/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class LaporanPenjualanTransaksiDataSource extends DataGridSource {
-  LaporanPenjualanTransaksiDataSource(
+class LaporanTransaksiDataSource extends DataGridSource {
+  LaporanTransaksiDataSource(
       {required List<LaporanPerBulanTransaksiData> transaksi}) {
     dataGridRows = transaksi
-        .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
+        .map<DataGridRow>((dataGridRow) =>
+        DataGridRow(cells: [
+          DataGridCell<String>(
+              columnName: 'noFaktur', value: dataGridRow.noFaktur),
+          DataGridCell<String>(
+              columnName: 'tanggal', value: dataGridRow.tanggal),
+          if(dataGridRow.namaSupplier != null)
+            DataGridCell<String>(
+                columnName: 'namaSupplier',
+                value: dataGridRow.namaSupplier)
+          else
+            if(dataGridRow.namaCustomer != null)
               DataGridCell<String>(
-                  columnName: 'noFaktur', value: dataGridRow.noFaktur),
+                  columnName: 'namaCustomer',
+                  value: dataGridRow.namaCustomer)
+          else
+            if(dataGridRow.namaProdusen != null)
               DataGridCell<String>(
-                  columnName: 'tanggal', value: dataGridRow.tanggal),
-              DataGridCell<String>(
-                  columnName: dataGridRow.namaCustomer == null
-                      ? 'namaSupplier'
-                      : 'namaCustomer',
-                  value: dataGridRow.namaCustomer ?? dataGridRow.namaSupplier),
-              DataGridCell<String>(
-                  columnName: 'namaBarang', value: dataGridRow.namaBarang),
-              DataGridCell<String>(
-                  columnName: 'total', value: double.parse(dataGridRow.total ?? "0").currencyValueFormat()),
-            ]))
+                  columnName: 'namaProdusen',
+                  value: dataGridRow.namaProdusen),
+          DataGridCell<String>(
+              columnName: 'namaBarang', value: dataGridRow.namaBarang),
+          DataGridCell<String>(
+              columnName: 'total',
+              value: double.parse(dataGridRow.total ?? "0")
+                  .currencyValueFormat()),
+        ]))
         .toList();
   }
 
@@ -35,17 +47,19 @@ class LaporanPenjualanTransaksiDataSource extends DataGridSource {
   DataGridRowAdapter? buildRow(DataGridRow row) {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-      return Container(
-          alignment: (dataGridCell.columnName == 'namaCustomer' ||
+          return Container(
+              alignment: (dataGridCell.columnName == 'namaCustomer' ||
                   dataGridCell.columnName == 'namaSupplier' ||
+                  dataGridCell.columnName == 'namaProdusen' ||
                   dataGridCell.columnName == 'namaBarang')
-              ? Alignment.centerLeft : dataGridCell.columnName == 'total' ? Alignment.centerRight
-              : Alignment.center,
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            dataGridCell.value.toString(),
-            overflow: TextOverflow.clip,
-          ));
-    }).toList());
+                  ? Alignment.centerLeft : dataGridCell.columnName == 'total'
+                  ? Alignment.centerRight
+                  : Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                dataGridCell.value.toString(),
+                overflow: TextOverflow.clip,
+              ));
+        }).toList());
   }
 }

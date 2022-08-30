@@ -23,14 +23,14 @@ class TableLaporanPenjualanProdukTerlarisWidget extends StatefulWidget {
 
 class _TableLaporanPenjualanProdukTerlarisWidgetState
     extends State<TableLaporanPenjualanProdukTerlarisWidget> {
-  late LaporanPenjualanProdukTerlarisDataSource
+  late LaporanProdukTerlarisDataSource
       _laporanPenjualanProdukTerlarisDataSource;
 
   @override
   void initState() {
     super.initState();
     _laporanPenjualanProdukTerlarisDataSource =
-        LaporanPenjualanProdukTerlarisDataSource(
+        LaporanProdukTerlarisDataSource(
             produkTerlaris: widget.data?.produkTerlaris ?? []);
   }
 

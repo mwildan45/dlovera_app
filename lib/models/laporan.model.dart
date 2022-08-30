@@ -20,9 +20,9 @@ class LaporanChartHeader {
 }
 
 class LaporanChartData {
-  String? yearNow;
+  dynamic? yearNow;
   List<LaporanChartYearList>? yearList;
-  int? max;
+  dynamic? max;
   List<Statistic>? statistic;
 
   LaporanChartData({this.yearNow, this.yearList, this.statistic, this.max});
@@ -59,7 +59,7 @@ class LaporanChartData {
 }
 
 class LaporanChartYearList {
-  int? year;
+  dynamic? year;
 
   LaporanChartYearList({this.year});
 
@@ -75,7 +75,7 @@ class LaporanChartYearList {
 }
 
 class Statistic {
-  int? num;
+  dynamic? num;
   String? bulan;
   String? total;
 

@@ -36,11 +36,11 @@ class LaporanStockPersediaanProdukPage extends StatelessWidget {
                       verticalScrollPhysics: const BouncingScrollPhysics(),
                       columns: [
                         CustomGridColumn().gridColumn('kodeProduk', 'Kode Produk'),
-                        CustomGridColumn().gridColumn('namaBarang', 'Nama Barang',
+                        CustomGridColumn().gridColumn('namaBarang', 'Nama Produk',
                             alignment: Alignment.centerLeft),
-                        CustomGridColumn().gridColumn('jumlahSatuan', 'Jumlah Satuan'),
-                        CustomGridColumn().gridColumn('golongan', 'Golongan'),
-                        CustomGridColumn().gridColumn('stockAkhir', 'Stock Akhir'),
+                        CustomGridColumn().gridColumn('jumlahSatuan', 'Harga'),
+                        CustomGridColumn().gridColumn('golongan', 'Kategori'),
+                        CustomGridColumn().gridColumn('stockAkhir', 'Stock'),
                       ],
                     ).expand(),
                   CustomPaginationWidget(

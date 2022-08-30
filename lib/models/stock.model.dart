@@ -161,12 +161,12 @@ class PersediaanProduk {
   }
 }
 
-class DataProdukBahanBaku {
+class  DataProdukBahanBaku {
   String? kodeBarang;
   String? namaBarang;
   String? hargaSatuan;
   String? golongan;
-  int? stockAkhir;
+  dynamic? stockAkhir;
 
   DataProdukBahanBaku(
       {this.kodeBarang,
@@ -176,20 +176,20 @@ class DataProdukBahanBaku {
         this.stockAkhir});
 
   DataProdukBahanBaku.fromJson(Map<String, dynamic> json) {
-    kodeBarang = json['Kode_Barang'];
-    namaBarang = json['Nama_Barang'];
-    hargaSatuan = json['Harga_Satuan'];
-    golongan = json['Golongan'];
-    stockAkhir = json['Stock_Akhir'];
+    kodeBarang = json['kode_barang'];
+    namaBarang = json['nama_barang'];
+    hargaSatuan = json['harga_satuan'];
+    golongan = json['golongan'];
+    stockAkhir = json['stock_akhir'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Kode_Barang'] = kodeBarang;
-    data['Nama_Barang'] = namaBarang;
-    data['Harga_Satuan'] = hargaSatuan;
-    data['Golongan'] = golongan;
-    data['Stock_Akhir'] = stockAkhir;
+    data['kode_barang'] = kodeBarang;
+    data['nama_barang'] = namaBarang;
+    data['harga_satuan'] = hargaSatuan;
+    data['golongan'] = golongan;
+    data['stock_akhir'] = stockAkhir;
     return data;
   }
 }

@@ -31,9 +31,10 @@ class LaporanStockViewModel extends MyBaseViewModel {
   //
   geLaporanStock(String? year, {bool isGetPerBulan = false}) async {
     setBusy(true);
+    stockData = await laporanStockRequest.getLaporanStock({});
+
     try {
 
-      stockData = await laporanStockRequest.getLaporanStock({});
 
       clearErrors();
     } catch (error) {
@@ -84,7 +85,7 @@ class LaporanStockViewModel extends MyBaseViewModel {
 
       stockData = await laporanStockRequest.getLaporanStock(
           {
-            'produk_page_number': pageNumber
+            'bahan_baku_page_number': pageNumber
           }
       );
 

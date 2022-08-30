@@ -30,13 +30,13 @@ class TableLaporanPembelianReturWidget extends StatefulWidget {
 
 class _TableLaporanPembelianReturWidgetState
     extends State<TableLaporanPembelianReturWidget> {
-  late LaporanPenjualanReturDataSource _laporanPenjualanReturDataSource;
+  late LaporanReturDataSource _laporanPenjualanReturDataSource;
 
   @override
   void initState() {
     super.initState();
     _laporanPenjualanReturDataSource =
-        LaporanPenjualanReturDataSource(retur: widget.data?.retur?.data ?? []);
+        LaporanReturDataSource(retur: widget.data?.retur?.data ?? []);
   }
 
   @override

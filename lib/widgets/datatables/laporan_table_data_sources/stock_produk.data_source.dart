@@ -1,4 +1,5 @@
 import 'package:dlovera_app/models/stock.model.dart';
+import 'package:dlovera_app/utils/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -13,7 +14,8 @@ class LaporanStockProdukBahanBakuDataSource extends DataGridSource {
           columnName: 'namaBarang', value: dataGridRow.namaBarang),
       DataGridCell<String>(
           columnName: 'hargaSatuan',
-          value: dataGridRow.hargaSatuan),
+          value: double.parse(dataGridRow.hargaSatuan ?? "0")
+              .currencyValueFormat()),
       DataGridCell<String>(
           columnName: 'golongan', value: dataGridRow.golongan),
       DataGridCell<String>(
