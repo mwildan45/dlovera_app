@@ -19,7 +19,8 @@ class StatisticPenjualanWidget extends StatefulWidget {
   final LaporanPenjualanViewModel vm;
 
   @override
-  State<StatisticPenjualanWidget> createState() => _StatisticPenjualanWidgetState();
+  State<StatisticPenjualanWidget> createState() =>
+      _StatisticPenjualanWidgetState();
 }
 
 class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
@@ -38,29 +39,34 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
         Container(
           decoration: BoxStyles.boxContent(),
           child: SfCartesianChart(
-              primaryXAxis: CategoryAxis(),
-              primaryYAxis: NumericAxis(
-                  minimum: 0,
-                  maximum: widget.data?.max?.toDouble(),
-                  numberFormat: NumberFormat.compactCurrency(locale: 'id')),
-              tooltipBehavior: _tooltip,
-              series: <ChartSeries<ChartData, String>>[
-                ColumnSeries<ChartData, String>(
-                    dataLabelSettings: const DataLabelSettings(
-                        isVisible: true, labelAlignment: ChartDataLabelAlignment.top, textStyle: TextStyle(color: Colors.white)),
-                    dataSource: widget.dataChart,
-                    xValueMapper: (ChartData data, _) => data.x,
-                    yValueMapper: (ChartData data, _) => double.parse(data.y),
-                    name: 'Laporan Penjualan Statistic',
-                    color: AppColor.primaryColorDark,
-                    onPointTap: (ChartPointDetails data) {
-                      final id = widget.vm.laporanChartData?.statistic?[data.pointIndex!].num;
-                      print('${widget.vm.laporanChartData?.statistic?[data.pointIndex!].num}');
-                      widget.vm.getLaporanPenjualanPerBulan(
-                          id.toString(),
-                          (widget.vm.selectedYear ?? widget.data?.yearNow));
-                    })
-              ]).pOnly(top: Vx.dp48),
+            isTransposed: true,
+            primaryXAxis: CategoryAxis(),
+            primaryYAxis: NumericAxis(
+                minimum: 0,
+                maximum: widget.data?.max?.toDouble(),
+                numberFormat: NumberFormat.compactCurrency(locale: 'id')),
+            tooltipBehavior: _tooltip,
+            series: <ChartSeries<ChartData, String>>[
+              ColumnSeries<ChartData, String>(
+                  dataLabelSettings: const DataLabelSettings(
+                      isVisible: true,
+                      labelAlignment: ChartDataLabelAlignment.top,
+                      textStyle: TextStyle(color: Colors.white)),
+                  dataSource: widget.dataChart,
+                  xValueMapper: (ChartData data, _) => data.x,
+                  yValueMapper: (ChartData data, _) => double.parse(data.y),
+                  name: 'Laporan Penjualan Statistic',
+                  color: AppColor.primaryColorDark,
+                  onPointTap: (ChartPointDetails data) {
+                    final id = widget
+                        .vm.laporanChartData?.statistic?[data.pointIndex!].num;
+                    print(
+                        '${widget.vm.laporanChartData?.statistic?[data.pointIndex!].num}');
+                    widget.vm.getLaporanPenjualanPerBulan(id.toString(),
+                        (widget.vm.selectedYear ?? widget.data?.yearNow));
+                  })
+            ],
+          ).pOnly(top: Vx.dp48),
         ).w(double.maxFinite).h(350),
         const CustomLabelBoxText(label: "Statistic"),
         Positioned(

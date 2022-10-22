@@ -25,14 +25,14 @@ class LaporanPenjualanAllReturPage extends StatelessWidget {
                 "Laporan Retur Penjualan ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
             body: VStack(
               [
-                if (vm.busy(vm.laporanPenjualanReturDataSource))
+                if (vm.busy(vm.laporanReturDataSource))
                   Image.asset(AppImages.appLoadingGear).centered()
                 else
                   SfDataGrid(
                     onQueryRowHeight: (details) {
                       return details.getIntrinsicRowHeight(details.rowIndex);
                     },
-                    source: vm.laporanPenjualanReturDataSource!,
+                    source: vm.laporanReturDataSource!,
                     shrinkWrapRows: true,
                     columnWidthMode: ColumnWidthMode.fill,
                     verticalScrollPhysics: const BouncingScrollPhysics(),

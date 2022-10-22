@@ -41,6 +41,7 @@ class _ReportStatisticState extends State<ReportStatistic> {
           TextStyles.labelBoxText(label: "Statistik").centered(),
           UiSpacer.divider().centered(),
           SfCartesianChart(
+            isTransposed: true,
               primaryXAxis: CategoryAxis(),
               primaryYAxis: NumericAxis(
                   minimum: 0, maximum: widget.statistic?.max?.toDouble()),

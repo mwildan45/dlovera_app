@@ -25,14 +25,14 @@ class LaporanProduksiAllTransaksiPage extends StatelessWidget {
               "Laporan Transaksi Produksi ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           body: VStack(
             [
-              if (vm.busy(vm.laporanPenjualanTransaksiDataSource))
+              if (vm.busy(vm.laporanTransaksiDataSource))
                 Image.asset(AppImages.appLoadingGear).centered()
               else
                 SfDataGrid(
                   onQueryRowHeight: (details) {
                     return details.getIntrinsicRowHeight(details.rowIndex);
                   },
-                  source: vm.laporanPenjualanTransaksiDataSource!,
+                  source: vm.laporanTransaksiDataSource!,
                   shrinkWrapRows: true,
                   columnWidthMode: ColumnWidthMode.fill,
                   verticalScrollPhysics: const BouncingScrollPhysics(),

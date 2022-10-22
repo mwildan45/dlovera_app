@@ -49,7 +49,7 @@ class TotalRevenueBox extends StatelessWidget {
                 right: 8,
                 child: HStack([
                   SvgPicture.asset(totalRevenue < yesterdayTotalRevenue ? AppSvgs.downward : AppSvgs.upward).pOnly(right: Vx.dp5),
-                  "${percentage.abs()}% from yesterday"
+                  "${percentage.abs()}% dari hari sebelumnya"
                       .text
                       .color(totalRevenue < yesterdayTotalRevenue ? AppColor.sizzlingRed : AppColor.green)
                       .lg

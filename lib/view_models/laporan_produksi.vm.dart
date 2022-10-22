@@ -26,8 +26,8 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
   int currentPageTransaksi = 1;
   int currentPageRetur = 1;
   String? selectedMonth = '';
-  LaporanTransaksiDataSource? laporanPenjualanTransaksiDataSource;
-  LaporanReturDataSource? laporanPenjualanReturDataSource;
+  LaporanTransaksiDataSource? laporanTransaksiDataSource;
+  LaporanReturDataSource? laporanReturDataSource;
 
 
   @override
@@ -103,7 +103,7 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
 
   //
   getDataPaginationTransaksi(pageNumber) async {
-    setBusyForObject(laporanPenjualanTransaksiDataSource, true);
+    setBusyForObject(laporanTransaksiDataSource, true);
 
     try{
 
@@ -115,8 +115,8 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
           }
       );
 
-      laporanPenjualanTransaksiDataSource?.dispose();
-      laporanPenjualanTransaksiDataSource = LaporanTransaksiDataSource(
+      laporanTransaksiDataSource?.dispose();
+      laporanTransaksiDataSource = LaporanTransaksiDataSource(
           transaksi: laporanPerBulanData?.transaksi?.data ?? []);
 
     } catch (error) {
@@ -128,12 +128,12 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
       );
     }
 
-    setBusyForObject(laporanPenjualanTransaksiDataSource, false);
+    setBusyForObject(laporanTransaksiDataSource, false);
   }
 
   //
   getDataPaginationRetur(pageNumber) async {
-    setBusyForObject(laporanPenjualanReturDataSource, true);
+    setBusyForObject(laporanReturDataSource, true);
 
     try{
 
@@ -145,8 +145,8 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
           }
       );
 
-      laporanPenjualanReturDataSource?.dispose();
-      laporanPenjualanReturDataSource = LaporanReturDataSource(
+      laporanReturDataSource?.dispose();
+      laporanReturDataSource = LaporanReturDataSource(
           retur: laporanPerBulanData?.retur?.data ?? []);
 
     } catch (error) {
@@ -158,7 +158,7 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
       );
     }
 
-    setBusyForObject(laporanPenjualanReturDataSource, false);
+    setBusyForObject(laporanReturDataSource, false);
   }
 
   //

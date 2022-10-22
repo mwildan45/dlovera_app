@@ -32,7 +32,7 @@ class _TodaySummaryPageState extends State<TodaySummaryPage>
             child: SingleChildScrollView(
               child: VStack([
                 UiSpacer.verticalSpace(),
-                "Ringkasan Hari ini".text.bold.size(20).make().centered(),
+                "Rekap Harian".text.bold.size(20).make().centered(),
                 UiSpacer.divider().centered(),
                 UiSpacer.verticalSpace(),
                 TotalRevenueBox(

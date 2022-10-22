@@ -20,7 +20,7 @@ class HomeViewModel extends MyBaseViewModel {
   int currentIndex = 0;
   PageController pageViewController = PageController(initialPage: 0);
   StreamSubscription? homePageChangeStream;
-  List<String> listMenu = ['Today Summary', 'laporan Penjualan', 'Laporan Pembelian', 'Laporan Produksi', 'Inventori Stock'];
+  List<String> listMenu = ['Rekap Harian', 'laporan Penjualan', 'Laporan Pembelian', 'Laporan Produksi', 'Stok Inventori'];
   List<IconData> listMenuIcon = [Icons.dashboard, Icons.sell, Icons.area_chart_rounded, Icons.insert_chart_outlined, Icons.inventory];
   bool isWasConnectionLoss = false;
   late StreamSubscription<ConnectivityResult> subscription;
