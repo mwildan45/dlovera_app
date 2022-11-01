@@ -39,17 +39,20 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
         Container(
           decoration: BoxStyles.boxContent(),
           child: SfCartesianChart(
-            isTransposed: true,
+            isTransposed: false,
             primaryXAxis: CategoryAxis(),
             primaryYAxis: NumericAxis(
-                minimum: 0,
-                maximum: widget.data?.max?.toDouble(),
-                numberFormat: NumberFormat.compactCurrency(locale: 'id')),
+              minimum: 0,
+              maximum: widget.data?.max?.toDouble(),
+              numberFormat: NumberFormat.compactCurrency(locale: 'id'),
+            ),
             tooltipBehavior: _tooltip,
             series: <ChartSeries<ChartData, String>>[
               ColumnSeries<ChartData, String>(
                   dataLabelSettings: const DataLabelSettings(
                       isVisible: true,
+                      overflowMode: OverflowMode.shift,
+                      labelPosition: ChartDataLabelPosition.outside,
                       labelAlignment: ChartDataLabelAlignment.top,
                       textStyle: TextStyle(color: Colors.white)),
                   dataSource: widget.dataChart,
@@ -68,37 +71,45 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
             ],
           ).pOnly(top: Vx.dp48),
         ).w(double.maxFinite).h(350),
-        const CustomLabelBoxText(label: "Statistic"),
-        Positioned(
-          top: 5,
-          right: 8,
-          child: DropdownButtonFormField<dynamic>(
-            isExpanded: true,
-            isDense: true,
-            decoration:
-                const InputDecoration.collapsed(hintText: "Pilih Tahun"),
-            value: (widget.vm.selectedYear ?? widget.data?.yearNow).toString(),
-            onChanged: (value) {
-              widget.vm.selectedYear = value;
-              widget.vm.getLaporanPenjualanChart(value.toString());
-              widget.vm.notifyListeners();
-            },
-            items: widget.data?.yearList?.map(
-              (e) {
-                return DropdownMenuItem(
-                    value: e.year.toString(), child: Text("${e.year}"));
-              },
-            ).toList(),
-          )
-              .p8()
-              .w(100)
-              .h(40)
-              .box
-              .border(color: AppColor.fadedGrey)
-              .roundedLg
-              .make()
-              .py4(),
-        ),
+        const CustomLabelBoxText(label: "Statistik"),
+        // Positioned(
+        //   top: 5,
+        //   right: 8,
+        //   child: Column(
+        //     children: [
+        //       if (widget.vm.selectedDate == null)
+        //         const Text('No month year selected.')
+        //       else
+        //         Text(DateFormat().add_yM().format(widget.vm.selectedDate!)),
+        //       // DropdownButtonFormField<dynamic>(
+        //       //   isExpanded: true,
+        //       //   isDense: true,
+        //       //   decoration:
+        //       //       const InputDecoration.collapsed(hintText: "Pilih Tahun"),
+        //       //   value: (widget.vm.selectedYear ?? widget.data?.yearNow).toString(),
+        //       //   onChanged: (value) {
+        //       //     widget.vm.selectedYear = value;
+        //       //     widget.vm.getLaporanPenjualanChart(value.toString());
+        //       //     widget.vm.notifyListeners();
+        //       //   },
+        //       //   items: widget.data?.yearList?.map(
+        //       //     (e) {
+        //       //       return DropdownMenuItem(
+        //       //           value: e.year.toString(), child: Text("${e.year}"));
+        //       //     },
+        //       //   ).toList(),
+        //       // )
+        //       //     .p8()
+        //       //     .w(100)
+        //       //     .h(40)
+        //       //     .box
+        //       //     .border(color: AppColor.fadedGrey)
+        //       //     .roundedLg
+        //       //     .make()
+        //       //     .py4(),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

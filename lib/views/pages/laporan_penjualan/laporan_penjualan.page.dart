@@ -4,8 +4,10 @@ import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
 import 'package:dlovera_app/views/pages/laporan_penjualan/laporan_penjualan_sticky_content.dart';
 import 'package:dlovera_app/views/pages/laporan_penjualan/widgets/report_statistic.widget.dart';
 import 'package:dlovera_app/widgets/busy_indicator.dart';
+import 'package:dlovera_app/widgets/buttons/custom_button.dart';
 import 'package:dlovera_app/widgets/buttons/custom_floating_refresh_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -34,9 +36,28 @@ class _LaporanPenjualanPageState extends State<LaporanPenjualanPage>
                 HStack(
                   [
                     UiSpacer.verticalDivider(),
-                    "Laporan Penjualan".text.bold.size(20).make().expand()
+                    "Laporan Penjualan".text.bold.size(20).make().expand(),
+                    CustomButton(
+                      height: 25,
+                      title: "Pilih Bulan",
+                      onPressed: () => vm.pickTheDate(context: context),
+                    )
                   ],
                 ).px(14),
+                if (vm.selectedDate == null)
+                  Container()
+                else
+                  Column(
+                    children: [
+                      UiSpacer.verticalSpace(),
+                      DateFormat()
+                          .add_yMMM()
+                          .format(vm.selectedDate!)
+                          .text.bold.size(20)
+                          .make()
+                          .centered(),
+                    ],
+                  ),
                 UiSpacer.verticalSpace(),
                 vm.isBusy
                     ? const BusyIndicator().h(350).px(14)

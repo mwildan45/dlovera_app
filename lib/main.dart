@@ -6,6 +6,9 @@ import 'package:dlovera_app/views/pages/home.page.dart';
 import 'package:dlovera_app/views/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dlovera_app/services/routers.services.dart' as router;
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/date_symbol_data_file.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +31,11 @@ class MyApp extends StatelessWidget {
           title: AppStrings.appName,
           onGenerateRoute: router.generateRoute,
           theme: theme,
-          home: const SplashScreen(),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            MonthYearPickerLocalizations.delegate,
+          ],
+          home: const HomePage(),
         );
       }
     );

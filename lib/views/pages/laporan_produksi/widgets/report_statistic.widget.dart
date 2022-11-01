@@ -62,7 +62,7 @@ class _StatisticProduksiWidgetState extends State<StatisticProduksiWidget> {
                     })
               ]).pOnly(top: Vx.dp48),
         ).w(double.maxFinite).h(350),
-        const CustomLabelBoxText(label: "Statistic"),
+        const CustomLabelBoxText(label: "Statistik"),
         Positioned(
           top: 5,
           right: 8,

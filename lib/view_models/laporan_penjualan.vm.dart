@@ -9,6 +9,7 @@ import 'package:dlovera_app/views/pages/laporan_penjualan/laporan_penjualan_all_
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/retur.data_source.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/transaksi.data_source.dart';
 import 'package:flutter/material.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LaporanPenjualanViewModel extends MyBaseViewModel {
@@ -27,6 +28,34 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
   String? selectedMonth = '';
   LaporanTransaksiDataSource? laporanTransaksiDataSource;
   LaporanReturDataSource? laporanReturDataSource;
+  DateTime? selectedDate;
+
+
+  //pick the month and year first
+  Future<void> pickTheDate({
+    required BuildContext context,
+    String? locale,
+  }) async {
+    final localeObj = locale != null ? Locale(locale) : null;
+    final selected = await showMonthYearPicker(
+      context: context,
+      initialDate: selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime(2030),
+      locale: localeObj,
+    );
+    // final selected = await showDatePicker(
+    //   context: context,
+    //   initialDate: _selected ?? DateTime.now(),
+    //   firstDate: DateTime(2019),
+    //   lastDate: DateTime(2022),
+    //   locale: localeObj,
+    // );
+    if (selected != null) {
+      selectedDate = selected;
+      notifyListeners();
+    }
+  }
 
 
   @override

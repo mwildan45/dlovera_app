@@ -11,7 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations: # Add this line
+    sdk: flutter
   cupertino_icons: ^1.0.2
   velocity_x: ^3.5.1
   rx_shared_preferences: ^3.0.0
@@ -33,6 +34,7 @@ dependencies:
   cool_alert: ^1.1.0
   connectivity_plus: ^2.3.6+1
   side_navigation: ^1.0.2
+  month_year_picker: ^0.2.0+3
 
 dev_dependencies:
   flutter_test:

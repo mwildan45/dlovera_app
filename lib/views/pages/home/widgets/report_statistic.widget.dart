@@ -5,6 +5,7 @@ import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/today_summary.model.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -44,7 +45,7 @@ class _ReportStatisticState extends State<ReportStatistic> {
             isTransposed: true,
               primaryXAxis: CategoryAxis(),
               primaryYAxis: NumericAxis(
-                  minimum: 0, maximum: widget.statistic?.max?.toDouble()),
+                  minimum: 0, maximum: widget.statistic?.max?.toDouble(), numberFormat: NumberFormat.compactCurrency(locale: 'id')),
               tooltipBehavior: _tooltip,
               series: <ChartSeries<ChartData, String>>[
                 ColumnSeries<ChartData, String>(
