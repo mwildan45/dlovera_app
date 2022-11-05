@@ -37,6 +37,8 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
                   },
                   source: vm.laporanTransaksiDataSource!,
                   shrinkWrapRows: true,
+                  allowSorting: true,
+                  sortingGestureType: SortingGestureType.tap,
                   columnWidthMode: ColumnWidthMode.fill,
                   verticalScrollPhysics: const BouncingScrollPhysics(),
                   columns: [

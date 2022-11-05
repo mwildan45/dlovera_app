@@ -39,7 +39,7 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
         Container(
           decoration: BoxStyles.boxContent(),
           child: SfCartesianChart(
-            isTransposed: false,
+            isTransposed: true,
             primaryXAxis: CategoryAxis(),
             primaryYAxis: NumericAxis(
               minimum: 0,
@@ -50,13 +50,14 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
             series: <ChartSeries<ChartData, String>>[
               ColumnSeries<ChartData, String>(
                   dataLabelSettings: const DataLabelSettings(
-                      isVisible: true,
-                      overflowMode: OverflowMode.shift,
-                      labelPosition: ChartDataLabelPosition.outside,
-                      labelAlignment: ChartDataLabelAlignment.top,
-                      textStyle: TextStyle(color: Colors.white)),
+                    isVisible: true,
+                    // overflowMode: OverflowMode.shift,
+                    // labelPosition: ChartDataLabelPosition.outside,
+                    labelAlignment: ChartDataLabelAlignment.outer,
+                    textStyle: TextStyle(color: Colors.black),
+                  ),
                   dataSource: widget.dataChart,
-                  xValueMapper: (ChartData data, _) => data.x,
+                  xValueMapper: (ChartData data, _) => data.num.toString(),
                   yValueMapper: (ChartData data, _) => double.parse(data.y),
                   name: 'Laporan Penjualan Statistic',
                   color: AppColor.primaryColorDark,
@@ -70,7 +71,7 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
                   })
             ],
           ).pOnly(top: Vx.dp48),
-        ).w(double.maxFinite).h(350),
+        ).w(double.maxFinite).h(380),
         const CustomLabelBoxText(label: "Statistik"),
         // Positioned(
         //   top: 5,

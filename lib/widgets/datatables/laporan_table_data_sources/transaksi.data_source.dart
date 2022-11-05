@@ -6,7 +6,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class LaporanTransaksiDataSource extends DataGridSource {
   LaporanTransaksiDataSource(
-      {required List<LaporanPerBulanTransaksiData> transaksi}) {
+      {required List<LaporanPerBulanTransaksiData> transaksi, BuildContext? context}) {
     dataGridRows = transaksi
         .map<DataGridRow>((dataGridRow) =>
         DataGridRow(cells: [
@@ -47,19 +47,29 @@ class LaporanTransaksiDataSource extends DataGridSource {
   DataGridRowAdapter? buildRow(DataGridRow row) {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-          return Container(
-              alignment: (dataGridCell.columnName == 'namaCustomer' ||
-                  dataGridCell.columnName == 'namaSupplier' ||
-                  dataGridCell.columnName == 'namaProdusen' ||
-                  dataGridCell.columnName == 'namaBarang')
-                  ? Alignment.centerLeft : dataGridCell.columnName == 'total'
-                  ? Alignment.centerRight
-                  : Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                dataGridCell.value.toString(),
-                overflow: TextOverflow.clip,
-              ));
+          return InkWell(
+            onTap: () {
+              print('tapped ${dataGridCell.value}');
+              // context.navigator?.push(
+              //     MaterialPageRoute(builder: (context) => LaporanPenjualanAllTransaksiPage(
+              //       viewModel: vm,
+              //     ))
+              // );
+            },
+            child: Container(
+                alignment: (dataGridCell.columnName == 'namaCustomer' ||
+                    dataGridCell.columnName == 'namaSupplier' ||
+                    dataGridCell.columnName == 'namaProdusen' ||
+                    dataGridCell.columnName == 'namaBarang')
+                    ? Alignment.centerLeft : dataGridCell.columnName == 'total'
+                    ? Alignment.centerRight
+                    : Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  dataGridCell.value.toString(),
+                  overflow: TextOverflow.clip,
+                )),
+          );
         }).toList());
   }
 }
