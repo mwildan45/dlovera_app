@@ -36,7 +36,7 @@ class LaporanStockPersediaanBahanBakuPage extends StatelessWidget {
                       final idb = vm.laporanStockProdukBahanBakuDataSource!.effectiveRows[details.rowColumnIndex.rowIndex - 1].getCells()[details.rowColumnIndex.columnIndex].value;
                       print("column $column");
                       if(column == "kodeProduk"){
-                        vm.getDetailKartuStok(idb, Api.kartuStokProduk);
+                        vm.getDetailKartuStok(idb, Api.kartuStokBahanBaku);
                       }
                     },
                     source: vm.laporanStockProdukBahanBakuDataSource!,

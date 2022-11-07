@@ -39,9 +39,9 @@ class LaporanKartuStockDataSource extends DataGridSource {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
           return Container(
-              alignment: /*(dataGridCell.columnName == 'namaBarang')
-                  ? Alignment.centerLeft
-                  : */Alignment.center,
+              alignment: (dataGridCell.columnName == 'tanggal' || dataGridCell.columnName == 'keterangan' || dataGridCell.columnName == 'admin')
+                  ? Alignment.center
+                  : Alignment.centerRight,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 dataGridCell.value.toString(),

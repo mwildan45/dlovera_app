@@ -36,6 +36,7 @@ dependencies:
   side_navigation: ^1.0.2
   month_year_picker: ^0.2.0+3
   loader_overlay: ^2.1.0
+  dismissible_page: ^0.7.3
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@
 
 import 'package:dlovera_app/constants/api.dart';
 import 'package:dlovera_app/models/api_response.dart';
+import 'package:dlovera_app/models/detail_transaksi.model.dart';
 import 'package:dlovera_app/models/laporan.model.dart';
 import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/services/http.service.dart';
@@ -27,5 +28,18 @@ class LaporanPenjualanRequest extends HttpService {
       throw apiResponse.message;
     }
   }
+
+  Future<DetailTransaksiHeader> getDetailTransaksi(String kode, String url) async {
+    final apiResult = await post(url, {
+      'faktur': kode
+    });
+    final apiResponse = ApiResponse.fromResponse(apiResult);
+    if (apiResponse.allGood) {
+      return DetailTransaksiHeader.fromJson(apiResponse.body);
+    } else {
+      throw apiResponse.message;
+    }
+  }
+
 
 }

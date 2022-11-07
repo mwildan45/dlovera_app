@@ -18,16 +18,19 @@ class Api {
 
   static const laporanPenjualanChart = "/laporanpenjualan";
   static const laporanPenjualanPerBulan = "/laporanpenjualanperbulan";
+  static const laporanPenjualanDetailTransaksi = "/detailpenjualan";
 
   static const laporanPembelianChart = "/laporanpembelian";
   static const laporanPembelianPerBulan = "/laporanpembelianperbulan";
+  static const laporanPembelianDetailTransaksi = "/detailpembelian";
 
   static const laporanProduksiChart = "/laporanproduksi";
   static const laporanProduksiPerBulan = "/laporanproduksiperbulan";
+  static const laporanProduksiDetailTransaksi = "/detailproduksi";
 
   static const laporanStock = "/laporanstockperbulan";
   static const kartuStokProduk = "/productstock";
-  static const kartuStokBahanBaku = "/productstock";
+  static const kartuStokBahanBaku = "/baseproductstock";
 
   // Other pages
   // static String get privacyPolicy {

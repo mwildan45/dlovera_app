@@ -1,14 +1,18 @@
 
 import 'package:dlovera_app/models/chart_data.model.dart';
+import 'package:dlovera_app/models/detail_transaksi.model.dart';
 import 'package:dlovera_app/models/laporan.model.dart';
 import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/requests/laporan_penjualan.request.dart';
 import 'package:dlovera_app/view_models/base.view_model.dart';
 import 'package:dlovera_app/views/pages/laporan_penjualan/laporan_penjualan_all_retur.page.dart';
 import 'package:dlovera_app/views/pages/laporan_penjualan/laporan_penjualan_all_transaksi.page.dart';
+import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/detailed/detail_transaksi.data_source.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/retur.data_source.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/transaksi.data_source.dart';
+import 'package:dlovera_app/widgets/dialogs/detail_transaksi_all.dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -29,7 +33,9 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
   String? selectedMonth = '';
   LaporanTransaksiDataSource? laporanTransaksiDataSource;
   LaporanReturDataSource? laporanReturDataSource;
+  LaporanDetailTransaksiDataSource? laporanDetailTransaksiDataSource;
   DateTime? selectedDate;
+  DetailTransaksiHeader? detailTransaksiHeader;
 
 
   //pick the month and year first
@@ -140,6 +146,34 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
 
     setBusyForObject(laporanPerBulanData, false);
   }
+
+  //
+  void getDetailTransaksi(idb, url) async {
+    // setBusyForObject(kartuStokHeader, true);
+    viewContext!.loaderOverlay.show();
+
+    try{
+      detailTransaksiHeader = await laporanPenjualanRequest.getDetailTransaksi(idb, url);
+
+      laporanDetailTransaksiDataSource?.dispose();
+      laporanDetailTransaksiDataSource = LaporanDetailTransaksiDataSource(
+          detailTransaksi: detailTransaksiHeader?.data?.product ?? []);
+
+      DialogDetailTransaksiAll(viewContext, data: detailTransaksiHeader?.data, laporanDetailTransaksiDataSource: laporanDetailTransaksiDataSource!);
+
+    } catch (error) {
+      print("Error ==> $error");
+      setError(error);
+      viewContext?.showToast(
+          msg: "Error ==> Tidak ada data pada baris yang dipilih",
+          bgColor: Colors.red,
+          textColor: Colors.white
+      );
+    }
+    viewContext!.loaderOverlay.hide();
+    // setBusyForObject(kartuStokHeader, false);
+  }
+
 
   //
   getDataPaginationTransaksi(pageNumber) async {
