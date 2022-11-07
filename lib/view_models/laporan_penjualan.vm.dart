@@ -23,6 +23,7 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
   LaporanPerBulanData? laporanPerBulanData;
   List<ChartData>? dataChart = [];
   int? selectedYear = 2022;
+  dynamic selectedDay = 1;
   int currentPageTransaksi = 1;
   int currentPageRetur = 1;
   String? selectedMonth = '';
@@ -53,24 +54,27 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
     // );
     if (selected != null) {
       selectedDate = selected;
+      selectedMonth = selectedDate!.month.toString();
+      selectedYear = selectedDate!.year;
       notifyListeners();
+      print("yaer ${selectedDate!.year.toString()}");
+      getLaporanPenjualanChart(selectedDate!.year.toString(), selectedDate!.month.toString(), isGetPerBulan: false);
     }
   }
 
 
   @override
   void initialise() async {
-    getLaporanPenjualanChart("", isGetPerBulan: true);
   }
 
 
   onReload() async {
-    getLaporanPenjualanChart("");
-    getLaporanPenjualanPerBulan(selectedMonth, selectedYear);
+    getLaporanPenjualanChart(selectedDate!.year.toString(), selectedDate!.month.toString());
+    getLaporanPenjualanPerBulan(selectedMonth, selectedYear, selectedDay);
   }
 
   //
-  getLaporanPenjualanChart(String? year, {bool isGetPerBulan = false}) async {
+  getLaporanPenjualanChart(String? year, String month, {bool isGetPerBulan = false}) async {
     setBusy(true);
     try {
 
@@ -80,8 +84,15 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
 
       setDataChart();
 
-      if(isGetPerBulan){
-        getLaporanPenjualanPerBulan("", "");
+      if(laporanChartData?.statistic != null) {
+        if (isGetPerBulan) {
+          getLaporanPenjualanPerBulan("", "", "");
+        }
+      }else{
+        viewContext?.showToast(
+          msg: "tidak ada data di tanggal ini",
+          bgColor: Colors.red,
+        );
       }
 
       clearErrors();
@@ -98,20 +109,22 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
   }
 
   //
-  getLaporanPenjualanPerBulan(month, year) async {
+  getLaporanPenjualanPerBulan(month, year, day) async {
     setBusyForObject(laporanPerBulanData, true);
 
     try{
       laporanPerBulanData = await laporanPenjualanRequest.getLaporanPenjualanPerBulan(
-        {
-          'tahun': year ?? 2022,
-          'bulan': month ?? 1,
-        }
+          {
+            'tahun': year ?? 2022,
+            'bulan': month ?? 1,
+            'tanggal': day ?? 1,
+          }
       );
 
       if(year != "") {
         selectedMonth = month;
         selectedYear = year;
+        selectedDay = day;
         notifyListeners();
       }
 

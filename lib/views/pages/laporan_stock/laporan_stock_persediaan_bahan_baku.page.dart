@@ -1,3 +1,4 @@
+import 'package:dlovera_app/constants/api.dart';
 import 'package:dlovera_app/constants/app_images.dart';
 import 'package:dlovera_app/view_models/laporan_stock.vm.dart';
 import 'package:dlovera_app/widgets/base.page.dart';
@@ -29,6 +30,14 @@ class LaporanStockPersediaanBahanBakuPage extends StatelessWidget {
                   SfDataGrid(
                     onQueryRowHeight: (details) {
                       return details.getIntrinsicRowHeight(details.rowIndex);
+                    },
+                    onCellTap: (DataGridCellTapDetails details) {
+                      final column = details.column.columnName;
+                      final idb = vm.laporanStockProdukBahanBakuDataSource!.effectiveRows[details.rowColumnIndex.rowIndex - 1].getCells()[details.rowColumnIndex.columnIndex].value;
+                      print("column $column");
+                      if(column == "kodeProduk"){
+                        vm.getDetailKartuStok(idb, Api.kartuStokProduk);
+                      }
                     },
                     source: vm.laporanStockProdukBahanBakuDataSource!,
                     shrinkWrapRows: true,

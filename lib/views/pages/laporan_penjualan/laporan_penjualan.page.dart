@@ -53,7 +53,9 @@ class _LaporanPenjualanPageState extends State<LaporanPenjualanPage>
                       DateFormat()
                           .add_yMMM()
                           .format(vm.selectedDate!)
-                          .text.bold.size(20)
+                          .text
+                          .bold
+                          .size(20)
                           .make()
                           .centered(),
                     ],
@@ -67,10 +69,13 @@ class _LaporanPenjualanPageState extends State<LaporanPenjualanPage>
                         vm: vm,
                       ).px(14),
                 UiSpacer.verticalSpace(space: Vx.dp24),
-                vm.busy(vm.laporanPerBulanData) || vm.laporanChartData == null
-                    ? Image.asset(AppImages.appLoadingGear).centered()
-                    : StickyContentLaporanPenjualan(
-                        data: vm.laporanPerBulanData, vm: vm),
+                if (vm.laporanChartData != null)
+                  vm.busy(vm.laporanPerBulanData)
+                      ? Image.asset(AppImages.appLoadingGear).centered()
+                      : StickyContentLaporanPenjualan(
+                          data: vm.laporanPerBulanData, vm: vm)
+                else
+                  "Pilih bulan terlebih dahulu".text.bold.size(20).make().centered(),
               ],
             ),
           ),

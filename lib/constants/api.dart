@@ -26,6 +26,8 @@ class Api {
   static const laporanProduksiPerBulan = "/laporanproduksiperbulan";
 
   static const laporanStock = "/laporanstockperbulan";
+  static const kartuStokProduk = "/productstock";
+  static const kartuStokBahanBaku = "/productstock";
 
   // Other pages
   // static String get privacyPolicy {

@@ -24,7 +24,7 @@ class StickyContentLaporanPenjualan extends StatelessWidget {
   Widget build(BuildContext context) {
     final double heightScreen = MediaQuery.of(context).size.height;
     return StickyHeader(
-      header: 'Laporan Penjualan ${data?.month} ${data?.year}'
+      header: 'Laporan Penjualan ${data?.day} ${data?.month} ${data?.year}'
           .text
           .lg
           .bold

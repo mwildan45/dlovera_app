@@ -1,5 +1,6 @@
 import 'package:dlovera_app/constants/api.dart';
 import 'package:dlovera_app/models/api_response.dart';
+import 'package:dlovera_app/models/kartu_stok.model.dart';
 import 'package:dlovera_app/models/laporan.model.dart';
 import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
 import 'package:dlovera_app/models/stock.model.dart';
@@ -12,6 +13,18 @@ class LaporanStockRequest extends HttpService {
     final apiResponse = ApiResponse.fromResponse(apiResult);
     if (apiResponse.allGood) {
       return StockHeader.fromJson(apiResponse.body);
+    } else {
+      throw apiResponse.message;
+    }
+  }
+
+  Future<KartuStokHeader> getKartuStok(String kode, String url) async {
+    final apiResult = await post(url, {
+      'idb': kode
+    });
+    final apiResponse = ApiResponse.fromResponse(apiResult);
+    if (apiResponse.allGood) {
+      return KartuStokHeader.fromJson(apiResponse.body);
     } else {
       throw apiResponse.message;
     }

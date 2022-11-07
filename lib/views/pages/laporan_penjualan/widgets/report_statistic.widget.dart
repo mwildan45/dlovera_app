@@ -66,8 +66,8 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
                         .vm.laporanChartData?.statistic?[data.pointIndex!].num;
                     print(
                         '${widget.vm.laporanChartData?.statistic?[data.pointIndex!].num}');
-                    widget.vm.getLaporanPenjualanPerBulan(id.toString(),
-                        (widget.vm.selectedYear ?? widget.data?.yearNow));
+                    widget.vm.getLaporanPenjualanPerBulan(widget.vm.selectedMonth,
+                        (widget.vm.selectedYear ?? widget.data?.yearNow), id.toString());
                   })
             ],
           ).pOnly(top: Vx.dp48),

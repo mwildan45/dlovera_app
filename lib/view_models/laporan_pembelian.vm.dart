@@ -9,6 +9,7 @@ import 'package:dlovera_app/views/pages/laporan_pembelian/laporan_pembelian_all_
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/retur.data_source.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/transaksi.data_source.dart';
 import 'package:flutter/material.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LaporanPembelianViewModel extends MyBaseViewModel {
@@ -22,25 +23,57 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
   LaporanPerBulanData? laporanPerBulanData;
   List<ChartData>? dataChart = [];
   int? selectedYear = 2022;
+  dynamic selectedDay = 1;
   int currentPageTransaksi = 1;
   int currentPageRetur = 1;
   String? selectedMonth = '';
   LaporanTransaksiDataSource? laporanTransaksiDataSource;
   LaporanReturDataSource? laporanReturDataSource;
+  DateTime? selectedDate;
+
+  //pick the month and year first
+  Future<void> pickTheDate({
+    required BuildContext context,
+    String? locale,
+  }) async {
+    final localeObj = locale != null ? Locale(locale) : null;
+    final selected = await showMonthYearPicker(
+      context: context,
+      initialDate: selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime(2030),
+      locale: localeObj,
+    );
+    // final selected = await showDatePicker(
+    //   context: context,
+    //   initialDate: _selected ?? DateTime.now(),
+    //   firstDate: DateTime(2019),
+    //   lastDate: DateTime(2022),
+    //   locale: localeObj,
+    // );
+    if (selected != null) {
+      selectedDate = selected;
+      selectedMonth = selectedDate!.month.toString();
+      selectedYear = selectedDate!.year;
+      notifyListeners();
+      print("yaer ${selectedDate!.year.toString()}");
+      getLaporanPembelianChart(selectedDate!.year.toString(), selectedDate!.month.toString(), isGetPerBulan: false);
+    }
+  }
 
 
   @override
   void initialise() async {
-    getLaporanPembelianChart("", isGetPerBulan: true);
+    // getLaporanPembelianChart("", isGetPerBulan: true);
   }
 
   onReload() async {
-    getLaporanPembelianChart("");
-    getLaporanPembelianPerBulan(selectedMonth, selectedYear);
+    getLaporanPembelianChart(selectedDate!.year.toString(), selectedDate!.month.toString());
+    getLaporanPembelianPerBulan(selectedMonth, selectedYear, selectedDay);
   }
 
   //
-  getLaporanPembelianChart(String? year, {bool isGetPerBulan = false}) async {
+  getLaporanPembelianChart(String? year, String month, {bool isGetPerBulan = false}) async {
     setBusy(true);
     try {
 
@@ -50,8 +83,15 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
 
       setDataChart();
 
-      if(isGetPerBulan){
-        getLaporanPembelianPerBulan("", "");
+      if(laporanChartData?.statistic != null) {
+        if (isGetPerBulan) {
+          getLaporanPembelianPerBulan("", "", "");
+        }
+      }else{
+        viewContext?.showToast(
+          msg: "tidak ada data di tanggal ini",
+          bgColor: Colors.red,
+        );
       }
 
       clearErrors();
@@ -68,18 +108,20 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
   }
 
   //
-  getLaporanPembelianPerBulan(month, year) async {
+  getLaporanPembelianPerBulan(month, year, day) async {
     setBusyForObject(laporanPerBulanData, true);
     laporanPerBulanData = await laporanPembelianRequest.getLaporanPenjualanPerBulan(
         {
           'tahun': year ?? 2022,
           'bulan': month ?? 1,
+          'tanggal': day ?? 1,
         }
     );
 
     if(year != "") {
       selectedMonth = month;
       selectedYear = year;
+      selectedDay = day;
       notifyListeners();
     }
     try{

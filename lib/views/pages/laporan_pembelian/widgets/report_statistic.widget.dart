@@ -38,6 +38,7 @@ class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
         Container(
           decoration: BoxStyles.boxContent(),
           child: SfCartesianChart(
+            isTransposed: true,
               primaryXAxis: CategoryAxis(),
               primaryYAxis: NumericAxis(
                   minimum: 0,
@@ -47,52 +48,56 @@ class _StatisticPembelianWidgetState extends State<StatisticPembelianWidget> {
               series: <ChartSeries<ChartData, String>>[
                 ColumnSeries<ChartData, String>(
                     dataLabelSettings: const DataLabelSettings(
-                        isVisible: true, labelAlignment: ChartDataLabelAlignment.top, textStyle: TextStyle(color: Colors.white)),
+                      isVisible: true,
+                      // overflowMode: OverflowMode.shift,
+                      // labelPosition: ChartDataLabelPosition.outside,
+                      labelAlignment: ChartDataLabelAlignment.outer,
+                      textStyle: TextStyle(color: Colors.black),
+                    ),
                     dataSource: widget.dataChart,
-                    xValueMapper: (ChartData data, _) => data.x,
+                    xValueMapper: (ChartData data, _) => data.num.toString(),
                     yValueMapper: (ChartData data, _) => double.parse(data.y),
                     name: 'Laporan Pembelian Statistic',
                     color: AppColor.primaryColorDark,
                     onPointTap: (ChartPointDetails data) {
                       final id = widget.vm.laporanChartData?.statistic?[data.pointIndex!].num;
                       // print('${data.dataPoints?[data.pointIndex!]}');
-                      widget.vm.getLaporanPembelianPerBulan(
-                          id.toString(),
-                          (widget.vm.selectedYear ?? widget.data?.yearNow));
+                      widget.vm.getLaporanPembelianPerBulan(widget.vm.selectedMonth,
+                          (widget.vm.selectedYear ?? widget.data?.yearNow), id.toString());
                     })
               ]).pOnly(top: Vx.dp48),
         ).w(double.maxFinite).h(350),
         const CustomLabelBoxText(label: "Statistik"),
-        Positioned(
-          top: 5,
-          right: 8,
-          child: DropdownButtonFormField<dynamic>(
-            isExpanded: true,
-            isDense: true,
-            decoration:
-                const InputDecoration.collapsed(hintText: "Pilih Tahun"),
-            value: widget.vm.selectedYear ?? widget.data?.yearNow,
-            onChanged: (value) {
-              widget.vm.selectedYear = value;
-              widget.vm.getLaporanPembelianChart(value.toString());
-              widget.vm.notifyListeners();
-            },
-            items: widget.data?.yearList?.map(
-              (e) {
-                return DropdownMenuItem(
-                    value: e.year, child: Text("${e.year}"));
-              },
-            ).toList(),
-          )
-              .p8()
-              .w(100)
-              .h(40)
-              .box
-              .border(color: AppColor.fadedGrey)
-              .roundedLg
-              .make()
-              .py4(),
-        ),
+        // Positioned(
+        //   top: 5,
+        //   right: 8,
+        //   child: DropdownButtonFormField<dynamic>(
+        //     isExpanded: true,
+        //     isDense: true,
+        //     decoration:
+        //         const InputDecoration.collapsed(hintText: "Pilih Tahun"),
+        //     value: widget.vm.selectedYear ?? widget.data?.yearNow,
+        //     onChanged: (value) {
+        //       widget.vm.selectedYear = value;
+        //       widget.vm.getLaporanPembelianChart(value.toString());
+        //       widget.vm.notifyListeners();
+        //     },
+        //     items: widget.data?.yearList?.map(
+        //       (e) {
+        //         return DropdownMenuItem(
+        //             value: e.year, child: Text("${e.year}"));
+        //       },
+        //     ).toList(),
+        //   )
+        //       .p8()
+        //       .w(100)
+        //       .h(40)
+        //       .box
+        //       .border(color: AppColor.fadedGrey)
+        //       .roundedLg
+        //       .make()
+        //       .py4(),
+        // ),
       ],
     );
   }

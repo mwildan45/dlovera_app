@@ -35,6 +35,7 @@ dependencies:
   connectivity_plus: ^2.3.6+1
   side_navigation: ^1.0.2
   month_year_picker: ^0.2.0+3
+  loader_overlay: ^2.1.0
 
 dev_dependencies:
   flutter_test:

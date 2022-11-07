@@ -24,6 +24,7 @@ class LaporanPerBulanHeader {
 class LaporanPerBulanData {
   dynamic? year;
   dynamic? month;
+  dynamic day;
   RataRata? rataRata;
   String? transaksiTertinggi;
   String? transaksiTerendah;
@@ -37,6 +38,7 @@ class LaporanPerBulanData {
   LaporanPerBulanData({
     this.year,
     this.month,
+    this.day,
     this.rataRata,
     this.transaksiTertinggi,
     this.transaksiTerendah,
@@ -50,6 +52,7 @@ class LaporanPerBulanData {
   LaporanPerBulanData.fromJson(Map<String, dynamic> json) {
     year = json['year'];
     month = json['month'];
+    day = json['day'];
     rataRata =
         json['rataRata'] != null ? RataRata.fromJson(json['rataRata']) : null;
     transaksiTertinggi = json['transaksiTertinggi'];
@@ -83,6 +86,7 @@ class LaporanPerBulanData {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['year'] = year;
     data['month'] = month;
+    data['day'] = day;
     if (rataRata != null) {
       data['rataRata'] = rataRata!.toJson();
     }
