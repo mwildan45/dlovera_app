@@ -12,8 +12,8 @@ class LaporanTransaksiDataSource extends DataGridSource {
         DataGridRow(cells: [
           DataGridCell<String>(
               columnName: 'noFaktur', value: dataGridRow.noFaktur),
-          DataGridCell<String>(
-              columnName: 'tanggal', value: dataGridRow.tanggal),
+          // DataGridCell<String>(
+          //     columnName: 'tanggal', value: dataGridRow.tanggal),
           if(dataGridRow.namaSupplier != null)
             DataGridCell<String>(
                 columnName: 'namaSupplier',
@@ -28,12 +28,16 @@ class LaporanTransaksiDataSource extends DataGridSource {
               DataGridCell<String>(
                   columnName: 'namaProdusen',
                   value: dataGridRow.namaProdusen),
-          DataGridCell<String>(
-              columnName: 'namaBarang', value: dataGridRow.namaBarang),
+          // DataGridCell<String>(
+          //     columnName: 'namaBarang', value: dataGridRow.namaBarang),
           DataGridCell<String>(
               columnName: 'total',
               value: double.parse(dataGridRow.total ?? "0")
                   .currencyValueFormat()),
+          DataGridCell<String>(
+              columnName: 'bayar', value: dataGridRow.bayar),
+          DataGridCell<String>(
+              columnName: 'kirim', value: dataGridRow.kirim),
         ]))
         .toList();
   }

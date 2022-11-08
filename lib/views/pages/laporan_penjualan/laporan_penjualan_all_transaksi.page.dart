@@ -19,11 +19,11 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
     return ViewModelBuilder<LaporanPenjualanViewModel>.reactive(
       viewModelBuilder: () => LaporanPenjualanViewModel(context),
       onModelReady: (model) => model.onPageChangeAllTransaksi(1,
-          month: viewModel?.selectedMonth, year: viewModel?.selectedYear),
+          month: viewModel?.selectedMonth, year: viewModel?.selectedYear, day: viewModel?.selectedDay),
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Transaksi Penjualan ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+              "Laporan Transaksi Penjualan ${vm.laporanPerBulanData?.day} ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           // floatingActionWidget: ,
           // floatingActionButtonLocation:
           //     FloatingActionButtonLocation.centerFloat,
@@ -38,7 +38,12 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
                   },
                   onCellTap: (DataGridCellTapDetails details) {
                     final column = details.column.columnName;
-                    final idb = vm.laporanTransaksiDataSource!.effectiveRows[details.rowColumnIndex.rowIndex - 1].getCells()[details.rowColumnIndex.columnIndex].value;
+                    var idb;
+                    try {
+                      idb = vm.laporanTransaksiDataSource!.effectiveRows[details.rowColumnIndex.rowIndex - 1].getCells()[details.rowColumnIndex.columnIndex].value;
+                    }catch(e) {
+                      return;
+                    }
                     print("column $column");
                     if(column == "noFaktur"){
                       vm.getDetailTransaksi(idb, Api.laporanPenjualanDetailTransaksi);
@@ -52,14 +57,16 @@ class LaporanPenjualanAllTransaksiPage extends StatelessWidget {
                   verticalScrollPhysics: const BouncingScrollPhysics(),
                   columns: [
                     CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
-                    CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
+                    // CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
                     CustomGridColumn().gridColumn(
                         'namaCustomer', 'Nama Konsumen',
                         alignment: Alignment.centerLeft),
-                    CustomGridColumn().gridColumn('namaBarang', 'Produk',
-                        alignment: Alignment.centerLeft),
+                    // CustomGridColumn().gridColumn('namaBarang', 'Produk',
+                    //     alignment: Alignment.centerLeft),
                     CustomGridColumn().gridColumn('total', 'Nilai',
                         alignment: Alignment.center),
+                    CustomGridColumn().gridColumn('bayar', 'Status Bayar'),
+                    CustomGridColumn().gridColumn('kirim', 'Status Kirim'),
                   ],
                 ).expand(),
               CustomPaginationWidget(

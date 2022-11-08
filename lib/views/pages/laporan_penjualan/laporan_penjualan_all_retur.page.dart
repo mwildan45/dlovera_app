@@ -18,11 +18,11 @@ class LaporanPenjualanAllReturPage extends StatelessWidget {
     return ViewModelBuilder<LaporanPenjualanViewModel>.reactive(
         viewModelBuilder: () => LaporanPenjualanViewModel(context),
         onModelReady: (model) => model.onPageChangeAllRetur(1,
-            month: vm?.selectedMonth, year: vm?.selectedYear),
+            month: vm?.selectedMonth, year: vm?.selectedYear, day: vm?.selectedDay),
         builder: (context, vm, child) {
           return BasePage(
             title:
-                "Laporan Retur Penjualan ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+                "Laporan Retur Penjualan ${vm.laporanPerBulanData?.day} ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
             body: VStack(
               [
                 if (vm.busy(vm.laporanReturDataSource))

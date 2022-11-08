@@ -460,6 +460,8 @@ class LaporanPerBulanTransaksiData {
   String? namaProdusen;
   String? namaBarang;
   String? total;
+  String? bayar;
+  String? kirim;
 
   LaporanPerBulanTransaksiData(
       {this.noFaktur,
@@ -468,7 +470,7 @@ class LaporanPerBulanTransaksiData {
       this.namaSupplier,
       this.namaProdusen,
       this.namaBarang,
-      this.total});
+      this.total, this.bayar, this.kirim});
 
   LaporanPerBulanTransaksiData.fromJson(Map<String, dynamic> json) {
     noFaktur = json['no_faktur'];
@@ -478,6 +480,8 @@ class LaporanPerBulanTransaksiData {
     namaProdusen = json['nama_produsen'];
     namaBarang = json['nama_barang'];
     total = json['total'];
+    bayar = json['bayar'];
+    kirim = json['kirim'];
   }
 
   Map<String, dynamic> toJson() {
@@ -489,6 +493,8 @@ class LaporanPerBulanTransaksiData {
     data['nama_produsen'] = namaProdusen;
     data['nama_barang'] = namaBarang;
     data['total'] = total;
+    data['bayar'] = bayar;
+    data['kirim'] = kirim;
     return data;
   }
 }

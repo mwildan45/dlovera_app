@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dismissible_page/dismissible_page.dart';
 import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/models/detail_transaksi.model.dart';
+import 'package:dlovera_app/utils/currency.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/detailed/detail_transaksi.data_source.dart';
@@ -32,6 +33,8 @@ void DialogDetailTransaksiAll(
                 UiSpacer.verticalSpace(space: 12),
                 HStack(
                   [
+                    "Bukti Pembayaran".text.bold.make().w(110),
+                    " : ".text.bold.make(),
                     if (data?.buktiPembayaran != "")
                       InkWell(
                         onTap: () {
@@ -41,19 +44,26 @@ void DialogDetailTransaksiAll(
                           ));
                         },
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(10.0),
                           child: Hero(
                             tag: data!.faktur!,
                             child: Image.memory(
                               base64Decode(data.buktiPembayaran ?? ""),
                               fit: BoxFit.cover,
-                              width: 120,
-                              height: 80,
+                              width: 70,
+                              height: 90,
                             ),
                           ),
                         ),
                       ),
-                    UiSpacer.horizontalSpace(),
+                  ]
+                ),
+                UiSpacer.verticalSpace(space: 8),
+                HStack(
+                  [
+                    "Bukti Pengiriman".text.bold.make().w(110),
+                    " : ".text.bold.make(),
+                    // UiSpacer.horizontalSpace(),
                     if (data?.buktiPengiriman != "")
                       InkWell(
                         onTap: () {
@@ -87,7 +97,7 @@ void DialogDetailTransaksiAll(
                     _buildaHeaderInfo("Status Kirim", data?.statusPengiriman),
                     UiSpacer.verticalSpace(space: 12),
                     _buildaHeaderInfo("Total Qty", data?.totalQty),
-                    _buildaHeaderInfo("Total Semua", data?.allTotal),
+                    _buildaHeaderInfo("Total Semua", double.parse(data?.allTotal.toString() ?? "0").currencyValueFormat()),
                   ],
                 ),
                 UiSpacer.verticalSpace(),

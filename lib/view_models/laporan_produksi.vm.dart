@@ -1,14 +1,19 @@
 
 import 'package:dlovera_app/models/chart_data.model.dart';
+import 'package:dlovera_app/models/detail_transaksi.model.dart';
 import 'package:dlovera_app/models/laporan.model.dart';
 import 'package:dlovera_app/models/laporan_per_bulan.model.dart';
+import 'package:dlovera_app/requests/laporan_penjualan.request.dart';
 import 'package:dlovera_app/requests/laporan_produksi.request.dart';
 import 'package:dlovera_app/view_models/base.view_model.dart';
 import 'package:dlovera_app/views/pages/laporan_produksi/laporan_produksi_all_retur.page.dart';
 import 'package:dlovera_app/views/pages/laporan_produksi/laporan_produksi_all_transaksi.page.dart';
+import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/detailed/detail_transaksi.data_source.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/retur.data_source.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/transaksi.data_source.dart';
+import 'package:dlovera_app/widgets/dialogs/detail_transaksi_all.dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -20,6 +25,7 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
   }
 
   LaporanProduksiRequest laporanProduksiRequest = LaporanProduksiRequest();
+  LaporanPenjualanRequest laporanPenjualanRequest = LaporanPenjualanRequest();
   LaporanChartData? laporanChartData;
   LaporanPerBulanData? laporanPerBulanData;
   List<ChartData>? dataChart = [];
@@ -31,6 +37,9 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
   LaporanTransaksiDataSource? laporanTransaksiDataSource;
   LaporanReturDataSource? laporanReturDataSource;
   DateTime? selectedDate;
+  LaporanDetailTransaksiDataSource? laporanDetailTransaksiDataSource;
+  DetailTransaksiHeader? detailTransaksiHeader;
+
 
   //pick the month and year first
   Future<void> pickTheDate({
@@ -154,6 +163,7 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
           {
             'tahun': selectedYear.toString(),
             'bulan': selectedMonth,
+            'tanggal': selectedDay,
             'transaksi_page_number': pageNumber
           }
       );
@@ -184,6 +194,7 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
           {
             'tahun': selectedYear.toString(),
             'bulan': selectedMonth,
+            'tanggal': selectedDay,
             'retur_page_number': pageNumber
           }
       );
@@ -205,6 +216,33 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
   }
 
   //
+  void getDetailTransaksi(idb, url) async {
+    // setBusyForObject(kartuStokHeader, true);
+    viewContext!.loaderOverlay.show();
+
+    try{
+      detailTransaksiHeader = await laporanPenjualanRequest.getDetailTransaksi(idb, url);
+
+      laporanDetailTransaksiDataSource?.dispose();
+      laporanDetailTransaksiDataSource = LaporanDetailTransaksiDataSource(
+          detailTransaksi: detailTransaksiHeader?.data?.product ?? []);
+
+      DialogDetailTransaksiAll(viewContext, data: detailTransaksiHeader?.data, laporanDetailTransaksiDataSource: laporanDetailTransaksiDataSource!);
+
+    } catch (error) {
+      print("Error ==> $error");
+      setError(error);
+      viewContext?.showToast(
+          msg: "Error ==> Tidak ada data pada baris yang dipilih",
+          bgColor: Colors.red,
+          textColor: Colors.white
+      );
+    }
+    viewContext!.loaderOverlay.hide();
+    // setBusyForObject(kartuStokHeader, false);
+  }
+
+  //
   setDataChart() {
     dataChart?.clear();
     laporanChartData?.statistic?.forEach((element) {
@@ -213,22 +251,24 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
   }
 
   //
-  onPageChangeAllTransaksi(number, {month, year}){
+  onPageChangeAllTransaksi(number, {month, year, day}){
     currentPageTransaksi = number;
     if(month != null){
       selectedYear = year;
       selectedMonth = month;
+      selectedDay = day;
     }
     notifyListeners();
     getDataPaginationTransaksi(number);
   }
 
   //
-  onPageChangeAllRetur(number, {month, year}){
+  onPageChangeAllRetur(number, {month, year, day}){
     currentPageTransaksi = number;
     if(month != null){
       selectedYear = year;
       selectedMonth = month;
+      selectedDay = day;
     }
     notifyListeners();
     getDataPaginationRetur(number);

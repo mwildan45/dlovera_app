@@ -1,5 +1,6 @@
 import 'package:dlovera_app/models/detail_transaksi.model.dart';
 import 'package:dlovera_app/models/kartu_stok.model.dart';
+import 'package:dlovera_app/utils/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -11,13 +12,14 @@ class LaporanDetailTransaksiDataSource extends DataGridSource {
       DataGridCell<String>(
           columnName: 'namaProduk', value: dataGridRow.namaBarang),
       DataGridCell<String>(
-          columnName: 'hargaSatuan', value: dataGridRow.hargaSatuan),
+          columnName: 'hargaSatuan', value: double.parse(dataGridRow.hargaSatuan ?? "0")
+          .currencyValueFormat()),
       DataGridCell<String>(
           columnName: 'qty',
           value: dataGridRow.jumlah.toString()),
       DataGridCell<String>(
           columnName: 'total',
-          value: dataGridRow.total.toString()),
+          value: double.parse(dataGridRow.total.toString()).currencyValueFormat()),
     ]))
         .toList();
   }

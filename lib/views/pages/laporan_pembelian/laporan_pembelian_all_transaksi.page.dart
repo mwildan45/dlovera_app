@@ -1,3 +1,4 @@
+import 'package:dlovera_app/constants/api.dart';
 import 'package:dlovera_app/constants/app_images.dart';
 import 'package:dlovera_app/view_models/laporan_pembelian.vm.dart';
 import 'package:dlovera_app/widgets/base.page.dart';
@@ -18,11 +19,11 @@ class LaporanPembelianAllTransaksiPage extends StatelessWidget {
     return ViewModelBuilder<LaporanPembelianViewModel>.reactive(
       viewModelBuilder: () => LaporanPembelianViewModel(context),
       onModelReady: (model) => model.onPageChangeAllTransaksi(1,
-          month: viewModel?.selectedMonth, year: viewModel?.selectedYear),
+          month: viewModel?.selectedMonth, year: viewModel?.selectedYear, day: viewModel?.selectedDay),
       builder: (context, vm, child) {
         return BasePage(
           title:
-              "Laporan Transaksi Pembelian ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
+              "Laporan Transaksi Pembelian ${vm.laporanPerBulanData?.day} ${vm.laporanPerBulanData?.month} ${vm.laporanPerBulanData?.year}",
           body: VStack(
             [
               if (vm.busy(vm.laporanTransaksiDataSource))
@@ -32,20 +33,37 @@ class LaporanPembelianAllTransaksiPage extends StatelessWidget {
                   onQueryRowHeight: (details) {
                     return details.getIntrinsicRowHeight(details.rowIndex);
                   },
+                  onCellTap: (DataGridCellTapDetails details) {
+                    final column = details.column.columnName;
+                    var idb;
+                    try {
+                      idb = vm.laporanTransaksiDataSource!.effectiveRows[details.rowColumnIndex.rowIndex - 1].getCells()[details.rowColumnIndex.columnIndex].value;
+                    }catch(e) {
+                      return;
+                    }
+                    print("column $column");
+                    if(column == "noFaktur"){
+                      vm.getDetailTransaksi(idb, Api.laporanPembelianDetailTransaksi);
+                    }
+                  },
                   source: vm.laporanTransaksiDataSource!,
                   shrinkWrapRows: true,
+                  allowSorting: true,
+                  sortingGestureType: SortingGestureType.tap,
                   columnWidthMode: ColumnWidthMode.fill,
                   verticalScrollPhysics: const BouncingScrollPhysics(),
                   columns: [
                     CustomGridColumn().gridColumn('noFaktur', 'No. Faktur'),
-                    CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
+                    // CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
                     CustomGridColumn().gridColumn(
                         'namaSupplier', 'Nama Supplier',
                         alignment: Alignment.centerLeft),
-                    CustomGridColumn().gridColumn('namaBarang', 'Bahan Baku',
-                        alignment: Alignment.centerLeft),
+                    // CustomGridColumn().gridColumn('namaBarang', 'Bahan Baku',
+                    //     alignment: Alignment.centerLeft),
                     CustomGridColumn().gridColumn('total', 'Nilai',
                         alignment: Alignment.centerLeft),
+                    CustomGridColumn().gridColumn('bayar', 'Status Bayar'),
+                    CustomGridColumn().gridColumn('kirim', 'Status Kirim'),
                   ],
                 ).expand(),
               CustomPaginationWidget(

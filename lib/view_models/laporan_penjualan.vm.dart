@@ -185,6 +185,7 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
           {
             'tahun': selectedYear.toString(),
             'bulan': selectedMonth,
+            'tanggal': selectedDay,
             'transaksi_page_number': pageNumber
           }
       );
@@ -215,6 +216,7 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
           {
             'tahun': selectedYear.toString(),
             'bulan': selectedMonth,
+            'tanggal': selectedDay,
             'retur_page_number': pageNumber
           }
       );
@@ -244,22 +246,24 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
   }
 
   //
-  onPageChangeAllTransaksi(number, {month, year}){
+  onPageChangeAllTransaksi(number, {day, month, year}){
     currentPageTransaksi = number;
     if(month != null){
       selectedYear = year;
       selectedMonth = month;
+      selectedDay = day;
     }
     notifyListeners();
     getDataPaginationTransaksi(number);
   }
 
   //
-  onPageChangeAllRetur(number, {month, year}){
+  onPageChangeAllRetur(number, {day, month, year}){
     currentPageTransaksi = number;
     if(month != null){
       selectedYear = year;
       selectedMonth = month;
+      selectedDay = day;
     }
     notifyListeners();
     getDataPaginationRetur(number);
