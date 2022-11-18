@@ -3,5 +3,5 @@ class ChartData {
 
   final String x;
   final String y;
-  final int? num;
+  final dynamic num;
 }

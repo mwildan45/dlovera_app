@@ -202,7 +202,7 @@ class LatestTransaction {
 
   LatestTransaction.fromJson(Map<String, dynamic> json) {
     noFaktur = json['no_faktur'];
-    namaCustomer = json['nama_customer'];
+    namaCustomer = json['Nama_Customer'];
     grandTotal = json['grand_total'];
     tanggal = json['tanggal'];
   }

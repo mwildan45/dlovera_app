@@ -87,10 +87,10 @@ class DataTableKartuStok {
   String? tanggal;
   String? kodeBarang;
   String? keterangan;
-  int? masuk;
-  int? keluar;
-  int? retur;
-  int? sisa;
+  dynamic masuk;
+  dynamic keluar;
+  dynamic retur;
+  dynamic sisa;
   String? createdBy;
   String? createdDate;
 
@@ -109,10 +109,10 @@ class DataTableKartuStok {
     tanggal = json['tanggal'];
     kodeBarang = json['kode_barang'];
     keterangan = json['keterangan'];
-    masuk = json['masuk'];
-    keluar = json['keluar'];
-    retur = json['retur'];
-    sisa = json['sisa'];
+    masuk = int.parse(json['masuk'].toString());
+    keluar = int.parse(json['keluar'].toString());
+    retur = int.parse(json['retur'].toString());
+    sisa = int.parse(json['sisa'].toString());
     createdBy = json['created_by'];
     createdDate = json['created_date'];
   }

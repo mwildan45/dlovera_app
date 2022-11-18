@@ -37,6 +37,7 @@ dependencies:
   month_year_picker: ^0.2.0+3
   loader_overlay: ^2.1.0
   dismissible_page: ^0.7.3
+  flutter_datetime_picker: ^1.5.1
 
 dev_dependencies:
   flutter_test:

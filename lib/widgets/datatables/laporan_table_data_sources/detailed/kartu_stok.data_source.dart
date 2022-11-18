@@ -2,7 +2,7 @@ import 'package:dlovera_app/models/kartu_stok.model.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class LaporanKartuStockDataSource extends DataGridSource {
+class  LaporanKartuStockDataSource extends DataGridSource {
   LaporanKartuStockDataSource(
       {required List<DataTableKartuStok> kartuStock}) {
     dataGridRows = kartuStock

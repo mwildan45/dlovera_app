@@ -15,6 +15,7 @@ class TodaySummaryViewModel extends MyBaseViewModel {
   TodaySummaryData? todaySummaryData;
   TodaySummaryRequest todaySummaryRequest = TodaySummaryRequest();
   List<ChartData>? dataChart;
+  DateTime? selectedTgl;
 
 
   @override
@@ -26,7 +27,7 @@ class TodaySummaryViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
 
-      todaySummaryData = await todaySummaryRequest.getTodaySummary();
+      todaySummaryData = await todaySummaryRequest.getTodaySummary((selectedTgl == null ? "" : "${selectedTgl!.year}-${selectedTgl!.month}-${selectedTgl!.day}"));
       setDataChart(todaySummaryData);
 
       clearErrors();
@@ -40,6 +41,14 @@ class TodaySummaryViewModel extends MyBaseViewModel {
     }
 
     setBusy(false);
+  }
+
+  //
+  onTglSelected(DateTime date) {
+    print('confirm $date');
+    selectedTgl = date;
+    notifyListeners();
+    getTodaySummary();
   }
 
 

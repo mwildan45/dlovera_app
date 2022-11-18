@@ -151,9 +151,9 @@ class LaporanPenjualanViewModel extends MyBaseViewModel {
   void getDetailTransaksi(idb, url) async {
     // setBusyForObject(kartuStokHeader, true);
     viewContext!.loaderOverlay.show();
+    detailTransaksiHeader = await laporanPenjualanRequest.getDetailTransaksi(idb, url);
 
     try{
-      detailTransaksiHeader = await laporanPenjualanRequest.getDetailTransaksi(idb, url);
 
       laporanDetailTransaksiDataSource?.dispose();
       laporanDetailTransaksiDataSource = LaporanDetailTransaksiDataSource(

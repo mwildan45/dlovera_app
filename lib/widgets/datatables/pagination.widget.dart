@@ -35,7 +35,7 @@ class CustomPaginationWidget extends StatelessWidget {
         onPageChange: onPageChange,
         useGroup: true,
         totalPage: totalPage ?? 1,
-        show: (totalPage ?? 0) < 4 ? (totalPage ?? 0) - 1 : 4,
+        show: (totalPage ?? 0) <= 4 ? (totalPage ?? 0) - 1 : 4,
         currentPage: currentPage,
       ),
     );

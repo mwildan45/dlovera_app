@@ -82,7 +82,7 @@ class DetailTransaksiData {
 class DetailTransaksiProduct {
   String? namaBarang;
   String? hargaSatuan;
-  int? jumlah;
+  dynamic jumlah;
   String? total;
 
   DetailTransaksiProduct({this.namaBarang, this.hargaSatuan, this.jumlah, this.total});
@@ -90,7 +90,7 @@ class DetailTransaksiProduct {
   DetailTransaksiProduct.fromJson(Map<String, dynamic> json) {
     namaBarang = json['nama_barang'];
     hargaSatuan = json['harga_satuan'];
-    jumlah = json['jumlah'];
+    jumlah = json['jumlah'].toString();
     total = json['total'];
   }
 

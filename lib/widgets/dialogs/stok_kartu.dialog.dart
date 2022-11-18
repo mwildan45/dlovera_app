@@ -41,13 +41,13 @@ void DialogStokKartu(context, {
                 ),
                 UiSpacer.verticalSpace(),
                 SfDataGrid(
-                  rowsPerPage: 20,
+                  rowsPerPage: 10,
                   onQueryRowHeight: (details) {
                     return details.getIntrinsicRowHeight(details.rowIndex);
                   },
                   source: laporanKartuStockDataSource,
                   shrinkWrapRows: true,
-                  columnWidthMode: ColumnWidthMode.fill,
+                  columnWidthMode: ColumnWidthMode.auto,
                   // verticalScrollPhysics: const NeverScrollableScrollPhysics(),
                   columns: [
                     CustomGridColumn().gridColumn('tanggal', 'Tanggal'),
