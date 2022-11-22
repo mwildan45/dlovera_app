@@ -90,6 +90,7 @@ class LaporanProduksiViewModel extends MyBaseViewModel {
 
       laporanChartData = await laporanProduksiRequest.getLaporanProduksiChart({
         'tahun': year ?? "",
+        'bulan': month
       });
 
       print('data $laporanChartData');

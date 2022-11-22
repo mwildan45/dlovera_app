@@ -1,4 +1,5 @@
 import 'package:dlovera_app/models/kartu_stok.model.dart';
+import 'package:dlovera_app/utils/currency.dart';
 import 'package:dlovera_app/utils/ui_spacer.dart';
 import 'package:dlovera_app/widgets/datatables/custom_grid_column.widget.dart';
 import 'package:dlovera_app/widgets/datatables/laporan_table_data_sources/detailed/kartu_stok.data_source.dart';
@@ -29,7 +30,7 @@ void DialogStokKartu(context, {
                     _buildaHeaderInfo("Kode Barang", data?.kodeBarang),
                     _buildaHeaderInfo("Nama Barang", data?.namaBarang),
                     _buildaHeaderInfo("Merk", data?.merk),
-                    _buildaHeaderInfo("Harga Satuan", data?.hargaSatuan),
+                    _buildaHeaderInfo("Harga Satuan", double.parse(data?.hargaSatuan ?? "0").currencyValueFormat()),
                     _buildaHeaderInfo("Kategori", data?.kategori),
                     _buildaHeaderInfo("Satuan", data?.satuan),
                     UiSpacer.verticalSpace(space: 12),

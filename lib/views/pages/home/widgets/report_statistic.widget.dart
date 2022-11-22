@@ -10,10 +10,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ReportStatistic extends StatefulWidget {
-  const ReportStatistic(
-      {Key? key,
-      required this.statistic,
-      this.dataChart})
+  const ReportStatistic({Key? key, required this.statistic, this.dataChart})
       : super(key: key);
 
   final Statistic? statistic;
@@ -42,15 +39,20 @@ class _ReportStatisticState extends State<ReportStatistic> {
           TextStyles.labelBoxText(label: "Statistik").centered(),
           UiSpacer.divider().centered(),
           SfCartesianChart(
-            isTransposed: true,
+              isTransposed: true,
               primaryXAxis: CategoryAxis(),
               primaryYAxis: NumericAxis(
-                  minimum: 0, maximum: widget.statistic?.max?.toDouble(), numberFormat: NumberFormat.compactCurrency(locale: 'id')),
+                  minimum: 0,
+                  maximum: widget.statistic?.max?.toDouble(),
+                  numberFormat: NumberFormat.compactCurrency(locale: 'id')),
               tooltipBehavior: _tooltip,
               series: <ChartSeries<ChartData, String>>[
                 ColumnSeries<ChartData, String>(
                     dataLabelSettings: const DataLabelSettings(
-                        isVisible: true, labelAlignment: ChartDataLabelAlignment.top, textStyle: TextStyle(color: Colors.white)),
+                      isVisible: true,
+                      labelAlignment: ChartDataLabelAlignment.outer,
+                      textStyle: TextStyle(color: Colors.black),
+                    ),
                     dataSource: widget.dataChart ?? [],
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => double.parse(data.y),

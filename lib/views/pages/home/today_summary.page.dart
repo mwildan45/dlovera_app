@@ -9,6 +9,7 @@ import 'package:dlovera_app/widgets/buttons/custom_button.dart';
 import 'package:dlovera_app/widgets/buttons/custom_floating_refresh_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -35,13 +36,14 @@ class _TodaySummaryPageState extends State<TodaySummaryPage>
             child: SingleChildScrollView(
               child: VStack([
                 UiSpacer.verticalSpace(),
-                "Rekap Harian".text.bold.size(20).make().centered(),
+                "Rekap Harian ${vm.todaySummaryData == null ? "" : DateFormat('d MMM y')
+                    .format(vm.todaySummaryData!.now!)}".text.bold.size(20).make().centered(),
                 UiSpacer.divider().centered(),
                 UiSpacer.verticalSpace(
                   space: 8,
                 ),
                 CustomButton(
-                  child: (vm.selectedTgl == null ? "Pilih Tanggal" : "${vm.selectedTgl!.day}-${vm.selectedTgl!.month}-${vm.selectedTgl!.year}").text.bold.make().centered(),
+                  child: ("Pilih Tanggal").text.bold.make().centered(),
                   onPressed: () {
                     DatePicker.showDatePicker(context,
                         showTitleActions: true,

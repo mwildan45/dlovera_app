@@ -27,7 +27,7 @@ class TodaySummaryViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
 
-      todaySummaryData = await todaySummaryRequest.getTodaySummary((selectedTgl == null ? "" : "${selectedTgl!.year}-${selectedTgl!.month}-${selectedTgl!.day}"));
+      todaySummaryData = await todaySummaryRequest.getTodaySummary((selectedTgl == null ? "" : "${selectedTgl!.year}-${selectedTgl!.month}-${selectedTgl!.day.toString().padLeft(2,"0")}"));
       setDataChart(todaySummaryData);
 
       clearErrors();

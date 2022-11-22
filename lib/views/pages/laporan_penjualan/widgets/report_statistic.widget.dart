@@ -2,6 +2,7 @@ import 'package:dlovera_app/constants/app_colors.dart';
 import 'package:dlovera_app/constants/box.styles.dart';
 import 'package:dlovera_app/models/chart_data.model.dart';
 import 'package:dlovera_app/models/laporan.model.dart';
+import 'package:dlovera_app/utils/currency.dart';
 import 'package:dlovera_app/view_models/laporan_penjualan.vm.dart';
 import 'package:dlovera_app/widgets/custom_label_box_text.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,14 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
               numberFormat: NumberFormat.compactCurrency(locale: 'id'),
             ),
             tooltipBehavior: _tooltip,
+            onDataLabelTapped: (args) {
+              final id = widget
+                  .vm.laporanChartData?.statistic?[args.pointIndex].num;
+              widget.vm.getLaporanPenjualanPerBulan(
+                  widget.vm.selectedMonth,
+                  (widget.vm.selectedYear ?? widget.data?.yearNow),
+                  id.toString());
+            },
             series: <ChartSeries<ChartData, String>>[
               ColumnSeries<ChartData, String>(
                   dataLabelSettings: const DataLabelSettings(
@@ -64,14 +73,14 @@ class _StatisticPenjualanWidgetState extends State<StatisticPenjualanWidget> {
                   onPointTap: (ChartPointDetails data) {
                     final id = widget
                         .vm.laporanChartData?.statistic?[data.pointIndex!].num;
-                    print(
-                        '${widget.vm.laporanChartData?.statistic?[data.pointIndex!].num}');
-                    widget.vm.getLaporanPenjualanPerBulan(widget.vm.selectedMonth,
-                        (widget.vm.selectedYear ?? widget.data?.yearNow), id.toString());
+                    widget.vm.getLaporanPenjualanPerBulan(
+                        widget.vm.selectedMonth,
+                        (widget.vm.selectedYear ?? widget.data?.yearNow),
+                        id.toString());
                   })
             ],
           ).pOnly(top: Vx.dp48),
-        ).w(double.maxFinite).h(380),
+        ).w(double.maxFinite).h(400),
         const CustomLabelBoxText(label: "Statistik"),
         // Positioned(
         //   top: 5,

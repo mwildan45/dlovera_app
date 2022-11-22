@@ -88,6 +88,7 @@ class LaporanPembelianViewModel extends MyBaseViewModel {
 
       laporanChartData = await laporanPembelianRequest.getLaporanPenjualanChart({
         'tahun': year ?? "",
+        'bulan': month
       });
 
       setDataChart();

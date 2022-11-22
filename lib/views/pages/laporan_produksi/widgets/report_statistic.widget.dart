@@ -45,6 +45,12 @@ class _StatisticProduksiWidgetState extends State<StatisticProduksiWidget> {
                   maximum: widget.data?.max?.toDouble(),
                   numberFormat: NumberFormat.compactCurrency(locale: 'id')),
               tooltipBehavior: _tooltip,
+              onDataLabelTapped: (args) {
+                final id = widget.vm.laporanChartData?.statistic?[args.pointIndex!].num;
+                // print('${data.dataPoints?[data.pointIndex!]}');
+                widget.vm.getLaporanProduksiPerBulan(widget.vm.selectedMonth,
+                    (widget.vm.selectedYear ?? widget.data?.yearNow), id.toString());
+              },
               series: <ChartSeries<ChartData, String>>[
                 ColumnSeries<ChartData, String>(
                     dataLabelSettings: const DataLabelSettings(
@@ -66,7 +72,7 @@ class _StatisticProduksiWidgetState extends State<StatisticProduksiWidget> {
                           (widget.vm.selectedYear ?? widget.data?.yearNow), id.toString());
                     })
               ]).pOnly(top: Vx.dp48),
-        ).w(double.maxFinite).h(350),
+        ).w(double.maxFinite).h(400),
         const CustomLabelBoxText(label: "Statistik"),
         // Positioned(
         //   top: 5,

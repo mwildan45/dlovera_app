@@ -6,7 +6,8 @@ class TodaySummaryHeader {
 
   TodaySummaryHeader.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    data = json['data'] != null ? TodaySummaryData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? TodaySummaryData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -20,29 +21,34 @@ class TodaySummaryHeader {
 }
 
 class TodaySummaryData {
+  DateTime? now;
+  DateTime? yesterday;
   TotalRevenue? totalRevenue;
   ItemSold? itemSold;
   Customer? customer;
   Statistic? statistic;
   List<LatestTransaction>? latestTransaction;
 
-  TodaySummaryData(
-      {this.totalRevenue,
-        this.itemSold,
-        this.customer,
-        this.statistic,
-        this.latestTransaction});
+  TodaySummaryData({
+    this.totalRevenue,
+    this.itemSold,
+    this.customer,
+    this.statistic,
+    this.latestTransaction,
+    this.now,
+    this.yesterday,
+  });
 
   TodaySummaryData.fromJson(Map<String, dynamic> json) {
+    now = json['now'] == null ? null : DateTime.parse(json["now"]);
+    yesterday = json['yesterday'] == null ? null : DateTime.parse(json["yesterday"]);
     totalRevenue = json['totalRevenue'] != null
         ? TotalRevenue.fromJson(json['totalRevenue'])
         : null;
-    itemSold = json['itemSold'] != null
-        ? ItemSold.fromJson(json['itemSold'])
-        : null;
-    customer = json['customer'] != null
-        ? Customer.fromJson(json['customer'])
-        : null;
+    itemSold =
+        json['itemSold'] != null ? ItemSold.fromJson(json['itemSold']) : null;
+    customer =
+        json['customer'] != null ? Customer.fromJson(json['customer']) : null;
     statistic = json['statistic'] != null
         ? Statistic.fromJson(json['statistic'])
         : null;
@@ -155,14 +161,14 @@ class Statistic {
 
   Statistic(
       {this.max,
-        this.i0003,
-        this.i0306,
-        this.s0609,
-        this.s0912,
-        this.s1215,
-        this.i1518,
-        this.i1821,
-        this.s2123});
+      this.i0003,
+      this.i0306,
+      this.s0609,
+      this.s0912,
+      this.s1215,
+      this.i1518,
+      this.i1821,
+      this.s2123});
 
   Statistic.fromJson(Map<String, dynamic> json) {
     i0003 = json['00-03'];
