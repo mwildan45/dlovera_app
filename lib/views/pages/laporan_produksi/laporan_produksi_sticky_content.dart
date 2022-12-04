@@ -44,15 +44,15 @@ class StickyContentLaporanProduksi extends StatelessWidget {
             decoration: BoxStyles.boxContent(),
             child: VStack(
               [
-                'Rata-Rata Harian'
-                    .text
-                    .lg
-                    .bold
-                    .color(AppColor.primaryColorDark)
-                    .align(TextAlign.center)
-                    .make()
-                    .centered(),
-                UiSpacer.verticalSpace(),
+                // 'Rata-Rata Harian'
+                //     .text
+                //     .lg
+                //     .bold
+                //     .color(AppColor.primaryColorDark)
+                //     .align(TextAlign.center)
+                //     .make()
+                //     .centered(),
+                // UiSpacer.verticalSpace(),
                 HStack(
                   [
                     VStack(

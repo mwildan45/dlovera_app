@@ -37,10 +37,10 @@ class LaporanStockViewModel extends MyBaseViewModel {
   //
   geLaporanStock(String? year, {bool isGetPerBulan = false}) async {
     setBusy(true);
-    stockData = await laporanStockRequest.getLaporanStock({});
 
     try {
 
+      stockData = await laporanStockRequest.getLaporanStock({});
 
       clearErrors();
     } catch (error) {
@@ -119,7 +119,6 @@ class LaporanStockViewModel extends MyBaseViewModel {
     try{
       kartuStokHeader = await laporanStockRequest.getKartuStok(idb, url);
 
-      print("DATA KARTU ${kartuStokHeader?.data?.kodeBarang}");
       laporanKartuStockDataSource?.dispose();
       laporanKartuStockDataSource = LaporanKartuStockDataSource(
           kartuStock: kartuStokHeader?.data?.product ?? []);
