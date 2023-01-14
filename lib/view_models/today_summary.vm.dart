@@ -27,12 +27,12 @@ class TodaySummaryViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
 
-      todaySummaryData = await todaySummaryRequest.getTodaySummary((selectedTgl == null ? "" : "${selectedTgl!.year}-${selectedTgl!.month}-${selectedTgl!.day.toString().padLeft(2,"0")}"));
+      todaySummaryData = await todaySummaryRequest.getTodaySummary((selectedTgl == null ? "" : "${selectedTgl!.year}-${selectedTgl!.month.toString().padLeft(2,"0")}-${selectedTgl!.day.toString().padLeft(2,"0")}"));
       setDataChart(todaySummaryData);
 
       clearErrors();
     } catch (error) {
-      print("Error ==> $error");
+      print("Error TODAY SUM ==> $error");
       setError(error);
       viewContext?.showToast(
         msg: "$error",

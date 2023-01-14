@@ -85,7 +85,7 @@ class StickyContentLaporanProduksi extends StatelessWidget {
                         UiSpacer.divider(),
                         HStack(
                           [
-                            (data?.rataRata?.jumlahProduk ?? 0)
+                            (data?.rataRata?.jumlahProduk ?? 0).toString()
                                 .text
                                 .bold
                                 .size(25)

@@ -113,7 +113,7 @@ class LaporanPerBulanData {
 
 class RataRata {
   String? nilaiTransaksi;
-  int? jumlahProduk;
+  String? jumlahProduk;
   String? produkTerjual;
   int? produkRetur;
 
